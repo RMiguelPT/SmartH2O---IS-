@@ -10,7 +10,7 @@ namespace SmartH2O_DU
 {
     class Program
     {
-        MqttClient m_cClient;
+       public static MqttClient m_cClient;
         static void Main(string[] args)
         {
 
