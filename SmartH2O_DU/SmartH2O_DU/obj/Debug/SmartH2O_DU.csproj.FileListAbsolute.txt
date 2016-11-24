@@ -10,3 +10,11 @@ c:\users\gilberto\documents\visual studio 2015\Projects\SmartH2O_DU\SmartH2O_DU\
 C:\Users\Gilberto\Source\Repos\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\SmartH2O_DU.exe.config
 C:\Users\Gilberto\Source\Repos\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.exe
 C:\Users\Gilberto\Source\Repos\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.pdb
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\SmartH2O_DU.exe.config
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.exe
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.pdb
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\SmartH2O_DU.exe
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\SmartH2O_DU.pdb
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\M2Mqtt.Net.dll
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\bin\Debug\M2Mqtt.Net.pdb
+C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.csprojResolveAssemblyReference.cache
