@@ -16,11 +16,9 @@ namespace SmartH2O_DU
 
             SensorNodeDll.SensorNodeDll dll = new SensorNodeDll.SensorNodeDll();
 
-<<<<<<< HEAD
+
             m_cClient = new MqttClient(IPAddress.Parse("127.0.0.1"));
-=======
-           m_cClient = new MqttClient(IPAddress.Parse("192.168.237.226"));
->>>>>>> origin/master
+
 
             m_cClient.Connect(Guid.NewGuid().ToString());
             if (!m_cClient.IsConnected)
