@@ -14,18 +14,23 @@ using System.IO;
 
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using System.Diagnostics;
 
 namespace AlarmSystem
 {
     public partial class AlarmSystem : Form
     {
 
-        static string xmlRulesPath = Application.StartupPath + @"\rules.xml";
-        string xsdRulesPath = Application.StartupPath + @"\rules.xsd";
+        static string xmlRulesPath = Application.StartupPath + @"\trigger-rules.xml";
+        string xsdRulesPath = Application.StartupPath + @"\trigger-rules.xsd";
         static CultureInfo ptPT = CultureInfo.InvariantCulture;
 
         string _host = "127.0.0.1";
         string[] _topics = { "PH", "NH3", "CI2" };
+
+        bool phAlarmGenerated = false;
+        bool nh3AlarmGenerated = false;
+        bool ci2AlarmGenerated = false;
 
         public AlarmSystem()
         {
@@ -41,10 +46,22 @@ namespace AlarmSystem
             this.cmbBoxCondition_NH3.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cmbBoxCondition_CI2.DropDownStyle = ComboBoxStyle.DropDownList;
 
+            disableAlarms();
+
+            //Timer Configuration
+
+            timer1.Tick += new EventHandler(timer_Tick);
+            timer1.Interval = 100;
+            timer1.Enabled = true;
+            timer1.Start();
+
             //Subsribe to a mosquitto channel
             subscribeMQTT(_topics);
 
         }
+
+
+
 
         private void createXmlRulesFile(string path)
         {
@@ -160,7 +177,7 @@ namespace AlarmSystem
         }
 
 
-        static void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             //Console.WriteLine("Received = " + Encoding.UTF8.GetString(e.Message) + " on topic " + e.Topic);
             verifyAlarms(e.Topic, Encoding.UTF8.GetString(e.Message));
@@ -218,12 +235,39 @@ namespace AlarmSystem
                 txtBoxValue2_CI2.Show();
             }
         }
+        /*********************************************************************************************************************
+        *                                 Disable specific alarms or all if "all" string is given
+        ********************************************************************************************************************/
+        private void disableAlarms()
+        {
+           
+                lbl_phWarning.Visible = false;
+                lbl_nh3Warning.Visible = false;
+                lbl_ci2Warning.Visible = false;
+           
+        }
+
+        void timer_Tick(object sender, EventArgs e)
+        {
+            triggerAlarms();
+        }
+
+        /*********************************************************************************************************************
+       *                                Trigger a specific alarm
+       ********************************************************************************************************************/
+        private void triggerAlarms()
+        {
+            lbl_phWarning.Visible = phAlarmGenerated ? true : false;
+            lbl_nh3Warning.Visible = nh3AlarmGenerated ? true : false;
+            lbl_ci2Warning.Visible = ci2AlarmGenerated ? true : false;
+
+        }
 
 
         /*********************************************************************************************************************
         *                                 Call functions to verify each one of Sensor Types
         ********************************************************************************************************************/
-        static private void verifyAlarms(string topic, string message)
+        private void verifyAlarms(string topic, string message)
         {
 
             if (topic == "PH")
@@ -245,7 +289,7 @@ namespace AlarmSystem
         /*********************************************************************************************************************
         *                                  Verify if PH Matches with conditions specified in rules.xml file
         ********************************************************************************************************************/
-        static private void verifyPhAlarm(string message)
+         private void verifyPhAlarm(string message)
         {
             XmlDocument rulesDoc = new XmlDocument();
             rulesDoc.Load(xmlRulesPath);
@@ -259,8 +303,14 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(message, ptPT) > ruleValue)
                     {
-                        Console.WriteLine("ALARM ON PH !!!!!!!!!");
+                        Debug.WriteLine("ALARM ON PH !!!!!!!!!");
+                        phAlarmGenerated = true;
+
                         //TODO call function to activate alarms on ph
+                    }
+                    else
+                    {
+                        phAlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Less Than")
@@ -268,6 +318,11 @@ namespace AlarmSystem
                     if (Convert.ToDecimal(message, ptPT) < ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        phAlarmGenerated = true;
+                    }
+                    else
+                    {
+                        phAlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Equal")
@@ -275,6 +330,11 @@ namespace AlarmSystem
                     if (Convert.ToDecimal(message, ptPT) == ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        phAlarmGenerated = true;
+                    }
+                    else
+                    {
+                        phAlarmGenerated = false;
                     }
                 }
 
@@ -283,8 +343,14 @@ namespace AlarmSystem
                     if (Convert.ToDecimal(message, ptPT) < ruleValue && Convert.ToDecimal(message, ptPT) > ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        phAlarmGenerated = true;
+                    }
+                    else
+                    {
+                        phAlarmGenerated = false;
                     }
                 }
+               
             }
         }
 
@@ -380,8 +446,16 @@ namespace AlarmSystem
             }
         }
 
+        private void btnSetRule_PH_Click(object sender, EventArgs e)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlRulesPath);
 
+            //TODO implement add rule 
+            
+            
 
-
+            updateRulesList(xmlRulesPath);
+        }
     }
 }
