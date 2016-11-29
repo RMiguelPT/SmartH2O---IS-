@@ -56,7 +56,9 @@ namespace AlarmSystem
             timer1.Start();
 
             //Subsribe to a mosquitto channel
-            subscribeMQTT(_topics);
+            // subscribeMQTT(_topics);
+
+            txtBox_XmlPreviewer.Lines = File.ReadAllLines(xmlRulesPath);
 
         }
 
@@ -81,9 +83,9 @@ namespace AlarmSystem
             decimal nh3 = 7;
             decimal ci2 = 7;
 
-            XmlElement phRule = addRule(doc, "PH", "Greater Than", ph.ToString(".0", ptPT));
-            XmlElement nh3Rule = addRule(doc, "NH3", "Greater Than", nh3.ToString(".0", ptPT));
-            XmlElement ci2Rule = addRule(doc, "CI2", "Greater Than", ci2.ToString(".0", ptPT));
+            XmlElement phRule = addRule(doc, "PH", "Greater Than", ph.ToString(".0", ptPT), "0");
+            XmlElement nh3Rule = addRule(doc, "NH3", "Greater Than", nh3.ToString(".0", ptPT), "0");
+            XmlElement ci2Rule = addRule(doc, "CI2", "Greater Than", ci2.ToString(".0", ptPT), "0");
 
             rootElem.AppendChild(phRule);
             rootElem.AppendChild(nh3Rule);
@@ -93,20 +95,23 @@ namespace AlarmSystem
 
         }
 
-        private XmlElement addRule(XmlDocument doc, string waterParameter, string condition, string value)
+        private XmlElement addRule(XmlDocument doc, string waterParameter, string condition, string minValue, string maxValue)
         {
             XmlElement rule = doc.CreateElement("rule");
             XmlElement type = doc.CreateElement("type");
             type.InnerText = waterParameter;
             XmlElement cond = doc.CreateElement("condition");
             cond.InnerText = condition;
-            XmlElement val = doc.CreateElement("value");
-            val.InnerText = value;
+            XmlElement minVal = doc.CreateElement("minValue");
+            minVal.InnerText = minValue;
+            XmlElement maxVal = doc.CreateElement("maxValue");
+            maxVal.InnerText = maxValue;
 
             //Append all childs to temperature rule
             rule.AppendChild(type);
             rule.AppendChild(cond);
-            rule.AppendChild(val);
+            rule.AppendChild(minVal);
+            rule.AppendChild(maxVal);
 
             return rule;
         }
@@ -114,7 +119,10 @@ namespace AlarmSystem
 
         private void updateRulesList(string xmlFilePath)
         {
-            lstBox_Rules.Items.Clear();
+            //lstBox_Rules.Items.Clear();
+            this.lstBox_PHRules.Items.Clear();
+            this.lstBox_NH3Rules.Items.Clear();
+            this.lstBox_CI2Rules.Items.Clear();
             if (File.Exists(xmlFilePath))
             {
                 XmlValidator xmlValidator = new XmlValidator(xmlRulesPath, xsdRulesPath);
@@ -130,26 +138,38 @@ namespace AlarmSystem
                     {
                         foreach (XmlNode node in nodeList)
                         {
-                            this.lstBox_Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("value").InnerText);
+                            if (node.SelectSingleNode("type").InnerText == "PH")
+                            {
+                                this.lstBox_PHRules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
+                            }
+                            if (node.SelectSingleNode("type").InnerText == "NH3")
+                            {
+                                this.lstBox_NH3Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
+                            }
+                            if (node.SelectSingleNode("type").InnerText == "CI2")
+                            {
+                                this.lstBox_CI2Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
+                            }
+                            //this.lstBox_Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
                         }
                     }
-                    else { lstBox_Rules.Items.Add("No rules in XML Document"); }
+                    else
+                    {
+                        lstBox_PHRules.Items.Add("No rules in XML Document");
+                        lstBox_NH3Rules.Items.Add("No rules in XML Document");
+                        lstBox_CI2Rules.Items.Add("No rules in XML Document");
+                    }
                 }
 
                 else
                 {
                     MessageBox.Show("INVALID rules.xml File!!", "ALARM SYSTEM [ERROR]", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
                 }
-
-
-
-
             }
-            else { lstBox_Rules.Items.Add("No XML Document Found. Press \"Generate XML\" Button "); }
-
-
-
-
+            else
+            {
+                txtBox_XmlPreviewer.Text = ("No XML Document Found. Press \"Generate XML\" Button ");
+            }
         }
 
 
@@ -157,14 +177,16 @@ namespace AlarmSystem
         private void subscribeMQTT(string[] topics)
         {
             MqttClient m_cClient = new MqttClient(IPAddress.Parse(_host));
-            m_cClient.Connect(Guid.NewGuid().ToString());
-
-            if (!m_cClient.IsConnected)
+            try
             {
-                Console.WriteLine("Error connecting to message broker...");
+                m_cClient.Connect(Guid.NewGuid().ToString());
+            }
+            catch
+            {
+                MessageBox.Show("Error connecting to message broker...");
+
                 return;
             }
-
 
             //Specify events we are interest on
             //New Msg Arrived
@@ -179,8 +201,18 @@ namespace AlarmSystem
 
         void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
-            //Console.WriteLine("Received = " + Encoding.UTF8.GetString(e.Message) + " on topic " + e.Topic);
-            verifyAlarms(e.Topic, Encoding.UTF8.GetString(e.Message));
+
+            if (File.Exists(xmlRulesPath))
+            {
+                XmlValidator xmlValidator = new XmlValidator(xmlRulesPath, xsdRulesPath);
+                var msg = xmlValidator.validateXMLDocument();
+                if (msg)
+                {
+                    verifyAlarms(e.Topic, Encoding.UTF8.GetString(e.Message));
+                }
+            }
+
+
         }
 
         private void btnDefaultRules_Click(object sender, EventArgs e)
@@ -240,11 +272,9 @@ namespace AlarmSystem
         ********************************************************************************************************************/
         private void disableAlarms()
         {
-           
-                lbl_phWarning.Visible = false;
-                lbl_nh3Warning.Visible = false;
-                lbl_ci2Warning.Visible = false;
-           
+            lbl_phWarning.Visible = false;
+            lbl_nh3Warning.Visible = false;
+            lbl_ci2Warning.Visible = false;
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -272,15 +302,15 @@ namespace AlarmSystem
 
             if (topic == "PH")
             {
-                verifyPhAlarm(message);
+                verifyPhAlarm(splitMessage(message));
             }
             if (topic == "NH3")
             {
-                verifyHN3Alarm(message);
+                verifyHN3Alarm(splitMessage(message));
             }
             if (topic == "CI2")
             {
-                verifyCI2Alarm(message);
+                verifyCI2Alarm(splitMessage(message));
             }
 
         }
@@ -289,7 +319,7 @@ namespace AlarmSystem
         /*********************************************************************************************************************
         *                                  Verify if PH Matches with conditions specified in rules.xml file
         ********************************************************************************************************************/
-         private void verifyPhAlarm(string message)
+        private void verifyPhAlarm(string message)
         {
             XmlDocument rulesDoc = new XmlDocument();
             rulesDoc.Load(xmlRulesPath);
@@ -298,15 +328,13 @@ namespace AlarmSystem
 
             foreach (XmlNode node in nodeList)
             {
-                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("value").InnerText, ptPT);
+                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
                     if (Convert.ToDecimal(message, ptPT) > ruleValue)
                     {
                         Debug.WriteLine("ALARM ON PH !!!!!!!!!");
                         phAlarmGenerated = true;
-
-                        //TODO call function to activate alarms on ph
                     }
                     else
                     {
@@ -350,7 +378,7 @@ namespace AlarmSystem
                         phAlarmGenerated = false;
                     }
                 }
-               
+
             }
         }
 
@@ -367,7 +395,7 @@ namespace AlarmSystem
 
             foreach (XmlNode node in nodeList)
             {
-                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("value").InnerText, ptPT);
+                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
                     if (Convert.ToDecimal(message, ptPT) > ruleValue)
@@ -412,7 +440,7 @@ namespace AlarmSystem
 
             foreach (XmlNode node in nodeList)
             {
-                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("value").InnerText, ptPT);
+                decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
                     if (Convert.ToDecimal(message, ptPT) > ruleValue)
@@ -448,14 +476,61 @@ namespace AlarmSystem
 
         private void btnSetRule_PH_Click(object sender, EventArgs e)
         {
-            XmlDocument doc = new XmlDocument();
-            doc.Load(xmlRulesPath);
+            if (this.cmbBoxCondition_PH.SelectedIndex > -1)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlRulesPath);
+                XmlNode rootElem = doc.SelectSingleNode("rules");
 
-            //TODO implement add rule 
-            
-            
+                if ((string)this.cmbBoxCondition_PH.SelectedItem != "Between")
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_PH.Text))
+                    {
+                        MessageBox.Show("You have selected the \"" + (string)this.cmbBoxCondition_PH.SelectedItem + "\" condition. Please insert the one value.");
+                        return;
+                    }
+                    XmlElement rule = addRule(doc, "PH", (string)cmbBoxCondition_PH.SelectedItem, txtBoxValue1_PH.Text.ToString(), "0");
+                    rootElem.AppendChild(rule);
 
-            updateRulesList(xmlRulesPath);
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_PH.Text) || (string.IsNullOrWhiteSpace(this.txtBoxValue2_PH.Text)))
+                    {
+                        MessageBox.Show("You have selected the \"Between\" condition. Please insert the minimum and the maximum values.");
+                        return;
+                    }
+                    else
+                    {
+                        int[] values = new int[2];
+                        values[0] = int.Parse(txtBoxValue1_PH.Text.ToString());
+                        values[1] = int.Parse(txtBoxValue2_PH.Text.ToString());
+
+                        XmlElement rule = addRule(doc, "PH", (string)cmbBoxCondition_PH.SelectedItem, values[0].ToString(), values[1].ToString());
+                        rootElem.AppendChild(rule);
+                    }
+                }
+                doc.Save(xmlRulesPath);
+
+                updateRulesList(xmlRulesPath);
+            }
+            else
+            {
+                MessageBox.Show("Please Select one condition.");
+                return;
+            }
+        }
+
+        private string splitMessage(string originalMessage)
+        {
+
+            string[] words = originalMessage.Split(';');
+            return words[1];
+        }
+
+        private void AlarmSystem_Shown(object sender, EventArgs e)
+        {
+            subscribeMQTT(_topics);
         }
     }
 }

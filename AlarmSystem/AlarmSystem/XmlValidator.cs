@@ -23,7 +23,7 @@ namespace AlarmSystem
             this._xmlPath = xmlPath;
             this._xsdPath = xsdPath;
             this._isValidXML = true;
-            Console.WriteLine(_xsdPath);
+            //Console.WriteLine(_xsdPath);
         }
 
         public bool validateXMLDocument()
@@ -37,7 +37,7 @@ namespace AlarmSystem
 
                 doc.Schemas.Add(null, _xsdPath);
                 ValidationEventHandler eventHandler = new ValidationEventHandler(validateHandler);
-                Console.WriteLine(_xsdPath);
+                //Console.WriteLine(_xsdPath);
                 
                 doc.Validate(eventHandler);
             }

@@ -30,6 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.grpBox_PH = new System.Windows.Forms.GroupBox();
+            this.btn_DelPhRules = new System.Windows.Forms.Button();
+            this.lstBox_PHRules = new System.Windows.Forms.ListBox();
+            this.lbl_phWarning = new System.Windows.Forms.Label();
             this.txtBoxValue2_PH = new System.Windows.Forms.TextBox();
             this.txtBoxValue1_PH = new System.Windows.Forms.TextBox();
             this.lblAnd_PH = new System.Windows.Forms.Label();
@@ -39,6 +42,9 @@
             this.btnSetRule_PH = new System.Windows.Forms.Button();
             this.lblCondition_PH = new System.Windows.Forms.Label();
             this.grpBox_NH3 = new System.Windows.Forms.GroupBox();
+            this.btn_DelNH3Rules = new System.Windows.Forms.Button();
+            this.lstBox_NH3Rules = new System.Windows.Forms.ListBox();
+            this.lbl_nh3Warning = new System.Windows.Forms.Label();
             this.txtBoxValue2_NH3 = new System.Windows.Forms.TextBox();
             this.txtBoxValue1_NH3 = new System.Windows.Forms.TextBox();
             this.lblCondition_NH3 = new System.Windows.Forms.Label();
@@ -48,6 +54,9 @@
             this.btnSetRule_NH3 = new System.Windows.Forms.Button();
             this.lblValue1_NH3 = new System.Windows.Forms.Label();
             this.grpBoc_CI2 = new System.Windows.Forms.GroupBox();
+            this.btn_DelCI2Rules = new System.Windows.Forms.Button();
+            this.lstBox_CI2Rules = new System.Windows.Forms.ListBox();
+            this.lbl_ci2Warning = new System.Windows.Forms.Label();
             this.txtBoxValue2_CI2 = new System.Windows.Forms.TextBox();
             this.txtBoxValue1_CI2 = new System.Windows.Forms.TextBox();
             this.cmbBoxCondition_CI2 = new System.Windows.Forms.ComboBox();
@@ -56,12 +65,9 @@
             this.lblValue2_CI2 = new System.Windows.Forms.Label();
             this.btnSetRule_CI2 = new System.Windows.Forms.Button();
             this.lblValue1_CI2 = new System.Windows.Forms.Label();
-            this.lstBox_Rules = new System.Windows.Forms.ListBox();
             this.btnDefaultRules = new System.Windows.Forms.Button();
-            this.lbl_phWarning = new System.Windows.Forms.Label();
-            this.lbl_nh3Warning = new System.Windows.Forms.Label();
-            this.lbl_ci2Warning = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.txtBox_XmlPreviewer = new System.Windows.Forms.TextBox();
             this.grpBox_PH.SuspendLayout();
             this.grpBox_NH3.SuspendLayout();
             this.grpBoc_CI2.SuspendLayout();
@@ -69,6 +75,8 @@
             // 
             // grpBox_PH
             // 
+            this.grpBox_PH.Controls.Add(this.btn_DelPhRules);
+            this.grpBox_PH.Controls.Add(this.lstBox_PHRules);
             this.grpBox_PH.Controls.Add(this.lbl_phWarning);
             this.grpBox_PH.Controls.Add(this.txtBoxValue2_PH);
             this.grpBox_PH.Controls.Add(this.txtBoxValue1_PH);
@@ -84,6 +92,36 @@
             this.grpBox_PH.TabIndex = 3;
             this.grpBox_PH.TabStop = false;
             this.grpBox_PH.Text = "PH";
+            // 
+            // btn_DelPhRules
+            // 
+            this.btn_DelPhRules.Location = new System.Drawing.Point(772, 146);
+            this.btn_DelPhRules.Name = "btn_DelPhRules";
+            this.btn_DelPhRules.Size = new System.Drawing.Size(114, 23);
+            this.btn_DelPhRules.TabIndex = 10;
+            this.btn_DelPhRules.Text = "Delete All PH Rules";
+            this.btn_DelPhRules.UseVisualStyleBackColor = true;
+            // 
+            // lstBox_PHRules
+            // 
+            this.lstBox_PHRules.FormattingEnabled = true;
+            this.lstBox_PHRules.Location = new System.Drawing.Point(750, 19);
+            this.lstBox_PHRules.Name = "lstBox_PHRules";
+            this.lstBox_PHRules.Size = new System.Drawing.Size(154, 121);
+            this.lstBox_PHRules.TabIndex = 9;
+            // 
+            // lbl_phWarning
+            // 
+            this.lbl_phWarning.AutoSize = true;
+            this.lbl_phWarning.BackColor = System.Drawing.Color.Red;
+            this.lbl_phWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_phWarning.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lbl_phWarning.Location = new System.Drawing.Point(6, 83);
+            this.lbl_phWarning.Name = "lbl_phWarning";
+            this.lbl_phWarning.Size = new System.Drawing.Size(288, 51);
+            this.lbl_phWarning.TabIndex = 8;
+            this.lbl_phWarning.Text = "WARNING !!!";
+            this.lbl_phWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtBoxValue2_PH
             // 
@@ -131,7 +169,7 @@
             this.cmbBoxCondition_PH.FormattingEnabled = true;
             this.cmbBoxCondition_PH.Items.AddRange(new object[] {
             "Greater Than",
-            "Less Than\t",
+            "Less Than",
             "Between",
             "Equal"});
             this.cmbBoxCondition_PH.Location = new System.Drawing.Point(10, 36);
@@ -142,7 +180,7 @@
             // 
             // btnSetRule_PH
             // 
-            this.btnSetRule_PH.Location = new System.Drawing.Point(829, 19);
+            this.btnSetRule_PH.Location = new System.Drawing.Point(436, 34);
             this.btnSetRule_PH.Name = "btnSetRule_PH";
             this.btnSetRule_PH.Size = new System.Drawing.Size(75, 23);
             this.btnSetRule_PH.TabIndex = 1;
@@ -161,6 +199,8 @@
             // 
             // grpBox_NH3
             // 
+            this.grpBox_NH3.Controls.Add(this.btn_DelNH3Rules);
+            this.grpBox_NH3.Controls.Add(this.lstBox_NH3Rules);
             this.grpBox_NH3.Controls.Add(this.lbl_nh3Warning);
             this.grpBox_NH3.Controls.Add(this.txtBoxValue2_NH3);
             this.grpBox_NH3.Controls.Add(this.txtBoxValue1_NH3);
@@ -176,6 +216,36 @@
             this.grpBox_NH3.TabIndex = 4;
             this.grpBox_NH3.TabStop = false;
             this.grpBox_NH3.Text = "NH3";
+            // 
+            // btn_DelNH3Rules
+            // 
+            this.btn_DelNH3Rules.Location = new System.Drawing.Point(772, 143);
+            this.btn_DelNH3Rules.Name = "btn_DelNH3Rules";
+            this.btn_DelNH3Rules.Size = new System.Drawing.Size(114, 23);
+            this.btn_DelNH3Rules.TabIndex = 13;
+            this.btn_DelNH3Rules.Text = "Delete All NH3 Rules";
+            this.btn_DelNH3Rules.UseVisualStyleBackColor = true;
+            // 
+            // lstBox_NH3Rules
+            // 
+            this.lstBox_NH3Rules.FormattingEnabled = true;
+            this.lstBox_NH3Rules.Location = new System.Drawing.Point(750, 16);
+            this.lstBox_NH3Rules.Name = "lstBox_NH3Rules";
+            this.lstBox_NH3Rules.Size = new System.Drawing.Size(154, 121);
+            this.lstBox_NH3Rules.TabIndex = 10;
+            // 
+            // lbl_nh3Warning
+            // 
+            this.lbl_nh3Warning.AutoSize = true;
+            this.lbl_nh3Warning.BackColor = System.Drawing.Color.Red;
+            this.lbl_nh3Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nh3Warning.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lbl_nh3Warning.Location = new System.Drawing.Point(6, 91);
+            this.lbl_nh3Warning.Name = "lbl_nh3Warning";
+            this.lbl_nh3Warning.Size = new System.Drawing.Size(288, 51);
+            this.lbl_nh3Warning.TabIndex = 9;
+            this.lbl_nh3Warning.Text = "WARNING !!!";
+            this.lbl_nh3Warning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtBoxValue2_NH3
             // 
@@ -214,7 +284,7 @@
             this.cmbBoxCondition_NH3.FormattingEnabled = true;
             this.cmbBoxCondition_NH3.Items.AddRange(new object[] {
             "Greater Than",
-            "Less Than\t",
+            "Less Than",
             "Between",
             "Equal"});
             this.cmbBoxCondition_NH3.Location = new System.Drawing.Point(9, 32);
@@ -234,7 +304,7 @@
             // 
             // btnSetRule_NH3
             // 
-            this.btnSetRule_NH3.Location = new System.Drawing.Point(829, 19);
+            this.btnSetRule_NH3.Location = new System.Drawing.Point(436, 26);
             this.btnSetRule_NH3.Name = "btnSetRule_NH3";
             this.btnSetRule_NH3.Size = new System.Drawing.Size(75, 23);
             this.btnSetRule_NH3.TabIndex = 2;
@@ -252,6 +322,8 @@
             // 
             // grpBoc_CI2
             // 
+            this.grpBoc_CI2.Controls.Add(this.btn_DelCI2Rules);
+            this.grpBoc_CI2.Controls.Add(this.lstBox_CI2Rules);
             this.grpBoc_CI2.Controls.Add(this.lbl_ci2Warning);
             this.grpBoc_CI2.Controls.Add(this.txtBoxValue2_CI2);
             this.grpBoc_CI2.Controls.Add(this.txtBoxValue1_CI2);
@@ -267,6 +339,36 @@
             this.grpBoc_CI2.TabIndex = 5;
             this.grpBoc_CI2.TabStop = false;
             this.grpBoc_CI2.Text = "CI2";
+            // 
+            // btn_DelCI2Rules
+            // 
+            this.btn_DelCI2Rules.Location = new System.Drawing.Point(772, 146);
+            this.btn_DelCI2Rules.Name = "btn_DelCI2Rules";
+            this.btn_DelCI2Rules.Size = new System.Drawing.Size(114, 23);
+            this.btn_DelCI2Rules.TabIndex = 18;
+            this.btn_DelCI2Rules.Text = "Delete All CI2 Rules";
+            this.btn_DelCI2Rules.UseVisualStyleBackColor = true;
+            // 
+            // lstBox_CI2Rules
+            // 
+            this.lstBox_CI2Rules.FormattingEnabled = true;
+            this.lstBox_CI2Rules.Location = new System.Drawing.Point(750, 19);
+            this.lstBox_CI2Rules.Name = "lstBox_CI2Rules";
+            this.lstBox_CI2Rules.Size = new System.Drawing.Size(154, 121);
+            this.lstBox_CI2Rules.TabIndex = 13;
+            // 
+            // lbl_ci2Warning
+            // 
+            this.lbl_ci2Warning.AutoSize = true;
+            this.lbl_ci2Warning.BackColor = System.Drawing.Color.Red;
+            this.lbl_ci2Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_ci2Warning.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.lbl_ci2Warning.Location = new System.Drawing.Point(6, 92);
+            this.lbl_ci2Warning.Name = "lbl_ci2Warning";
+            this.lbl_ci2Warning.Size = new System.Drawing.Size(288, 51);
+            this.lbl_ci2Warning.TabIndex = 13;
+            this.lbl_ci2Warning.Text = "WARNING !!!";
+            this.lbl_ci2Warning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtBoxValue2_CI2
             // 
@@ -287,7 +389,7 @@
             this.cmbBoxCondition_CI2.FormattingEnabled = true;
             this.cmbBoxCondition_CI2.Items.AddRange(new object[] {
             "Greater Than",
-            "Less Than\t",
+            "Less Than",
             "Between",
             "Equal"});
             this.cmbBoxCondition_CI2.Location = new System.Drawing.Point(6, 32);
@@ -325,7 +427,7 @@
             // 
             // btnSetRule_CI2
             // 
-            this.btnSetRule_CI2.Location = new System.Drawing.Point(829, 19);
+            this.btnSetRule_CI2.Location = new System.Drawing.Point(436, 30);
             this.btnSetRule_CI2.Name = "btnSetRule_CI2";
             this.btnSetRule_CI2.Size = new System.Drawing.Size(75, 23);
             this.btnSetRule_CI2.TabIndex = 3;
@@ -341,14 +443,6 @@
             this.lblValue1_CI2.TabIndex = 13;
             this.lblValue1_CI2.Text = "Value";
             // 
-            // lstBox_Rules
-            // 
-            this.lstBox_Rules.FormattingEnabled = true;
-            this.lstBox_Rules.Location = new System.Drawing.Point(932, 21);
-            this.lstBox_Rules.Name = "lstBox_Rules";
-            this.lstBox_Rules.Size = new System.Drawing.Size(415, 186);
-            this.lstBox_Rules.TabIndex = 6;
-            // 
             // btnDefaultRules
             // 
             this.btnDefaultRules.Location = new System.Drawing.Point(1228, 217);
@@ -359,57 +453,28 @@
             this.btnDefaultRules.UseVisualStyleBackColor = true;
             this.btnDefaultRules.Click += new System.EventHandler(this.btnDefaultRules_Click);
             // 
-            // lbl_phWarning
+            // txtBox_XmlPreviewer
             // 
-            this.lbl_phWarning.AutoSize = true;
-            this.lbl_phWarning.BackColor = System.Drawing.Color.Red;
-            this.lbl_phWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_phWarning.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_phWarning.Location = new System.Drawing.Point(6, 83);
-            this.lbl_phWarning.Name = "lbl_phWarning";
-            this.lbl_phWarning.Size = new System.Drawing.Size(288, 51);
-            this.lbl_phWarning.TabIndex = 8;
-            this.lbl_phWarning.Text = "WARNING !!!";
-            this.lbl_phWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_nh3Warning
-            // 
-            this.lbl_nh3Warning.AutoSize = true;
-            this.lbl_nh3Warning.BackColor = System.Drawing.Color.Red;
-            this.lbl_nh3Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_nh3Warning.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_nh3Warning.Location = new System.Drawing.Point(6, 91);
-            this.lbl_nh3Warning.Name = "lbl_nh3Warning";
-            this.lbl_nh3Warning.Size = new System.Drawing.Size(288, 51);
-            this.lbl_nh3Warning.TabIndex = 9;
-            this.lbl_nh3Warning.Text = "WARNING !!!";
-            this.lbl_nh3Warning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // lbl_ci2Warning
-            // 
-            this.lbl_ci2Warning.AutoSize = true;
-            this.lbl_ci2Warning.BackColor = System.Drawing.Color.Red;
-            this.lbl_ci2Warning.Font = new System.Drawing.Font("Microsoft Sans Serif", 32F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_ci2Warning.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.lbl_ci2Warning.Location = new System.Drawing.Point(6, 92);
-            this.lbl_ci2Warning.Name = "lbl_ci2Warning";
-            this.lbl_ci2Warning.Size = new System.Drawing.Size(288, 51);
-            this.lbl_ci2Warning.TabIndex = 13;
-            this.lbl_ci2Warning.Text = "WARNING !!!";
-            this.lbl_ci2Warning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.txtBox_XmlPreviewer.Location = new System.Drawing.Point(928, 12);
+            this.txtBox_XmlPreviewer.Multiline = true;
+            this.txtBox_XmlPreviewer.Name = "txtBox_XmlPreviewer";
+            this.txtBox_XmlPreviewer.Size = new System.Drawing.Size(419, 199);
+            this.txtBox_XmlPreviewer.TabIndex = 9;
+            this.txtBox_XmlPreviewer.WordWrap = false;
             // 
             // AlarmSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 580);
+            this.Controls.Add(this.txtBox_XmlPreviewer);
             this.Controls.Add(this.btnDefaultRules);
-            this.Controls.Add(this.lstBox_Rules);
             this.Controls.Add(this.grpBoc_CI2);
             this.Controls.Add(this.grpBox_NH3);
             this.Controls.Add(this.grpBox_PH);
             this.Name = "AlarmSystem";
             this.Text = "Alarm System Configurator";
+            this.Shown += new System.EventHandler(this.AlarmSystem_Shown);
             this.grpBox_PH.ResumeLayout(false);
             this.grpBox_PH.PerformLayout();
             this.grpBox_NH3.ResumeLayout(false);
@@ -417,6 +482,7 @@
             this.grpBoc_CI2.ResumeLayout(false);
             this.grpBoc_CI2.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -425,7 +491,6 @@
         private System.Windows.Forms.GroupBox grpBox_PH;
         private System.Windows.Forms.GroupBox grpBox_NH3;
         private System.Windows.Forms.GroupBox grpBoc_CI2;
-        private System.Windows.Forms.ListBox lstBox_Rules;
         private System.Windows.Forms.Button btnSetRule_PH;
         private System.Windows.Forms.Label lblCondition_PH;
         private System.Windows.Forms.Button btnSetRule_NH3;
@@ -455,6 +520,13 @@
         private System.Windows.Forms.Label lbl_nh3Warning;
         private System.Windows.Forms.Label lbl_ci2Warning;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.ListBox lstBox_PHRules;
+        private System.Windows.Forms.ListBox lstBox_NH3Rules;
+        private System.Windows.Forms.ListBox lstBox_CI2Rules;
+        private System.Windows.Forms.Button btn_DelPhRules;
+        private System.Windows.Forms.Button btn_DelNH3Rules;
+        private System.Windows.Forms.Button btn_DelCI2Rules;
+        private System.Windows.Forms.TextBox txtBox_XmlPreviewer;
     }
 }
 
