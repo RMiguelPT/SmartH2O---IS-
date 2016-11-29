@@ -28,3 +28,6 @@ C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_D
 C:\Users\Ruben\IPL\3º Ano\1º Semestre\IS\SmartH2O---IS-\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.csprojResolveAssemblyReference.cache
 >>>>>>> origin/master
 >>>>>>> 0bb912ac48cf57b25074e2220ed408ee0c74ac06
+C:\Users\Gilberto\Source\Repos\SmartH2O_DU\SmartH2O_DU\bin\Debug\SmartH2O_DU.exe.config
+C:\Users\Gilberto\Source\Repos\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.exe
+C:\Users\Gilberto\Source\Repos\SmartH2O_DU\SmartH2O_DU\obj\Debug\SmartH2O_DU.pdb
