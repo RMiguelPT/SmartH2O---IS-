@@ -58,7 +58,8 @@ namespace AlarmSystem
             //Subsribe to a mosquitto channel
             // subscribeMQTT(_topics);
 
-            txtBox_XmlPreviewer.Lines = File.ReadAllLines(xmlRulesPath);
+
+            //txtBox_XmlPreviewer.Lines = File.ReadAllLines(xmlRulesPath);
 
         }
 
@@ -123,6 +124,7 @@ namespace AlarmSystem
             this.lstBox_PHRules.Items.Clear();
             this.lstBox_NH3Rules.Items.Clear();
             this.lstBox_CI2Rules.Items.Clear();
+
             if (File.Exists(xmlFilePath))
             {
                 XmlValidator xmlValidator = new XmlValidator(xmlRulesPath, xsdRulesPath);
@@ -528,9 +530,45 @@ namespace AlarmSystem
             return words[1];
         }
 
+        private void deleteRules(string topic)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.Load(xmlRulesPath);
+
+            XmlNodeList nodes = doc.SelectNodes("/rules/rule");
+            foreach (XmlNode node in nodes)
+            {
+                if (node.SelectSingleNode("type").InnerText == topic)
+                {
+                    node.ParentNode.RemoveChild(node);
+                    Console.WriteLine("deleted node");
+                }
+            }
+
+            doc.Save(xmlRulesPath);
+        }
+
         private void AlarmSystem_Shown(object sender, EventArgs e)
         {
             subscribeMQTT(_topics);
+        }
+
+        private void btn_DelPhRules_Click(object sender, EventArgs e)
+        {
+            deleteRules("PH");
+            updateRulesList(xmlRulesPath);
+        }
+
+        private void btn_DelNH3Rules_Click(object sender, EventArgs e)
+        {
+            deleteRules("NH3");
+            updateRulesList(xmlRulesPath);
+        }
+
+        private void btn_DelCI2Rules_Click(object sender, EventArgs e)
+        {
+            deleteRules("CI2");
+            updateRulesList(xmlRulesPath);
         }
     }
 }

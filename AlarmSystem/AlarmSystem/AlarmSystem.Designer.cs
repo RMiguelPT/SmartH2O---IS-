@@ -101,6 +101,7 @@
             this.btn_DelPhRules.TabIndex = 10;
             this.btn_DelPhRules.Text = "Delete All PH Rules";
             this.btn_DelPhRules.UseVisualStyleBackColor = true;
+            this.btn_DelPhRules.Click += new System.EventHandler(this.btn_DelPhRules_Click);
             // 
             // lstBox_PHRules
             // 
@@ -225,6 +226,7 @@
             this.btn_DelNH3Rules.TabIndex = 13;
             this.btn_DelNH3Rules.Text = "Delete All NH3 Rules";
             this.btn_DelNH3Rules.UseVisualStyleBackColor = true;
+            this.btn_DelNH3Rules.Click += new System.EventHandler(this.btn_DelNH3Rules_Click);
             // 
             // lstBox_NH3Rules
             // 
@@ -348,6 +350,7 @@
             this.btn_DelCI2Rules.TabIndex = 18;
             this.btn_DelCI2Rules.Text = "Delete All CI2 Rules";
             this.btn_DelCI2Rules.UseVisualStyleBackColor = true;
+            this.btn_DelCI2Rules.Click += new System.EventHandler(this.btn_DelCI2Rules_Click);
             // 
             // lstBox_CI2Rules
             // 
