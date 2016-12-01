@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="rules" type="DataRules"></xs:element>
+
+  <xs:complexType name="DataRules">
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="rule" type="RulesElements"></xs:element>
+      </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="RulesElements">
+    <xs:sequence>
+      <xs:element name="type" type="SensorType" />
+      <xs:element name="condition" type="Conditions" />
+      <xs:element name="minValue" type="ValueRange" />
+	  <xs:element name="maxValue" type="ValueRange" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name ="SensorType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PH"></xs:enumeration>
+      <xs:enumeration value="NH3"></xs:enumeration>
+      <xs:enumeration value="CI2"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <xs:simpleType name="Conditions">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Greater Than"></xs:enumeration>
+      <xs:enumeration value="Less Than"></xs:enumeration>
+      <xs:enumeration value="Equal"></xs:enumeration>
+      <xs:enumeration value="Between"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="ValueRange">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="0"></xs:minInclusive>
+      <xs:maxInclusive value="14"></xs:maxInclusive>
+    </xs:restriction>
+  </xs:simpleType>
+  
+</xs:schema>
