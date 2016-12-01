@@ -25,7 +25,7 @@ namespace AlarmSystem
         string xsdRulesPath = Application.StartupPath + @"\trigger-rules.xsd";
         static CultureInfo ptPT = CultureInfo.InvariantCulture;
 
-        string _host = "127.0.0.1";
+        string _host = "192.168.237.200";
         string[] _topics = { "PH", "NH3", "CI2" };
 
         bool phAlarmGenerated = false;
