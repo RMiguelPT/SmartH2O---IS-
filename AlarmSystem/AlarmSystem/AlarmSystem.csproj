@@ -56,7 +56,7 @@
     <Compile Include="AlarmSystem.Designer.cs">
       <DependentUpon>AlarmSystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="MqttSubsciber.cs" />
+    <Compile Include="mqttPublisher.cs" />
     <Compile Include="XmlValidator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -68,13 +68,26 @@
             this.btnDefaultRules = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.txtBox_XmlPreviewer = new System.Windows.Forms.TextBox();
+            this.rdBtn_AlarmPhON = new System.Windows.Forms.RadioButton();
+            this.grpBox_PhON_OFF = new System.Windows.Forms.GroupBox();
+            this.rdBtn_AlarmPhOFF = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdBtn_AlarmNH3OFF = new System.Windows.Forms.RadioButton();
+            this.rdBtn_AlarmNH3ON = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdBtn_AlarmCI2OFF = new System.Windows.Forms.RadioButton();
+            this.rdBtn_AlarmCI2ON = new System.Windows.Forms.RadioButton();
             this.grpBox_PH.SuspendLayout();
             this.grpBox_NH3.SuspendLayout();
             this.grpBoc_CI2.SuspendLayout();
+            this.grpBox_PhON_OFF.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpBox_PH
             // 
+            this.grpBox_PH.Controls.Add(this.grpBox_PhON_OFF);
             this.grpBox_PH.Controls.Add(this.btn_DelPhRules);
             this.grpBox_PH.Controls.Add(this.lstBox_PHRules);
             this.grpBox_PH.Controls.Add(this.lbl_phWarning);
@@ -200,6 +213,7 @@
             // 
             // grpBox_NH3
             // 
+            this.grpBox_NH3.Controls.Add(this.groupBox1);
             this.grpBox_NH3.Controls.Add(this.btn_DelNH3Rules);
             this.grpBox_NH3.Controls.Add(this.lstBox_NH3Rules);
             this.grpBox_NH3.Controls.Add(this.lbl_nh3Warning);
@@ -324,6 +338,7 @@
             // 
             // grpBoc_CI2
             // 
+            this.grpBoc_CI2.Controls.Add(this.groupBox2);
             this.grpBoc_CI2.Controls.Add(this.btn_DelCI2Rules);
             this.grpBoc_CI2.Controls.Add(this.lstBox_CI2Rules);
             this.grpBoc_CI2.Controls.Add(this.lbl_ci2Warning);
@@ -465,6 +480,117 @@
             this.txtBox_XmlPreviewer.TabIndex = 9;
             this.txtBox_XmlPreviewer.WordWrap = false;
             // 
+            // rdBtn_AlarmPhON
+            // 
+            this.rdBtn_AlarmPhON.AutoSize = true;
+            this.rdBtn_AlarmPhON.Location = new System.Drawing.Point(6, 41);
+            this.rdBtn_AlarmPhON.Name = "rdBtn_AlarmPhON";
+            this.rdBtn_AlarmPhON.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmPhON.Size = new System.Drawing.Size(41, 17);
+            this.rdBtn_AlarmPhON.TabIndex = 11;
+            this.rdBtn_AlarmPhON.TabStop = true;
+            this.rdBtn_AlarmPhON.Text = "ON";
+            this.rdBtn_AlarmPhON.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmPhON.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmPhON_CheckedChanged);
+            // 
+            // grpBox_PhON_OFF
+            // 
+            this.grpBox_PhON_OFF.Controls.Add(this.rdBtn_AlarmPhOFF);
+            this.grpBox_PhON_OFF.Controls.Add(this.rdBtn_AlarmPhON);
+            this.grpBox_PhON_OFF.Location = new System.Drawing.Point(652, 19);
+            this.grpBox_PhON_OFF.Name = "grpBox_PhON_OFF";
+            this.grpBox_PhON_OFF.Size = new System.Drawing.Size(92, 121);
+            this.grpBox_PhON_OFF.TabIndex = 12;
+            this.grpBox_PhON_OFF.TabStop = false;
+            this.grpBox_PhON_OFF.Text = "Enable Disable PH Alarms";
+            // 
+            // rdBtn_AlarmPhOFF
+            // 
+            this.rdBtn_AlarmPhOFF.AutoSize = true;
+            this.rdBtn_AlarmPhOFF.Location = new System.Drawing.Point(6, 64);
+            this.rdBtn_AlarmPhOFF.Name = "rdBtn_AlarmPhOFF";
+            this.rdBtn_AlarmPhOFF.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmPhOFF.Size = new System.Drawing.Size(45, 17);
+            this.rdBtn_AlarmPhOFF.TabIndex = 12;
+            this.rdBtn_AlarmPhOFF.TabStop = true;
+            this.rdBtn_AlarmPhOFF.Text = "OFF";
+            this.rdBtn_AlarmPhOFF.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmPhOFF.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmPhOFF_CheckedChanged);
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.rdBtn_AlarmNH3OFF);
+            this.groupBox1.Controls.Add(this.rdBtn_AlarmNH3ON);
+            this.groupBox1.Location = new System.Drawing.Point(646, 16);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(92, 121);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Enable Disable NH3 Alarms";
+            // 
+            // rdBtn_AlarmNH3OFF
+            // 
+            this.rdBtn_AlarmNH3OFF.AutoSize = true;
+            this.rdBtn_AlarmNH3OFF.Location = new System.Drawing.Point(6, 75);
+            this.rdBtn_AlarmNH3OFF.Name = "rdBtn_AlarmNH3OFF";
+            this.rdBtn_AlarmNH3OFF.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmNH3OFF.Size = new System.Drawing.Size(45, 17);
+            this.rdBtn_AlarmNH3OFF.TabIndex = 12;
+            this.rdBtn_AlarmNH3OFF.TabStop = true;
+            this.rdBtn_AlarmNH3OFF.Text = "OFF";
+            this.rdBtn_AlarmNH3OFF.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmNH3OFF.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmNH3OFF_CheckedChanged);
+            // 
+            // rdBtn_AlarmNH3ON
+            // 
+            this.rdBtn_AlarmNH3ON.AutoSize = true;
+            this.rdBtn_AlarmNH3ON.Location = new System.Drawing.Point(6, 52);
+            this.rdBtn_AlarmNH3ON.Name = "rdBtn_AlarmNH3ON";
+            this.rdBtn_AlarmNH3ON.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmNH3ON.Size = new System.Drawing.Size(41, 17);
+            this.rdBtn_AlarmNH3ON.TabIndex = 11;
+            this.rdBtn_AlarmNH3ON.TabStop = true;
+            this.rdBtn_AlarmNH3ON.Text = "ON";
+            this.rdBtn_AlarmNH3ON.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmNH3ON.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmNH3ON_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.rdBtn_AlarmCI2OFF);
+            this.groupBox2.Controls.Add(this.rdBtn_AlarmCI2ON);
+            this.groupBox2.Location = new System.Drawing.Point(652, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(92, 121);
+            this.groupBox2.TabIndex = 14;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Enable Disable CI2 Alarms";
+            // 
+            // rdBtn_AlarmCI2OFF
+            // 
+            this.rdBtn_AlarmCI2OFF.AutoSize = true;
+            this.rdBtn_AlarmCI2OFF.Location = new System.Drawing.Point(6, 73);
+            this.rdBtn_AlarmCI2OFF.Name = "rdBtn_AlarmCI2OFF";
+            this.rdBtn_AlarmCI2OFF.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmCI2OFF.Size = new System.Drawing.Size(45, 17);
+            this.rdBtn_AlarmCI2OFF.TabIndex = 12;
+            this.rdBtn_AlarmCI2OFF.TabStop = true;
+            this.rdBtn_AlarmCI2OFF.Text = "OFF";
+            this.rdBtn_AlarmCI2OFF.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmCI2OFF.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmCI2OFF_CheckedChanged);
+            // 
+            // rdBtn_AlarmCI2ON
+            // 
+            this.rdBtn_AlarmCI2ON.AutoSize = true;
+            this.rdBtn_AlarmCI2ON.Location = new System.Drawing.Point(6, 50);
+            this.rdBtn_AlarmCI2ON.Name = "rdBtn_AlarmCI2ON";
+            this.rdBtn_AlarmCI2ON.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rdBtn_AlarmCI2ON.Size = new System.Drawing.Size(41, 17);
+            this.rdBtn_AlarmCI2ON.TabIndex = 11;
+            this.rdBtn_AlarmCI2ON.TabStop = true;
+            this.rdBtn_AlarmCI2ON.Text = "ON";
+            this.rdBtn_AlarmCI2ON.UseVisualStyleBackColor = true;
+            this.rdBtn_AlarmCI2ON.CheckedChanged += new System.EventHandler(this.rdBtn_AlarmCI2ON_CheckedChanged);
+            // 
             // AlarmSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -484,6 +610,12 @@
             this.grpBox_NH3.PerformLayout();
             this.grpBoc_CI2.ResumeLayout(false);
             this.grpBoc_CI2.PerformLayout();
+            this.grpBox_PhON_OFF.ResumeLayout(false);
+            this.grpBox_PhON_OFF.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -530,6 +662,15 @@
         private System.Windows.Forms.Button btn_DelNH3Rules;
         private System.Windows.Forms.Button btn_DelCI2Rules;
         private System.Windows.Forms.TextBox txtBox_XmlPreviewer;
+        private System.Windows.Forms.GroupBox grpBox_PhON_OFF;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmPhOFF;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmPhON;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmNH3OFF;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmNH3ON;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmCI2OFF;
+        private System.Windows.Forms.RadioButton rdBtn_AlarmCI2ON;
     }
 }
 
