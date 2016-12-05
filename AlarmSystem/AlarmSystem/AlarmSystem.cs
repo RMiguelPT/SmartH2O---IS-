@@ -21,7 +21,7 @@ namespace AlarmSystem
     public partial class AlarmSystem : Form
     {
 
-        static string xmlRulesPath = Application.StartupPath + @"\trigger-rules.xml";
+        string xmlRulesPath = Application.StartupPath + @"\trigger-rules.xml";
         string xsdRulesPath = Application.StartupPath + @"\trigger-rules.xsd";
         static CultureInfo ptPT = CultureInfo.InvariantCulture;
 
@@ -32,6 +32,12 @@ namespace AlarmSystem
         bool nh3AlarmGenerated = false;
         bool ci2AlarmGenerated = false;
 
+        bool phAlarmEnabled = true;
+        bool nh3AlarmEnabled = true;
+        bool ci2AlarmEnabled = true;
+
+        private mqttPublisher publisher;
+
         public AlarmSystem()
         {
 
@@ -40,13 +46,12 @@ namespace AlarmSystem
 
             updateRulesList(xmlRulesPath);
 
-
             //Prevent users to write to comboboxes
             this.cmbBoxCondition_PH.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cmbBoxCondition_NH3.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cmbBoxCondition_CI2.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            disableAlarms();
+            disableAlarms("all");
 
             //Timer Configuration
 
@@ -60,7 +65,9 @@ namespace AlarmSystem
 
 
             //txtBox_XmlPreviewer.Lines = File.ReadAllLines(xmlRulesPath);
-
+            rdBtn_AlarmPhON.Select();
+            rdBtn_AlarmNH3ON.Select();
+            rdBtn_AlarmCI2ON.Select();
         }
 
 
@@ -222,6 +229,7 @@ namespace AlarmSystem
             createXmlRulesFile(xmlRulesPath);
             updateRulesList(xmlRulesPath);
         }
+
         private void cmbBoxCondition_PH_SelectedIndexChanged(object sender, EventArgs e)
         {
             if ((string)cmbBoxCondition_PH.SelectedItem != "Between")
@@ -272,11 +280,29 @@ namespace AlarmSystem
         /*********************************************************************************************************************
         *                                 Disable specific alarms or all if "all" string is given
         ********************************************************************************************************************/
-        private void disableAlarms()
+        private void disableAlarms(string alarm)
         {
-            lbl_phWarning.Visible = false;
-            lbl_nh3Warning.Visible = false;
-            lbl_ci2Warning.Visible = false;
+            if (alarm == "ph")
+            {
+                lbl_phWarning.Visible = false;
+            }
+            if (alarm == "nh3")
+            {
+                lbl_nh3Warning.Visible = false;
+            }
+            if (alarm == "ci2")
+            {
+                lbl_ci2Warning.Visible = false;
+            }
+            if (alarm == "all")
+            {
+                lbl_phWarning.Visible = false;
+                lbl_nh3Warning.Visible = false;
+                lbl_ci2Warning.Visible = false;
+            }
+
+
+
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -289,12 +315,20 @@ namespace AlarmSystem
        ********************************************************************************************************************/
         private void triggerAlarms()
         {
-            lbl_phWarning.Visible = phAlarmGenerated ? true : false;
-            lbl_nh3Warning.Visible = nh3AlarmGenerated ? true : false;
-            lbl_ci2Warning.Visible = ci2AlarmGenerated ? true : false;
+            if (phAlarmEnabled)
+            {
+                lbl_phWarning.Visible = phAlarmGenerated ? true : false;
+            }
+            if (nh3AlarmEnabled)
+            {
+                lbl_nh3Warning.Visible = nh3AlarmGenerated ? true : false;
+            }
+            if (ci2AlarmEnabled)
+            {
+                lbl_ci2Warning.Visible = ci2AlarmGenerated ? true : false;
+            }
 
         }
-
 
         /*********************************************************************************************************************
         *                                 Call functions to verify each one of Sensor Types
@@ -317,11 +351,10 @@ namespace AlarmSystem
 
         }
 
-
         /*********************************************************************************************************************
         *                                  Verify if PH Matches with conditions specified in rules.xml file
         ********************************************************************************************************************/
-        private void verifyPhAlarm(string message)
+        private void verifyPhAlarm(string actualPhValue)
         {
             XmlDocument rulesDoc = new XmlDocument();
             rulesDoc.Load(xmlRulesPath);
@@ -333,10 +366,12 @@ namespace AlarmSystem
                 decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualPhValue, ptPT) > ruleValue)
                     {
                         Debug.WriteLine("ALARM ON PH !!!!!!!!!");
                         phAlarmGenerated = true;
+                        publisher.publishData("alarmPH;" + actualPhValue);
+
                     }
                     else
                     {
@@ -345,10 +380,11 @@ namespace AlarmSystem
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Less Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue)
+                    if (Convert.ToDecimal(actualPhValue, ptPT) < ruleValue)
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
+                        publisher.publishData("alarmPH;" + actualPhValue);
                     }
                     else
                     {
@@ -357,10 +393,11 @@ namespace AlarmSystem
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Equal")
                 {
-                    if (Convert.ToDecimal(message, ptPT) == ruleValue)
+                    if (Convert.ToDecimal(actualPhValue, ptPT) == ruleValue)
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
+                        publisher.publishData("alarmPH;" + actualPhValue);
                     }
                     else
                     {
@@ -370,10 +407,11 @@ namespace AlarmSystem
 
                 if (node.SelectSingleNode("condition").InnerText == "Between")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue && Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualPhValue, ptPT) < ruleValue && Convert.ToDecimal(actualPhValue, ptPT) > ruleValue)
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
+                        publisher.publishData("alarmPH;" + actualPhValue);
                     }
                     else
                     {
@@ -388,7 +426,7 @@ namespace AlarmSystem
         *                                  Verify if NH3 Matches with conditions specified in rules.xml file
         ********************************************************************************************************************/
 
-        static private void verifyHN3Alarm(string message)
+        private void verifyHN3Alarm(string actualNH3Value)
         {
             XmlDocument rulesDoc = new XmlDocument();
             rulesDoc.Load(xmlRulesPath);
@@ -400,40 +438,64 @@ namespace AlarmSystem
                 decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualNH3Value, ptPT) > ruleValue)
                     {
-                        Console.WriteLine("ALARM ON NH3 !!!!!!!!!");
-                        //TODO call function to activate alarms on ph
+                        Debug.WriteLine("ALARM ON NH3 !!!!!!!!!");
+                        nh3AlarmGenerated = true;
+                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                    }
+                    else
+                    {
+                        nh3AlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Less Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue)
+                    if (Convert.ToDecimal(actualNH3Value, ptPT) < ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        nh3AlarmGenerated = true;
+                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                    }
+                    else
+                    {
+                        nh3AlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Equal")
                 {
-                    if (Convert.ToDecimal(message, ptPT) == ruleValue)
+                    if (Convert.ToDecimal(actualNH3Value, ptPT) == ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        nh3AlarmGenerated = true;
+                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                    }
+                    else
+                    {
+                        nh3AlarmGenerated = false;
                     }
                 }
 
                 if (node.SelectSingleNode("condition").InnerText == "Between")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue && Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualNH3Value, ptPT) < ruleValue && Convert.ToDecimal(actualNH3Value, ptPT) > ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        nh3AlarmGenerated = true;
+                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                    }
+                    else
+                    {
+                        nh3AlarmGenerated = false;
                     }
                 }
+
             }
         }
         /*********************************************************************************************************************
          *                                  Verify if CI2 Matches with conditions specified in rules.xml file
          ********************************************************************************************************************/
-        static private void verifyCI2Alarm(string message)
+        private void verifyCI2Alarm(string actualCI2Value)
         {
             XmlDocument rulesDoc = new XmlDocument();
             rulesDoc.Load(xmlRulesPath);
@@ -445,34 +507,58 @@ namespace AlarmSystem
                 decimal ruleValue = Convert.ToDecimal(node.SelectSingleNode("minValue").InnerText, ptPT);
                 if (node.SelectSingleNode("condition").InnerText == "Greater Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualCI2Value, ptPT) > ruleValue)
                     {
-                        Console.WriteLine("ALARM ON CI2 !!!!!!!!!");
-                        //TODO call function to activate alarms on ph
+                        Debug.WriteLine("ALARM ON CI2 !!!!!!!!!");
+                        ci2AlarmGenerated = true;
+                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                    }
+                    else
+                    {
+                        ci2AlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Less Than")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue)
+                    if (Convert.ToDecimal(actualCI2Value, ptPT) < ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        ci2AlarmGenerated = true;
+                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                    }
+                    else
+                    {
+                        ci2AlarmGenerated = false;
                     }
                 }
                 if (node.SelectSingleNode("condition").InnerText == "Equal")
                 {
-                    if (Convert.ToDecimal(message, ptPT) == ruleValue)
+                    if (Convert.ToDecimal(actualCI2Value, ptPT) == ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        ci2AlarmGenerated = true;
+                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                    }
+                    else
+                    {
+                        ci2AlarmGenerated = false;
                     }
                 }
 
                 if (node.SelectSingleNode("condition").InnerText == "Between")
                 {
-                    if (Convert.ToDecimal(message, ptPT) < ruleValue && Convert.ToDecimal(message, ptPT) > ruleValue)
+                    if (Convert.ToDecimal(actualCI2Value, ptPT) < ruleValue && Convert.ToDecimal(actualCI2Value, ptPT) > ruleValue)
                     {
                         //TODO call function to activate alarms on ph
+                        ci2AlarmGenerated = true;
+                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                    }
+                    else
+                    {
+                        ci2AlarmGenerated = false;
                     }
                 }
+
             }
         }
 
@@ -525,7 +611,6 @@ namespace AlarmSystem
 
         private string splitMessage(string originalMessage)
         {
-
             string[] words = originalMessage.Split(';');
             return words[1];
         }
@@ -551,6 +636,7 @@ namespace AlarmSystem
         private void AlarmSystem_Shown(object sender, EventArgs e)
         {
             subscribeMQTT(_topics);
+            publisher = new mqttPublisher(_host);
         }
 
         private void btn_DelPhRules_Click(object sender, EventArgs e)
@@ -569,6 +655,60 @@ namespace AlarmSystem
         {
             deleteRules("CI2");
             updateRulesList(xmlRulesPath);
+        }
+
+        private void rdBtn_AlarmPhON_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!phAlarmEnabled)
+            {
+                phAlarmEnabled = true;
+            }
+        }
+
+        private void rdBtn_AlarmPhOFF_CheckedChanged(object sender, EventArgs e)
+        {
+            if (phAlarmEnabled)
+            {
+                phAlarmEnabled = false;
+                disableAlarms("ph");
+                phAlarmGenerated = false;
+            }
+        }
+
+        private void rdBtn_AlarmNH3ON_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!nh3AlarmEnabled)
+            {
+                nh3AlarmEnabled = true;
+            }
+        }
+
+        private void rdBtn_AlarmNH3OFF_CheckedChanged(object sender, EventArgs e)
+        {
+            if (nh3AlarmEnabled)
+            {
+                nh3AlarmEnabled = false;
+                disableAlarms("nh3");
+                nh3AlarmGenerated = false;
+            }
+        }
+
+        private void rdBtn_AlarmCI2ON_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!ci2AlarmEnabled)
+            {
+                ci2AlarmEnabled = false;
+            }
+        }
+
+        private void rdBtn_AlarmCI2OFF_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ci2AlarmEnabled)
+            {
+                ci2AlarmEnabled = false;
+                disableAlarms("ci2");
+                ci2AlarmGenerated = false;
+            }
         }
     }
 }
