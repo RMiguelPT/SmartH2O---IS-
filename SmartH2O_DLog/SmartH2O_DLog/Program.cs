@@ -23,15 +23,15 @@ namespace SmartH2O_DLog
             }
            else if(e.Topic == "alarmNH3")
             {
-                string info = "NH3;"+msg+";"+ DateTime.Now.ToString("HH: mm") + DateTime.Now.ToString("dd-MM-yyyy");
+                string info = "NH3;"+msg+";"+ DateTime.Now.ToString("HH: mm") +";" + DateTime.Now.ToString("dd-MM-yyyy");
             }
             else if (e.Topic == "alarmCI2")
             {
-                string info = "CI2;" + msg + ";" + DateTime.Now.ToString("HH: mm") + DateTime.Now.ToString("dd-MM-yyyy");
+                string info = "CI2;" + msg + ";" + DateTime.Now.ToString("HH: mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
             }
             else if (e.Topic == "alarmPH")
             {
-                string info = "PH;" + msg + ";" + DateTime.Now.ToString("HH: mm") + DateTime.Now.ToString("dd-MM-yyyy");
+                string info = "PH;" + msg + ";" + DateTime.Now.ToString("HH: mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
             }
         }
 
