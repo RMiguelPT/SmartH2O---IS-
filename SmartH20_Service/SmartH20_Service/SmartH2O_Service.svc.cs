@@ -22,9 +22,10 @@ namespace SmartH20_Service
 
             string[] elementData = dados.Split(';');
 
-           
-            
-            doc.Load("param-data.xml");
+            string filepath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/param-data.xml";
+
+
+            doc.Load(filepath);
 
             XmlElement p = doc.CreateElement("PARAM");
             XmlElement pname = doc.CreateElement(elementData[0]);
@@ -48,7 +49,7 @@ namespace SmartH20_Service
 
             pData.AppendChild(p);
 
-            doc.Save("param-data.xml");
+            doc.Save(filepath);
         }
 
         public void writeAlarms(string dados)
@@ -58,9 +59,10 @@ namespace SmartH20_Service
 
             string[] elementData = dados.Split(';');
 
-            var fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "alarm-data.xml");
+            string filepath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/alarm-data.xml";
+           
 
-            doc.Load(fileName);
+            doc.Load(filepath);
 
             XmlElement p = doc.CreateElement("ALARM");
             XmlElement pname = doc.CreateElement(elementData[0]);
@@ -81,7 +83,7 @@ namespace SmartH20_Service
 
             pData.AppendChild(p);
 
-            doc.Save("alarm-data.xml");
+            doc.Save(filepath);
         }
     }
 }
