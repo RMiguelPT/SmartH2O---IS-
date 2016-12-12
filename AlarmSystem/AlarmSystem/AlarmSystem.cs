@@ -68,6 +68,8 @@ namespace AlarmSystem
             rdBtn_AlarmPhON.Select();
             rdBtn_AlarmNH3ON.Select();
             rdBtn_AlarmCI2ON.Select();
+
+            publisher = new mqttPublisher(_host);
         }
 
 
@@ -299,11 +301,7 @@ namespace AlarmSystem
                 lbl_phWarning.Visible = false;
                 lbl_nh3Warning.Visible = false;
                 lbl_ci2Warning.Visible = false;
-            }
-
-
-
-        }
+            }        }
 
         void timer_Tick(object sender, EventArgs e)
         {
@@ -368,9 +366,9 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualPhValue, ptPT) > ruleValue)
                     {
-                        Debug.WriteLine("ALARM ON PH !!!!!!!!!");
+                        Debug.WriteLine("ALARM ON PH !!!!!!!!!" + DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                         phAlarmGenerated = true;
-                        publisher.publishData("alarmPH;" + actualPhValue);
+                        publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
 
                     }
                     else
@@ -384,7 +382,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
-                        publisher.publishData("alarmPH;" + actualPhValue);
+                        publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -397,7 +395,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
-                        publisher.publishData("alarmPH;" + actualPhValue);
+                        publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -411,7 +409,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
-                        publisher.publishData("alarmPH;" + actualPhValue);
+                        publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -442,7 +440,8 @@ namespace AlarmSystem
                     {
                         Debug.WriteLine("ALARM ON NH3 !!!!!!!!!");
                         nh3AlarmGenerated = true;
-                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                        publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
+                        
                     }
                     else
                     {
@@ -455,7 +454,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
-                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                        publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -468,7 +467,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
-                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                        publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -482,7 +481,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
-                        publisher.publishData("alarmNH3;" + actualNH3Value);
+                        publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -511,7 +510,7 @@ namespace AlarmSystem
                     {
                         Debug.WriteLine("ALARM ON CI2 !!!!!!!!!");
                         ci2AlarmGenerated = true;
-                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                        publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -524,7 +523,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
-                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                        publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -537,7 +536,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
-                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                        publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -551,7 +550,7 @@ namespace AlarmSystem
                     {
                         //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
-                        publisher.publishData("alarmCI2;" + actualCI2Value);
+                        publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
                     else
                     {
@@ -636,7 +635,7 @@ namespace AlarmSystem
         private void AlarmSystem_Shown(object sender, EventArgs e)
         {
             subscribeMQTT(_topics);
-            publisher = new mqttPublisher(_host);
+            //publisher = new mqttPublisher(_host);
         }
 
         private void btn_DelPhRules_Click(object sender, EventArgs e)
@@ -710,5 +709,100 @@ namespace AlarmSystem
                 ci2AlarmGenerated = false;
             }
         }
+
+        private void btnSetRule_NH3_Click(object sender, EventArgs e)
+        {
+             if (this.cmbBoxCondition_NH3.SelectedIndex > -1)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlRulesPath);
+                XmlNode rootElem = doc.SelectSingleNode("rules");
+
+                if ((string)this.cmbBoxCondition_NH3.SelectedItem != "Between")
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_NH3.Text))
+                    {
+                        MessageBox.Show("You have selected the \"" + (string)this.cmbBoxCondition_NH3.SelectedItem + "\" condition. Please insert the one value.");
+                        return;
+                    }
+                    XmlElement rule = addRule(doc, "NH3", (string)cmbBoxCondition_NH3.SelectedItem, txtBoxValue1_NH3.Text.ToString(), "0");
+                    rootElem.AppendChild(rule);
+
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_NH3.Text) || (string.IsNullOrWhiteSpace(this.txtBoxValue2_NH3.Text)))
+                    {
+                        MessageBox.Show("You have selected the \"Between\" condition. Please insert the minimum and the maximum values.");
+                        return;
+                    }
+                    else
+                    {
+                        int[] values = new int[2];
+                        values[0] = int.Parse(txtBoxValue1_NH3.Text.ToString());
+                        values[1] = int.Parse(txtBoxValue2_NH3.Text.ToString());
+
+                        XmlElement rule = addRule(doc, "NH3", (string)cmbBoxCondition_NH3.SelectedItem, values[0].ToString(), values[1].ToString());
+                        rootElem.AppendChild(rule);
+                    }
+                }
+                doc.Save(xmlRulesPath);
+
+                updateRulesList(xmlRulesPath);
+            }
+            else
+            {
+                MessageBox.Show("Please Select one condition.");
+                return;
+            }
+        }
+
+        private void btnSetRule_CI2_Click(object sender, EventArgs e)
+        {
+            if (this.cmbBoxCondition_CI2.SelectedIndex > -1)
+            {
+                XmlDocument doc = new XmlDocument();
+                doc.Load(xmlRulesPath);
+                XmlNode rootElem = doc.SelectSingleNode("rules");
+
+                if ((string)this.cmbBoxCondition_CI2.SelectedItem != "Between")
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_CI2.Text))
+                    {
+                        MessageBox.Show("You have selected the \"" + (string)this.cmbBoxCondition_CI2.SelectedItem + "\" condition. Please insert the one value.");
+                        return;
+                    }
+                    XmlElement rule = addRule(doc, "CI2", (string)cmbBoxCondition_CI2.SelectedItem, txtBoxValue1_CI2.Text.ToString(), "0");
+                    rootElem.AppendChild(rule);
+
+                }
+                else
+                {
+                    if (string.IsNullOrWhiteSpace(this.txtBoxValue1_CI2.Text) || (string.IsNullOrWhiteSpace(this.txtBoxValue2_CI2.Text)))
+                    {
+                        MessageBox.Show("You have selected the \"Between\" condition. Please insert the minimum and the maximum values.");
+                        return;
+                    }
+                    else
+                    {
+                        int[] values = new int[2];
+                        values[0] = int.Parse(txtBoxValue1_CI2.Text.ToString());
+                        values[1] = int.Parse(txtBoxValue2_CI2.Text.ToString());
+
+                        XmlElement rule = addRule(doc, "CI2", (string)cmbBoxCondition_CI2.SelectedItem, values[0].ToString(), values[1].ToString());
+                        rootElem.AppendChild(rule);
+                    }
+                }
+                doc.Save(xmlRulesPath);
+
+                updateRulesList(xmlRulesPath);
+            }
+            else
+            {
+                MessageBox.Show("Please Select one condition.");
+                return;
+            }
+        }
+    
     }
 }

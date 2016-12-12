@@ -30,15 +30,18 @@ namespace AlarmSystem
             {
                 MessageBox.Show("Error connecting to message publisher broker");
             }
+           
         }
 
 
-        public void publishData(string data)
+        public void publishData(string topic, string message, string timestamp)
         {
-            string topic = data.Split(';')[0];
-            string message = data.Split(';')[1];
 
-            m_cClient.Publish(topic, Encoding.UTF8.GetBytes(message));
+            string messageToSend = message + ";" + timestamp;
+
+            //Console.WriteLine("PUBLISH ALARM: " + topic);
+
+            m_cClient.Publish(topic, Encoding.UTF8.GetBytes(messageToSend));
         }
     }
 }
