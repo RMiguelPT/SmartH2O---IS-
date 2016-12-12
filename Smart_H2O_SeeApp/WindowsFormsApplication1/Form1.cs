@@ -21,6 +21,7 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             listBoxParam.Enabled = false;
+            
 
             listBoxParam.Items.Add("PH");
             listBoxParam.Items.Add("NH3");
@@ -31,45 +32,15 @@ namespace WindowsFormsApplication1
      
 
 
-        public void ValidateXML()
-        {
-            XmlDocument doc = new XmlDocument();
-            doc.Load("Bookstore.xml");
-
-            doc.Schemas.Add(null, "Bookstore.xsd");
-
-            ValidationEventHandler handler = new ValidationEventHandler(ValidationMethod);
-            doc.Validate(handler);
-
-            if (isValid)
-            {
-                MessageBox.Show("OK!" + strValidateMessage);
-            }
-            else
-            {
-                MessageBox.Show("Invalid" + strValidateMessage);
-            }
-        }
-
-        private void ValidationMethod(object sender, ValidationEventArgs e)
-        {
-            isValid = false;
-            switch (e.Severity)
-            {
-                case XmlSeverityType.Error: strValidateMessage = "Error: " + e.Message;
-                    break;
-                case XmlSeverityType.Warning: strValidateMessage = "Warning" + e.Message;
-                    break;
-                default:
-                    break;
-            }
-        }
+ 
 
         private void button2_Click(object sender, EventArgs e)
         {
-            ValidateXML();
+          
         }
 
+
+        // Ler Valores dos XML
         private void button3_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
@@ -80,34 +51,76 @@ namespace WindowsFormsApplication1
 
 
 
-            string teste = textBox1.Text;
-            bool check1 = Alarms.Checked;
-            bool check2 = Param.Checked;
-
+           
+       
 
             XmlDocument doc = new XmlDocument();
 
-            if (Alarms.Checked) {
-
+            if (Alarms.Checked)
+            {
 
                 doc.Load("alarm-data.xml");
                 XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
 
-                foreach (XmlNode n in list)
-                {
-                    foreach (XmlNode c in n.ChildNodes)
-                    {
-                        listBox1.Items.Add(c.Name);
-                        listBox3.Items.Add(c.ChildNodes[0].InnerText);
-                        listBox4.Items.Add(c.ChildNodes[1].InnerText);
-                        listBox5.Items.Add(c.ChildNodes[2].InnerText);
-                    }
+                            if (dailyAlarms.Checked)
+                            {
+                                    int day = dailyAlarmsPick.Value.Day;
+                                    int month = dailyAlarmsPick.Value.Month;
+                                    int year = dailyAlarmsPick.Value.Year;
+
+                                    foreach (XmlNode n in list)
+                                    {
+                                        foreach (XmlNode c in n.ChildNodes)
+                                        {
+
+                                            string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                                            int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                                            int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                                            int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                                             //MessageBox.Show(day.ToString() + "-" + nodeDay.ToString());
+                                             //MessageBox.Show(month.ToString() + "-" + nodeMonth.ToString());
+                                             //MessageBox.Show(year.ToString() + "-" + nodeYear.ToString());
+
+                                             if (day == nodeDay && month == nodeMonth && year == nodeYear) {
+                                                    listBox1.Items.Add(c.Name);
+                                                    listBox3.Items.Add(c.ChildNodes[0].InnerText);
+                                                    listBox4.Items.Add(c.ChildNodes[1].InnerText);
+                                                    listBox5.Items.Add(c.ChildNodes[2].InnerText);
+                                                }
+                                          }
 
 
-                }
+                                    }
 
 
-            }
+
+                            }
+                            else if(allAlarms.Checked) {
+
+
+                                foreach (XmlNode n in list)
+                                {
+                                    foreach (XmlNode c in n.ChildNodes)
+                                    {
+                                        listBox1.Items.Add(c.Name);
+                                        listBox3.Items.Add(c.ChildNodes[0].InnerText);
+                                        listBox4.Items.Add(c.ChildNodes[1].InnerText);
+                                        listBox5.Items.Add(c.ChildNodes[2].InnerText);
+                                    }
+
+
+                                }
+
+
+                            }
+
+                        }
+
+
+
+
+
             else if (Param.Checked)
             {
 
@@ -115,11 +128,11 @@ namespace WindowsFormsApplication1
                 string listval = listBoxParam.SelectedItem.ToString();
 
 
-                if(listval != "TODOS")
+                if (listval != "TODOS")
                 {
                     XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM/" + listval);
 
-                  
+
                     foreach (XmlNode c in list)
                     {
 
@@ -130,22 +143,15 @@ namespace WindowsFormsApplication1
                         listBox4.Items.Add(c.ChildNodes[2].InnerText);
                         listBox5.Items.Add(c.ChildNodes[3].InnerText);
 
-
-
-
-
                     }
-
-
-
 
                 }
                 else
                 {
                     XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM");
 
-                     foreach (XmlNode n in list)
-                     {
+                    foreach (XmlNode n in list)
+                    {
 
                         foreach (XmlNode c in n.ChildNodes)
                         {
@@ -160,10 +166,6 @@ namespace WindowsFormsApplication1
 
 
                 }
-
-
-
-
 
             }
         }
@@ -307,6 +309,7 @@ namespace WindowsFormsApplication1
             listBoxParam.Enabled = false;
             labelSid.Enabled = false;
             listSid.Enabled = false;
+            allAlarms.Checked = true;
         }
         
         private void radioButton2_CheckedChanged(object sender, EventArgs e)

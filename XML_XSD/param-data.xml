@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PARAM-DATA>
+  <PARAM>
+    <CI2>
+      <SENSOR-ID>1</SENSOR-ID>
+      <SENSOR-VALUE>7.0</SENSOR-VALUE>
+      <HOUR>10:34</HOUR>
+      <DATE>02-12-2012</DATE>
+    </CI2>
+  </PARAM>
+  <PARAM>
+    <NH3>
+      <SENSOR-ID>2</SENSOR-ID>
+      <SENSOR-VALUE>8.0</SENSOR-VALUE>
+      <HOUR>10:34</HOUR>
+      <DATE>02-12-2013</DATE>
+    </NH3>
+  </PARAM>
+  <PARAM>
+    <PH>
+      <SENSOR-ID>5</SENSOR-ID>
+      <SENSOR-VALUE>10.0</SENSOR-VALUE>
+      <HOUR>10:40</HOUR>
+      <DATE>05-12-2016</DATE>
+    </PH>
+  </PARAM>
+</PARAM-DATA>
