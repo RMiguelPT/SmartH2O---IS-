@@ -43,8 +43,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.periodParam = new System.Windows.Forms.RadioButton();
+            this.dailyParam = new System.Windows.Forms.RadioButton();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -60,6 +60,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.alarmTxt = new System.Windows.Forms.TextBox();
             this.dailyAlarmsPick = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dateTimePicker4 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePicker5 = new System.Windows.Forms.DateTimePicker();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -67,7 +71,7 @@
             // 
             // readValues
             // 
-            this.readValues.Location = new System.Drawing.Point(14, 248);
+            this.readValues.Location = new System.Drawing.Point(14, 333);
             this.readValues.Name = "readValues";
             this.readValues.Size = new System.Drawing.Size(106, 26);
             this.readValues.TabIndex = 2;
@@ -79,7 +83,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(12, 332);
+            this.listBox1.Location = new System.Drawing.Point(12, 417);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(109, 84);
             this.listBox1.TabIndex = 3;
@@ -89,7 +93,7 @@
             // 
             this.listSid.FormattingEnabled = true;
             this.listSid.ItemHeight = 16;
-            this.listSid.Location = new System.Drawing.Point(143, 332);
+            this.listSid.Location = new System.Drawing.Point(143, 417);
             this.listSid.Name = "listSid";
             this.listSid.Size = new System.Drawing.Size(171, 84);
             this.listSid.TabIndex = 10;
@@ -98,14 +102,14 @@
             // 
             this.listBox3.FormattingEnabled = true;
             this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(320, 332);
+            this.listBox3.Location = new System.Drawing.Point(320, 417);
             this.listBox3.Name = "listBox3";
             this.listBox3.Size = new System.Drawing.Size(178, 84);
             this.listBox3.TabIndex = 11;
             // 
             // paramTxt
             // 
-            this.paramTxt.Location = new System.Drawing.Point(257, 250);
+            this.paramTxt.Location = new System.Drawing.Point(257, 335);
             this.paramTxt.Name = "paramTxt";
             this.paramTxt.Size = new System.Drawing.Size(234, 22);
             this.paramTxt.TabIndex = 7;
@@ -116,10 +120,10 @@
             this.Alarms.AutoSize = true;
             this.Alarms.Location = new System.Drawing.Point(22, 21);
             this.Alarms.Name = "Alarms";
-            this.Alarms.Size = new System.Drawing.Size(72, 21);
+            this.Alarms.Size = new System.Drawing.Size(80, 21);
             this.Alarms.TabIndex = 18;
             this.Alarms.TabStop = true;
-            this.Alarms.Text = "Alarms";
+            this.Alarms.Text = "Alarmes";
             this.Alarms.UseVisualStyleBackColor = true;
             this.Alarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
@@ -137,7 +141,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(143, 248);
+            this.button1.Location = new System.Drawing.Point(143, 333);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(106, 26);
             this.button1.TabIndex = 20;
@@ -163,25 +167,29 @@
             this.groupBox1.Controls.Add(this.Param);
             this.groupBox1.Location = new System.Drawing.Point(14, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(676, 229);
+            this.groupBox1.Size = new System.Drawing.Size(676, 300);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Log Filter";
+            this.groupBox1.Text = "Filtro de Logs";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.dateTimePicker4);
+            this.groupBox3.Controls.Add(this.dateTimePicker5);
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.dateTimePicker3);
             this.groupBox3.Controls.Add(this.radioButton5);
-            this.groupBox3.Controls.Add(this.radioButton4);
-            this.groupBox3.Controls.Add(this.radioButton3);
+            this.groupBox3.Controls.Add(this.periodParam);
+            this.groupBox3.Controls.Add(this.dailyParam);
             this.groupBox3.Controls.Add(this.dateTimePicker1);
             this.groupBox3.Controls.Add(this.dateTimePicker2);
             this.groupBox3.Location = new System.Drawing.Point(243, 57);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(293, 144);
+            this.groupBox3.Size = new System.Drawing.Size(389, 237);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Mostrar:";
@@ -189,7 +197,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 78);
+            this.label3.Location = new System.Drawing.Point(204, 98);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 17);
             this.label3.TabIndex = 34;
@@ -198,7 +206,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 55);
+            this.label1.Location = new System.Drawing.Point(27, 98);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(40, 17);
             this.label1.TabIndex = 32;
@@ -206,7 +214,7 @@
             // 
             // dateTimePicker3
             // 
-            this.dateTimePicker3.Location = new System.Drawing.Point(110, 78);
+            this.dateTimePicker3.Location = new System.Drawing.Point(30, 118);
             this.dateTimePicker3.Name = "dateTimePicker3";
             this.dateTimePicker3.Size = new System.Drawing.Size(171, 22);
             this.dateTimePicker3.TabIndex = 25;
@@ -214,46 +222,46 @@
             // radioButton5
             // 
             this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(6, 106);
+            this.radioButton5.Location = new System.Drawing.Point(6, 146);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(81, 21);
+            this.radioButton5.Size = new System.Drawing.Size(84, 21);
             this.radioButton5.TabIndex = 2;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Semana";
+            this.radioButton5.Text = "Semanal";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // periodParam
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(7, 50);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(50, 21);
-            this.radioButton4.TabIndex = 1;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Dia";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.periodParam.AutoSize = true;
+            this.periodParam.Location = new System.Drawing.Point(6, 76);
+            this.periodParam.Name = "periodParam";
+            this.periodParam.Size = new System.Drawing.Size(78, 21);
+            this.periodParam.TabIndex = 1;
+            this.periodParam.TabStop = true;
+            this.periodParam.Text = "Periodo";
+            this.periodParam.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // dailyParam
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(7, 22);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(60, 21);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Hora";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.dailyParam.AutoSize = true;
+            this.dailyParam.Location = new System.Drawing.Point(7, 22);
+            this.dailyParam.Name = "dailyParam";
+            this.dailyParam.Size = new System.Drawing.Size(93, 21);
+            this.dailyParam.TabIndex = 0;
+            this.dailyParam.TabStop = true;
+            this.dailyParam.Text = "Hora / Dia";
+            this.dailyParam.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(110, 19);
+            this.dateTimePicker1.Location = new System.Drawing.Point(30, 48);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(171, 22);
             this.dateTimePicker1.TabIndex = 23;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(110, 50);
+            this.dateTimePicker2.Location = new System.Drawing.Point(207, 118);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(171, 22);
             this.dateTimePicker2.TabIndex = 24;
@@ -298,7 +306,7 @@
             // 
             this.listBox4.FormattingEnabled = true;
             this.listBox4.ItemHeight = 16;
-            this.listBox4.Location = new System.Drawing.Point(504, 332);
+            this.listBox4.Location = new System.Drawing.Point(504, 417);
             this.listBox4.Name = "listBox4";
             this.listBox4.Size = new System.Drawing.Size(178, 84);
             this.listBox4.TabIndex = 25;
@@ -307,7 +315,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 312);
+            this.label5.Location = new System.Drawing.Point(12, 395);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 17);
             this.label5.TabIndex = 26;
@@ -316,7 +324,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(317, 312);
+            this.label6.Location = new System.Drawing.Point(317, 395);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(133, 17);
             this.label6.TabIndex = 27;
@@ -325,7 +333,7 @@
             // labelSid
             // 
             this.labelSid.AutoSize = true;
-            this.labelSid.Location = new System.Drawing.Point(140, 312);
+            this.labelSid.Location = new System.Drawing.Point(140, 395);
             this.labelSid.Name = "labelSid";
             this.labelSid.Size = new System.Drawing.Size(70, 17);
             this.labelSid.TabIndex = 28;
@@ -335,7 +343,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(501, 312);
+            this.label8.Location = new System.Drawing.Point(501, 395);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(39, 17);
             this.label8.TabIndex = 29;
@@ -344,7 +352,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(685, 312);
+            this.label9.Location = new System.Drawing.Point(685, 395);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(38, 17);
             this.label9.TabIndex = 31;
@@ -354,14 +362,14 @@
             // 
             this.listBox5.FormattingEnabled = true;
             this.listBox5.ItemHeight = 16;
-            this.listBox5.Location = new System.Drawing.Point(688, 332);
+            this.listBox5.Location = new System.Drawing.Point(688, 417);
             this.listBox5.Name = "listBox5";
             this.listBox5.Size = new System.Drawing.Size(178, 84);
             this.listBox5.TabIndex = 30;
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(143, 280);
+            this.button4.Location = new System.Drawing.Point(143, 365);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(106, 26);
             this.button4.TabIndex = 32;
@@ -371,7 +379,7 @@
             // 
             // alarmTxt
             // 
-            this.alarmTxt.Location = new System.Drawing.Point(257, 282);
+            this.alarmTxt.Location = new System.Drawing.Point(257, 367);
             this.alarmTxt.Name = "alarmTxt";
             this.alarmTxt.Size = new System.Drawing.Size(234, 22);
             this.alarmTxt.TabIndex = 33;
@@ -382,6 +390,38 @@
             this.dailyAlarmsPick.Name = "dailyAlarmsPick";
             this.dailyAlarmsPick.Size = new System.Drawing.Size(171, 22);
             this.dailyAlarmsPick.TabIndex = 35;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(204, 169);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(30, 17);
+            this.label2.TabIndex = 38;
+            this.label2.Text = "Fim";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(27, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.TabIndex = 37;
+            this.label4.Text = "Inicio";
+            // 
+            // dateTimePicker4
+            // 
+            this.dateTimePicker4.Location = new System.Drawing.Point(30, 189);
+            this.dateTimePicker4.Name = "dateTimePicker4";
+            this.dateTimePicker4.Size = new System.Drawing.Size(171, 22);
+            this.dateTimePicker4.TabIndex = 36;
+            // 
+            // dateTimePicker5
+            // 
+            this.dateTimePicker5.Location = new System.Drawing.Point(207, 189);
+            this.dateTimePicker5.Name = "dateTimePicker5";
+            this.dateTimePicker5.Size = new System.Drawing.Size(171, 22);
+            this.dateTimePicker5.TabIndex = 35;
             // 
             // Form1
             // 
@@ -444,14 +484,18 @@
         private System.Windows.Forms.RadioButton dailyAlarms;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton periodParam;
+        private System.Windows.Forms.RadioButton dailyParam;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dateTimePicker3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox alarmTxt;
         private System.Windows.Forms.DateTimePicker dailyAlarmsPick;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker4;
+        private System.Windows.Forms.DateTimePicker dateTimePicker5;
     }
 }
 
