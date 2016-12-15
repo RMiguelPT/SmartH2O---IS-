@@ -24,8 +24,23 @@ namespace SmartH20_Service
 
             string filepath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/param-data.xml";
 
+            if (!File.Exists(filepath))
+            {
+                XmlDeclaration dec = doc.CreateXmlDeclaration("1.0",null,null);
+                doc.AppendChild(dec);
+                XmlElement root = doc.CreateElement("PARAM-DATA");
+                doc.AppendChild(root);
 
-            doc.Load(filepath);
+                doc.Save(filepath);
+            }
+            else {
+               
+
+                doc.Load(filepath);
+            }
+
+
+
 
             XmlElement p = doc.CreateElement("PARAM");
             XmlElement pname = doc.CreateElement(elementData[0]);
@@ -60,9 +75,21 @@ namespace SmartH20_Service
             string[] elementData = dados.Split(';');
 
             string filepath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/alarm-data.xml";
-           
 
-            doc.Load(filepath);
+            if (!File.Exists(filepath))
+            {
+                XmlDeclaration dec = doc.CreateXmlDeclaration("1.0", null, null);
+                doc.AppendChild(dec);
+                XmlElement root = doc.CreateElement("ALARM-DATA");
+                doc.AppendChild(root);
+
+                doc.Save(filepath);
+            }
+            else {
+
+
+                doc.Load(filepath);
+            }
 
             XmlElement p = doc.CreateElement("ALARM");
             XmlElement pname = doc.CreateElement(elementData[0]);

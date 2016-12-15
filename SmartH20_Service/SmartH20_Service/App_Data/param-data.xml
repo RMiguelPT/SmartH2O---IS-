@@ -24,4 +24,12 @@
       <DATE>05-12-2016</DATE>
     </PH>
   </PARAM>
+  <PARAM>
+    <NH3>
+      <SENSOR-ID>2</SENSOR-ID>
+      <SENSOR-VALUE>1.32</SENSOR-VALUE>
+      <HOUR>23:41</HOUR>
+      <DATE>12-12-2016</DATE>
+    </NH3>
+  </PARAM>
 </PARAM-DATA>
