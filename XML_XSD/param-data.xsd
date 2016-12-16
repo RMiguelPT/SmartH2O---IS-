@@ -1,45 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:element name="PARAM-DATA">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" name="PARAM">
-          <xs:complexType>
+  <xs:element name="PARAM-DATA" type="ParamData"></xs:element>
+
+
+    <xs:complexType name="ParamData">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" name="PARAM" type="LoggedParams"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+      
+          <xs:complexType name="LoggedParams">
             <xs:sequence>
-              <xs:element minOccurs="0" name="PH">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
-                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
-                    <xs:element name="HOUR" type="xs:string" />
-                    <xs:element name="DATE" type="xs:string" />
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element minOccurs="0" name="NH3">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
-                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
-                    <xs:element name="HOUR" type="xs:string" />
-                    <xs:element name="DATE" type="xs:string" />
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
-              <xs:element minOccurs="0" name="CI2">
-                <xs:complexType>
-                  <xs:sequence>
-                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
-                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
-                    <xs:element name="HOUR" type="xs:string" />
-                    <xs:element name="DATE" type="xs:string" />
-                  </xs:sequence>
-                </xs:complexType>
-              </xs:element>
+                <xs:element minOccurs="0" name="PH" type="SensorParams"></xs:element>
+                <xs:element minOccurs="0" name="NH3" type="SensorParams"></xs:element>
+                <xs:element minOccurs="0" name="CI2" type="SensorParams"></xs:element>
             </xs:sequence>
           </xs:complexType>
-        </xs:element>
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
+              
+                <xs:complexType name="SensorParams">
+                  <xs:sequence>
+                    <xs:element name="SENSOR-ID" type="SensorID" />
+                    <xs:element name="SENSOR-VALUE" type="SensorValue" />
+                    <xs:element name="HOUR" type="LogHour" />
+                    <xs:element name="DATE" type="LogDate" />
+                  </xs:sequence>
+                </xs:complexType>
+
+                <xs:simpleType name="SensorID">
+                  <xs:restriction base="xs:integer" />
+                  </xs:simpleType>
+
+<xs:simpleType name="SensorValue">
+                  <xs:restriction base="xs:decimal" />
+                  </xs:simpleType>
+
+<xs:simpleType name="LogHour">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+
+  <xs:simpleType name="LogDate">
+    <xs:restriction base="xs:string" />
+  </xs:simpleType>
+
+
+              
+    
 </xs:schema>
