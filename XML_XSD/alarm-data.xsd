@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+
+  <xs:element name="ALARM-DATA" type="DataAlarms"></xs:element>
+
+  <xs:complexType name="DataAlarms">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="ALARM" type="TriggeredAlarms"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="TriggeredAlarms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CI2" type="AlarmParams"></xs:element>
+      <xs:element minOccurs="0" name="NH3" type="AlarmParams"></xs:element>
+      <xs:element minOccurs="0" name="PH" type="AlarmParams"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  
+  <xs:complexType name="AlarmParams">
+    <xs:sequence>
+      <xs:element name="ALARM-VALUE" type="AlarmValue" />
+      <xs:element name="HOUR" type="AlarmHour" />
+      <xs:element name="DATE" type="AlarmDate" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="AlarmValue">
+    <xs:restriction base="xs:decimal">
+      <xs:minInclusive value="-9999"></xs:minInclusive>
+      <xs:maxInclusive value="9999"></xs:maxInclusive>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AlarmHour">
+    <xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="AlarmDate">
+    <xs:restriction base="xs:string"></xs:restriction>
+  </xs:simpleType>
+
+
+</xs:schema>

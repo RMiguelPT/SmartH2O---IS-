@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PARAM-DATA">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" name="PARAM">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="0" name="PH">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
+                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
+                    <xs:element name="HOUR" type="xs:string" />
+                    <xs:element name="DATE" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="NH3">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
+                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
+                    <xs:element name="HOUR" type="xs:string" />
+                    <xs:element name="DATE" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="CI2">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="SENSOR-ID" type="xs:unsignedByte" />
+                    <xs:element name="SENSOR-VALUE" type="xs:decimal" />
+                    <xs:element name="HOUR" type="xs:string" />
+                    <xs:element name="DATE" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
