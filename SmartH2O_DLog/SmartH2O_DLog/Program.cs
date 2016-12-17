@@ -60,7 +60,7 @@ namespace SmartH2O_DLog
         static void Main(string[] args)
         {
 
-            MqttClient m_cClient = new MqttClient(IPAddress.Parse("192.168.237.202"));
+            MqttClient m_cClient = new MqttClient(IPAddress.Parse("127.0.0.1"));
             string[] m_strTopicsInfo = { "PH", "NH3", "CI2", "alarmNH3", "alarmCI2", "alarmPH" };
             m_cClient.Connect(Guid.NewGuid().ToString());
             if (!m_cClient.IsConnected)
