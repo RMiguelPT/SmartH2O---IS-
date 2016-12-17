@@ -5,10 +5,10 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using System.Xml;
 
 namespace SmartH20_Service
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
     [ServiceContract]
     public interface ISmartH2O_Service
     {
@@ -19,6 +19,20 @@ namespace SmartH20_Service
         [OperationContract]
         void writeAlarms(string dados);
 
+        [OperationContract]
+        string getHourlySummarizedInformation(string parameter, DateTime date);
+
+        [OperationContract]
+        string getDailySummarizedInformation(string parameter, DateTime StartDate, DateTime EndDate);
+
+        [OperationContract]
+        string getWeeklySummarizedInformation(string parameter, DateTime date);
+
+        [OperationContract]
+        string getDailyAlarmsInformation(string parameter, DateTime date);
+
+        [OperationContract]
+        string getAlarmsInformation(string parameter, DateTime StartDate, DateTime EndDate);
 
     }
 
