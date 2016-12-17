@@ -119,7 +119,7 @@ namespace SmartH20_Service
             doc.Save(filepath);
         }
 
-        public string getHourlySummarizedInformation(string parameter, DateTime date)
+        public string getHourlySummarizedInformation(string parameter, string date)
         {
             XmlDocument doc = readDocument(xmlDocPath);
             XmlDocument docAux = new XmlDocument();
@@ -140,7 +140,7 @@ namespace SmartH20_Service
                 {
 
 
-                    if (DateTime.Parse(node.SelectSingleNode("DATE").InnerText).Date.Equals(date.Date))
+                    if (DateTime.Parse(node.SelectSingleNode("DATE").InnerText).Date.Equals(DateTime.Parse(date).Date))
                     {
 
                         XmlElement p = docAux.CreateElement("PARAM");

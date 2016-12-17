@@ -20,7 +20,7 @@ namespace SmartH20_Service
         void writeAlarms(string dados);
 
         [OperationContract]
-        string getHourlySummarizedInformation(string parameter, DateTime date);
+        string getHourlySummarizedInformation(string parameter, string date);
 
         [OperationContract]
         string getDailySummarizedInformation(string parameter, DateTime StartDate, DateTime EndDate);
