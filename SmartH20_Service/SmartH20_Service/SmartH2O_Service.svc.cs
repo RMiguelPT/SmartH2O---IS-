@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -16,7 +17,7 @@ namespace SmartH20_Service
     public class SmartH2O_Service : ISmartH2O_Service
     {
 
-
+        static CultureInfo ptPT = CultureInfo.InvariantCulture;
         private string xmlDocPath = AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/param-data.xml";
 
         public void writeParams(string dados)
@@ -140,7 +141,7 @@ namespace SmartH20_Service
                 {
 
 
-                    if (DateTime.Parse(node.SelectSingleNode("DATE").InnerText).Date.Equals(DateTime.Parse(date).Date))
+                    if (DateTime.Parse(node.SelectSingleNode("DATE").InnerText).Date.Equals(DateTime.ParseExact(date, "dd-MM-yyyy", ptPT)))
                     {
 
                         XmlElement p = docAux.CreateElement("PARAM");
