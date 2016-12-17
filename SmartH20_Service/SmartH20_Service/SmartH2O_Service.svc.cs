@@ -141,7 +141,7 @@ namespace SmartH20_Service
                 {
 
 
-                    if (DateTime.Parse(node.SelectSingleNode("DATE").InnerText).Date.Equals(DateTime.ParseExact(date, "dd-MM-yyyy", ptPT)))
+                    if (DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT).Equals(DateTime.ParseExact(date, "dd-MM-yyyy", ptPT)))
                     {
 
                         XmlElement p = docAux.CreateElement("PARAM");
