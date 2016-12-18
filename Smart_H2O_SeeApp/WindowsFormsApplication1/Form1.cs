@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,199 +15,24 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        bool isValid = true;
-        string strValidateMessage = "";
-
-        public Form1()
+      public Form1()
         {
             InitializeComponent();
-            listBoxParam.Enabled = false;
-            
 
-            listBoxParam.Items.Add("PH");
-            listBoxParam.Items.Add("NH3");
-            listBoxParam.Items.Add("CI2");
-            listBoxParam.Items.Add("TODOS");
+
         }
 
-     
+        public SmartH2O_Graph_View sh2OGraph = new SmartH2O_Graph_View();
+        public SmartH2O_Alarms_View sh2OAlarm = new SmartH2O_Alarms_View();
 
-
- 
 
         private void button2_Click(object sender, EventArgs e)
         {
-          
+
         }
 
 
-        // Ler Valores dos XML
-        private void button3_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            listSid.Items.Clear();
-            listBox3.Items.Clear();
-            listBox4.Items.Clear();
-            listBox5.Items.Clear();
-
-
-
-           
        
-
-            XmlDocument doc = new XmlDocument();
-
-            if (Alarms.Checked)
-            {
-
-                doc.Load("alarm-data.xml");
-                XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
-
-                            if (dailyAlarms.Checked)
-                            {
-                                    int day = dailyAlarmsPick.Value.Day;
-                                    int month = dailyAlarmsPick.Value.Month;
-                                    int year = dailyAlarmsPick.Value.Year;
-
-                                    foreach (XmlNode n in list)
-                                    {
-                                        foreach (XmlNode c in n.ChildNodes)
-                                        {
-
-                                            string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
-                                            int nodeDay = Int32.Parse(nodeSplitDate[0]);
-                                            int nodeMonth = Int32.Parse(nodeSplitDate[1]);
-                                            int nodeYear = Int32.Parse(nodeSplitDate[2]);
-
-                                             //MessageBox.Show(day.ToString() + "-" + nodeDay.ToString());
-                                             //MessageBox.Show(month.ToString() + "-" + nodeMonth.ToString());
-                                             //MessageBox.Show(year.ToString() + "-" + nodeYear.ToString());
-
-                                             if (day == nodeDay && month == nodeMonth && year == nodeYear) {
-                                                    listBox1.Items.Add(c.Name);
-                                                    listBox3.Items.Add(c.ChildNodes[0].InnerText);
-                                                    listBox4.Items.Add(c.ChildNodes[1].InnerText);
-                                                    listBox5.Items.Add(c.ChildNodes[2].InnerText);
-                                                }
-                                          }
-
-
-                                    }
-
-
-
-                            }
-                            else if(allAlarms.Checked) {
-
-
-                                foreach (XmlNode n in list)
-                                {
-                                    foreach (XmlNode c in n.ChildNodes)
-                                    {
-                                        listBox1.Items.Add(c.Name);
-                                        listBox3.Items.Add(c.ChildNodes[0].InnerText);
-                                        listBox4.Items.Add(c.ChildNodes[1].InnerText);
-                                        listBox5.Items.Add(c.ChildNodes[2].InnerText);
-                                    }
-
-
-                                }
-
-
-                            }
-
-                        }
-
-
-
-
-
-            else if (Param.Checked)
-            {
-
-                doc.Load("param-data.xml");
-                string listval = listBoxParam.SelectedItem.ToString();
-
-
-                if (listval != "TODOS")
-                {
-                    XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM/" + listval);
-
-
-                    foreach (XmlNode c in list)
-                    {
-
-
-                        listBox1.Items.Add(c.Name);
-                        listSid.Items.Add(c.ChildNodes[0].InnerText);
-                        listBox3.Items.Add(c.ChildNodes[1].InnerText);
-                        listBox4.Items.Add(c.ChildNodes[2].InnerText);
-                        listBox5.Items.Add(c.ChildNodes[3].InnerText);
-
-                    }
-
-                }
-                else
-                {
-                    XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM");
-
-                    foreach (XmlNode n in list)
-                    {
-
-                        foreach (XmlNode c in n.ChildNodes)
-                        {
-                            listBox1.Items.Add(c.Name);
-                            listSid.Items.Add(c.ChildNodes[0].InnerText);
-                            listBox3.Items.Add(c.ChildNodes[1].InnerText);
-                            listBox4.Items.Add(c.ChildNodes[2].InnerText);
-                            listBox5.Items.Add(c.ChildNodes[3].InnerText);
-                        }
-
-                    }
-
-
-                }
-
-            }
-        }
-
-
-        private void writeParam(string xmlData) {
-
-            
-
-            XmlDocument doc = new XmlDocument();
-            XmlDocument strData = new XmlDocument();
-
-            string[] elementData = xmlData.Split(';'); 
-            
-            doc.Load("param-data.xml");
-
-            XmlElement p = doc.CreateElement("PARAM");
-            XmlElement pname = doc.CreateElement(elementData[0]);
-            XmlElement sid = doc.CreateElement("SENSOR-ID");
-                sid.InnerText = elementData[1];
-            XmlElement sval = doc.CreateElement("SENSOR-VALUE");
-                sval.InnerText = elementData[2];
-            XmlElement h = doc.CreateElement("HOUR");
-                h.InnerText = elementData[3];
-            XmlElement date = doc.CreateElement("DATE");
-                date.InnerText = elementData[4];
-                
-            XmlNode pData = doc.SelectSingleNode("/PARAM-DATA");
-
-            pname.AppendChild(sid);
-            pname.AppendChild(sval);
-            pname.AppendChild(h);
-            pname.AppendChild(date);
-
-            p.AppendChild(pname);
-
-            pData.AppendChild(p);
-
-            doc.Save("param-data.xml");
-
-      }
 
         private void writeAlarm(string xmlData)
         {
@@ -245,122 +71,525 @@ namespace WindowsFormsApplication1
 
 
 
-
-
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void generateAlarmsView()
         {
 
-        }
-
-     
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-  
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-     
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox2_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
 
 
-        public int countCategory(string cat)
-        {
+
+            //################## ALARMS ###########################
+
             XmlDocument doc = new XmlDocument();
-            doc.Load("bookstore.xml");
-            XmlNodeList books = doc.SelectNodes("/bookstore/book[@category='" + cat + "']");
 
-            MessageBox.Show(books.Count.ToString()+" " + cat);
+            doc.Load("alarm-data.xml");
+            XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
 
-            return books.Count;
-            
+
+            //################## DAILY-ALARMS ###########################
+
+            if (dailyAlarms.Checked)
+            {
+                // int day = dailyAlarmsPick.Value.Day;
+                // int month = dailyAlarmsPick.Value.Month;
+                // int year = dailyAlarmsPick.Value.Year;
+
+                foreach (XmlNode n in list)
+                {
+                    foreach (XmlNode c in n.ChildNodes)
+                    {
+
+                        string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                        int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                        int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                        int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                        DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+
+
+                        if (nodeDate == dailyAlarmsPick.Value)
+                        {
+                            listBox1.Items.Add(c.Name);
+                            listBox3.Items.Add(c.ChildNodes[0].InnerText);
+                            listBox4.Items.Add(c.ChildNodes[1].InnerText);
+                            listBox5.Items.Add(c.ChildNodes[2].InnerText);
+                        }
+                    }
+
+
+                }
+
+
+            }
+
+            else if (periodAlarms.Checked && periodAlarmsPickEnd.Value < periodAlarmsPickInit.Value)
+            {
+
+                MessageBox.Show("Data de Fim tem de ser superior a Data de inicio");
+            }
+
+            //################## ALARMS-PERIOD ###########################
+
+            else {
+
+                int initDay = periodAlarmsPickInit.Value.Day;
+                int initMonth = periodAlarmsPickInit.Value.Month;
+                int initYear = periodAlarmsPickInit.Value.Year;
+
+                int endDay = periodAlarmsPickEnd.Value.Day;
+                int endMonth = periodAlarmsPickEnd.Value.Month;
+                int endYear = periodAlarmsPickEnd.Value.Year;
+
+
+
+                foreach (XmlNode n in list)
+                {
+                    foreach (XmlNode c in n.ChildNodes)
+                    {
+
+
+                        string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                        int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                        int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                        int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                        DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+
+                        if (periodAlarmsPickInit.Value <= nodeDate && periodAlarmsPickEnd.Value >= nodeDate)
+
+                        {
+
+                            listBox1.Items.Add(c.Name);
+                            listBox3.Items.Add(c.ChildNodes[0].InnerText);
+                            listBox4.Items.Add(c.ChildNodes[1].InnerText);
+                            listBox5.Items.Add(c.ChildNodes[2].InnerText);
+                        }
+                    }
+
+
+                }
+
+
+            }
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+
+        //################## PARAMS ###########################
+
+        private void generateParamsView()
         {
-            
-            listBoxParam.Enabled = false;
-            labelSid.Enabled = false;
-            listSid.Enabled = false;
-            allAlarms.Checked = true;
+
+            //################## DAILY-PARAMS ###########################
+
+            if (dailyParam.Checked)
+            {
+
+                //sh2OGraph.changeHeaders(0);
+
+
+                if (chkCi2.Checked)
+                {
+
+                    string xmlHdataCi2 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlDataCi2 = getHourySummmarizedInformation("CI2", hourlyDatePick.Value);
+                    createGraphfromXml(xmlHdataCi2, "CI2", "dailyParam");
+                }
+
+                if (chkNh3.Checked)
+                {
+                    string xmlHdataNh3 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlDataNh3 = getHourySummmarizedInformation("NH3", hourlyDatePick.Value);
+                    createGraphfromXml(xmlHdataNh3, "NH3", "dailyParam");
+
+
+                }
+                if (chkPh.Checked)
+                {
+                    string xmlHdataPh = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlDataPh = getHourySummmarizedInformation("PH", hourlyDatePick.Value);
+                    createGraphfromXml(xmlHdataPh, "PH", "dailyParam");
+
+                }
+
+            }
+
+
+            //################## PERIOD-PARAMS ###########################
+
+
+            else if (periodParam.Checked)
+            {
+                //sh2OGraph.changeHeaders(1);
+
+                if (chkCi2.Checked)
+                {
+                    string xmlPdataCi2 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataCi2 = getPediodSummmarize-Information("CI2", paramPeriodPickInit, paramPeriodPickEnd);
+                    createGraphfromXml(xmlPdataCi2, "CI2", "periodParam");
+
+                }
+
+                if (chkNh3.Checked)
+                {
+                    string xmlPdataNh3 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataNh3 = getPeriodSummmarizedInformation("NH3", paramPeriodPickInit, paramPeriodPickEnd);
+                    createGraphfromXml(xmlPdataNh3, "NH3", "periodParam");
+
+
+                }
+                if (chkPh.Checked)
+                {
+                    string xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataPh = getPeriodSummmarizedInformation("PH", paramPeriodPickInit, paramPeriodPickEnd);
+                    createGraphfromXml(xmlPdataPh, "PH", "periodParam");
+
+                }
+            }
+
+            else if (weakParam.Checked)
+            {
+
+
+               // sh2OGraph.changeHeaders(2);
+
+                DateTime weeKdate = paramWeekPick.Value;
+                DayOfWeek fdow = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
+                int offset = fdow - weeKdate.DayOfWeek;
+                DateTime fisrtDayofWeek = weeKdate.AddDays(offset);
+                DateTime lastDayofWeek = fisrtDayofWeek.AddDays(6);
+
+                if (chkCi2.Checked)
+                {
+                    string xmlPdataCi2 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataCi2 = getPediodSummmarize-Information("CI2", fisrtDayofWeek, lastDayofWeek);
+                    createGraphfromXml(xmlPdataCi2, "CI2", "periodParam");
+
+                }
+
+                if (chkNh3.Checked)
+                {
+                    string xmlPdataNh3 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataNh3 = getPeriodSummmarizedInformation("NH3", fisrtDayofWeek, lastDayofWeek);
+                    createGraphfromXml(xmlPdataNh3, "NH3", "periodParam");
+
+
+                }
+                if (chkPh.Checked)
+                {
+                    string xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+                    //xmlPdataPh = getPeriodSummmarizedInformation("PH", fisrtDayofWeek, lastDayofWeek);
+                    createGraphfromXml(xmlPdataPh, "PH", "periodParam");
+
+                }
+
+
+
+
+
+            }else MessageBox.Show("Tem de selecionar pelo menos uma opção de visualização!");
+
+
+
+
         }
-        
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+
+
+
+    private void createGraphfromXml(string xmlString, string param, string viewType)
+    {
+
+
+        XmlDocument xmlData = new XmlDocument();
+
+        xmlData.LoadXml(xmlString);
+
+        XmlNodeList list = xmlData.SelectNodes("/PARAM-DATA/PARAM");
+
+
+
+        foreach (XmlNode c in list)
         {
-            listBoxParam.Enabled = true;
-            listBoxParam.SelectedIndex = 0;
-            labelSid.Enabled = true;
-            listSid.Enabled = true;
+
+            if (String.ReferenceEquals(viewType, "dailyParam"))
+            {
+
+                //sh2OGraph.AccessibilityObject.Equals(graphPos)
+                sh2OGraph.updateHourlyGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, c.ChildNodes[0].InnerText);
+
+
+            }
+            if (String.Equals(viewType, "periodParam"))
+            {
+
+                string[] nodeSplitDate = c.ChildNodes[0].InnerText.Split('-');
+                int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+                sh2OGraph.updatePeriodGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, nodeDate);
+
+            }
+
+
+
+
+
+            listBox1.Items.Add(c.Name); // PARAM
+            listSid.Items.Add(c.ChildNodes[0].InnerText); //ID
+            listBox3.Items.Add(c.ChildNodes[1].InnerText); //VAL
+            listBox4.Items.Add(c.ChildNodes[2].InnerText); //HORA
+            listBox5.Items.Add(c.ChildNodes[3].InnerText); //DATA
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+        sh2OGraph.Show();
 
-        }
 
-        private void rateTxt_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            writeParam(paramTxt.Text);
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            writeAlarm(alarmTxt.Text);
-        }
     }
+
+
+
+
+    string getHourySummmarizedInformation(string param, DateTime date)
+    {
+
+        String xmlStringResult = "";
+
+        XmlDocument doc = new XmlDocument();
+        doc.Load("param-data.xml");
+
+        XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM/" + param);
+
+
+        foreach (XmlNode c in list)
+        {
+
+
+            listBox1.Items.Add(c.Name);
+            listSid.Items.Add(c.ChildNodes[0].InnerText);
+            listBox3.Items.Add(c.ChildNodes[1].InnerText);
+            listBox4.Items.Add(c.ChildNodes[2].InnerText);
+            listBox5.Items.Add(c.ChildNodes[3].InnerText);
+
+        }
+
+
+
+
+
+
+
+        return xmlStringResult;
+    }
+
+
+
+
+
+
+
+    private void writeParam(string xmlData)
+    {
+
+
+
+        XmlDocument doc = new XmlDocument();
+        XmlDocument strData = new XmlDocument();
+
+        string[] elementData = xmlData.Split(';');
+
+        doc.Load("param-data.xml");
+
+        XmlElement p = doc.CreateElement("PARAM");
+        XmlElement pname = doc.CreateElement(elementData[0]);
+        XmlElement sid = doc.CreateElement("SENSOR-ID");
+        sid.InnerText = elementData[1];
+        XmlElement sval = doc.CreateElement("SENSOR-VALUE");
+        sval.InnerText = elementData[2];
+        XmlElement h = doc.CreateElement("HOUR");
+        h.InnerText = elementData[3];
+        XmlElement date = doc.CreateElement("DATE");
+        date.InnerText = elementData[4];
+
+        XmlNode pData = doc.SelectSingleNode("/PARAM-DATA");
+
+        pname.AppendChild(sid);
+        pname.AppendChild(sval);
+        pname.AppendChild(h);
+        pname.AppendChild(date);
+
+        p.AppendChild(pname);
+
+        pData.AppendChild(p);
+
+        doc.Save("param-data.xml");
+
+
+
+
+    }
+
+
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label3_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void textBox2_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+    private void label4_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void textBox2_TextChanged_1(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+
+    private void radioButton1_CheckedChanged(object sender, EventArgs e)
+    {
+
+        labelSid.Enabled = false;
+        listSid.Enabled = false;
+        periodAlarms.Checked = true;
+    }
+
+    private void radioButton2_CheckedChanged(object sender, EventArgs e)
+    {
+
+        labelSid.Enabled = true;
+        listSid.Enabled = true;
+
+    }
+
+    private void label2_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void rateTxt_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void groupBox1_Enter(object sender, EventArgs e)
+    {
+
+    }
+
+    private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label7_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
+    {
+
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        //writeParam(paramTxt.Text);
+    }
+
+    private void button4_Click(object sender, EventArgs e)
+    {
+        // writeAlarm(alarmTxt.Text);
+    }
+
+    private void listSid_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void alarmTxt_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label9_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label8_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label6_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void label5_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void viewAlarms_Click(object sender, EventArgs e)
+    {
+        generateAlarmsView();
+        sh2OAlarm.Show();
+
+
+    }
+
+    private void viewParam_Click(object sender, EventArgs e)
+    {
+        generateParamsView();
+    }
+
+    private void groupBox5_Enter(object sender, EventArgs e)
+    {
+
+    }
+}
 
 
 }
