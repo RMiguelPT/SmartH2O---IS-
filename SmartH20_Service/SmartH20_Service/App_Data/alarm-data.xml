@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ALARM-DATA>
+  <ALARM>
+    <PH>
+      <ALARM-VALUE>1.4</ALARM-VALUE>
+      <HOUR>18:00</HOUR>
+      <DATE>07-05-2016</DATE>
+    </PH>
+  </ALARM>
+  <ALARM>
+    <NH3>
+      <ALARM-VALUE>2.4</ALARM-VALUE>
+      <HOUR>18:00</HOUR>
+      <DATE>07-05-2016</DATE>
+    </NH3>
+  </ALARM>
+  <ALARM>
+    <PH>
+      <ALARM-VALUE>3.4</ALARM-VALUE>
+      <HOUR>18:00</HOUR>
+      <DATE>07-05-2016</DATE>
+    </PH>
+  </ALARM>
+  <ALARM>
+    <CI2>
+      <ALARM-VALUE>4.4</ALARM-VALUE>
+      <HOUR>18:00</HOUR>
+      <DATE>07-05-2016</DATE>
+    </CI2>
+  </ALARM>
+  <ALARM>
+    <CI2>
+      <ALARM-VALUE>22</ALARM-VALUE>
+      <HOUR>22:22</HOUR>
+      <DATE>22-2-2022</DATE>
+    </CI2>
+  </ALARM>
+</ALARM-DATA>

@@ -29,21 +29,21 @@ namespace SmartH2O_DLog
             {
 
                 string info = "NH3;" + msg;
-                //serv.writeAlarms(info);
+                serv.writeAlarms(info);
                 Console.WriteLine(info);
 
             }
             else if (e.Topic == "alarmCI2")
             {
                 string info = "CI2;" + msg;
-                //serv.writeAlarms(info);
+                serv.writeAlarms(info);
                 Console.WriteLine(info);
             }
             else if (e.Topic == "alarmPH")
             {
                 string info = "PH;" + msg;
                 Console.WriteLine(info);
-                //serv.writeAlarms(info);
+                serv.writeAlarms(info);
             }
         }
 
@@ -52,15 +52,15 @@ namespace SmartH2O_DLog
             WriteService.SmartH2O_ServiceClient serv = new WriteService.SmartH2O_ServiceClient();
             string[] words = message.Split(';');
             string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
-            //serv.writeParams(info);
-            // Console.WriteLine(info);
+            serv.writeParams(info);
+            Console.WriteLine(info);
 
         }
 
         static void Main(string[] args)
         {
 
-            MqttClient m_cClient = new MqttClient(IPAddress.Parse("192.168.237.202"));
+            MqttClient m_cClient = new MqttClient(IPAddress.Parse("127.0.0.1"));
             string[] m_strTopicsInfo = { "PH", "NH3", "CI2", "alarmNH3", "alarmCI2", "alarmPH" };
             m_cClient.Connect(Guid.NewGuid().ToString());
             if (!m_cClient.IsConnected)

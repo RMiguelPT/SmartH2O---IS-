@@ -253,3 +253,4 @@ paket-files/
 
 #executable files
 **/*.exe
+SmartH20_Service/SmartH20_Service/App_Data/teste.xml
