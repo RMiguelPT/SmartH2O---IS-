@@ -210,7 +210,7 @@ namespace SmartH20_Service
     
 
         
-        string getPeriodSummarizedInformation(string parameter, string StartDate, string EndDate)
+        public string getPeriodSummarizedInformation(string parameter, string StartDate, string EndDate)
         {
 
             XmlDocument doc = readDocument(xmlDocPath);
