@@ -291,15 +291,16 @@ namespace SmartH20_Service
 
             DateTime sDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
             DateTime eDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
-
+           // DateTime aux = sDate;
             List<int> vals = new List<int>();
 
-            while (sDate <= eDate)
+            while (sDate.Date <= eDate.Date)
             {
+                
                 if (doc != null)
                 {
                     parameter = parameter.ToUpper();
-                    XmlNodeList nodeList = doc.SelectNodes("/ALARM-DATA/ALARM/" + parameter + "[DATE=" + sDate + "]");
+                    XmlNodeList nodeList = doc.SelectNodes("/ALARM-DATA/ALARM/" + parameter + "[DATE='" + sDate + "']");
 
                     //docAux.AppendChild(root);
 
@@ -312,7 +313,8 @@ namespace SmartH20_Service
 
 
                 }
-                sDate.AddDays(1);
+                sDate = sDate.Date.AddDays(1);
+               // System.Diagnostics.Debug.WriteLine(aux);
             }
             return docAux.OuterXml;
         }
