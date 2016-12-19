@@ -23,16 +23,18 @@ namespace SmartH20_Service
         string getHourlySummarizedInformation(string parameter, string date);
 
         [OperationContract]
-        string getDailySummarizedInformation(string parameter, DateTime StartDate, DateTime EndDate);
+        string getDailySummarizedInformation(string parameter, string date);
 
         [OperationContract]
-        string getWeeklySummarizedInformation(string parameter, DateTime date);
+        string getPeriodSummarizedInformation(string parameter, string StartDate, string EndDate);
 
         [OperationContract]
-        string getDailyAlarmsInformation(string parameter, DateTime date);
+        string getDailyAlarmsInformation(string parameter, string date);
 
         [OperationContract]
-        string getAlarmsInformation(string parameter, DateTime StartDate, DateTime EndDate);
+        string getAlarmsInformation(string parameter, string StartDate, string EndDate);
+
+        
 
     }
 
