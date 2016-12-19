@@ -25,7 +25,7 @@ namespace AlarmSystem
         string xsdRulesPath = Application.StartupPath + @"\trigger-rules.xsd";
         static CultureInfo ptPT = CultureInfo.InvariantCulture;
 
-        string _host = "192.168.237.200";
+        string _host = "192.168.237.219";
         string[] _topics = { "PH", "NH3", "CI2" };
 
         bool phAlarmGenerated = false;
@@ -61,10 +61,7 @@ namespace AlarmSystem
             timer1.Start();
 
             //Subsribe to a mosquitto channel
-            // subscribeMQTT(_topics);
-
-
-            //txtBox_XmlPreviewer.Lines = File.ReadAllLines(xmlRulesPath);
+           
             rdBtn_AlarmPhON.Select();
             rdBtn_AlarmNH3ON.Select();
             rdBtn_AlarmCI2ON.Select();
@@ -129,7 +126,6 @@ namespace AlarmSystem
 
         private void updateRulesList(string xmlFilePath)
         {
-            //lstBox_Rules.Items.Clear();
             this.lstBox_PHRules.Items.Clear();
             this.lstBox_NH3Rules.Items.Clear();
             this.lstBox_CI2Rules.Items.Clear();
@@ -161,7 +157,6 @@ namespace AlarmSystem
                             {
                                 this.lstBox_CI2Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
                             }
-                            //this.lstBox_Rules.Items.Add(node.SelectSingleNode("type").InnerText + " " + node.SelectSingleNode("condition").InnerText + " " + node.SelectSingleNode("minValue").InnerText);
                         }
                     }
                     else
@@ -179,7 +174,9 @@ namespace AlarmSystem
             }
             else
             {
-                txtBox_XmlPreviewer.Text = ("No XML Document Found. Press \"Generate XML\" Button ");
+                this.lstBox_CI2Rules.Items.Add("No rules.xml file found. Please press \"Generate XML file \" button");
+                this.lstBox_NH3Rules.Items.Add("No rules.xml file found. Please press \"Generate XML file \" button");
+                this.lstBox_PHRules.Items.Add("No rules.xml file found. Please press \"Generate XML file \" button");
             }
         }
 
@@ -301,7 +298,8 @@ namespace AlarmSystem
                 lbl_phWarning.Visible = false;
                 lbl_nh3Warning.Visible = false;
                 lbl_ci2Warning.Visible = false;
-            }        }
+            }
+        }
 
         void timer_Tick(object sender, EventArgs e)
         {
@@ -380,7 +378,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualPhValue, ptPT) < ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
                         publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -393,7 +390,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualPhValue, ptPT) == ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
                         publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -407,7 +403,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualPhValue, ptPT) < ruleValue && Convert.ToDecimal(actualPhValue, ptPT) > ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         phAlarmGenerated = true;
                         publisher.publishData("alarmPH", actualPhValue, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -441,7 +436,7 @@ namespace AlarmSystem
                         Debug.WriteLine("ALARM ON NH3 !!!!!!!!!");
                         nh3AlarmGenerated = true;
                         publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
-                        
+
                     }
                     else
                     {
@@ -452,7 +447,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualNH3Value, ptPT) < ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
                         publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -465,7 +459,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualNH3Value, ptPT) == ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
                         publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -479,7 +472,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualNH3Value, ptPT) < ruleValue && Convert.ToDecimal(actualNH3Value, ptPT) > ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         nh3AlarmGenerated = true;
                         publisher.publishData("alarmNH3", actualNH3Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -521,7 +513,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualCI2Value, ptPT) < ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
                         publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -534,7 +525,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualCI2Value, ptPT) == ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
                         publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -548,7 +538,6 @@ namespace AlarmSystem
                 {
                     if (Convert.ToDecimal(actualCI2Value, ptPT) < ruleValue && Convert.ToDecimal(actualCI2Value, ptPT) > ruleValue)
                     {
-                        //TODO call function to activate alarms on ph
                         ci2AlarmGenerated = true;
                         publisher.publishData("alarmCI2", actualCI2Value, DateTime.Now.ToString("HH:mm:ss.fff") + ";" + DateTime.Now.ToString("dd-MM-yyyy"));
                     }
@@ -635,7 +624,6 @@ namespace AlarmSystem
         private void AlarmSystem_Shown(object sender, EventArgs e)
         {
             subscribeMQTT(_topics);
-            //publisher = new mqttPublisher(_host);
         }
 
         private void btn_DelPhRules_Click(object sender, EventArgs e)
@@ -712,7 +700,7 @@ namespace AlarmSystem
 
         private void btnSetRule_NH3_Click(object sender, EventArgs e)
         {
-             if (this.cmbBoxCondition_NH3.SelectedIndex > -1)
+            if (this.cmbBoxCondition_NH3.SelectedIndex > -1)
             {
                 XmlDocument doc = new XmlDocument();
                 doc.Load(xmlRulesPath);
@@ -803,6 +791,6 @@ namespace AlarmSystem
                 return;
             }
         }
-    
+
     }
 }

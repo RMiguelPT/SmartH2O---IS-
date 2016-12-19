@@ -75,7 +75,6 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALARMS";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox3
             // 
@@ -175,7 +174,7 @@
             this.dailyAlarms.TabStop = true;
             this.dailyAlarms.Text = "Dia";
             this.dailyAlarms.UseVisualStyleBackColor = true;
-            this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
+            //this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
             // 
             // paramPeriodPickInit
             // 
@@ -317,7 +316,7 @@
             this.groupBox5.TabIndex = 46;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Ver por:";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+           // this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // viewParam
             // 
@@ -378,7 +377,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Smart_H20_SeeApp";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            //this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

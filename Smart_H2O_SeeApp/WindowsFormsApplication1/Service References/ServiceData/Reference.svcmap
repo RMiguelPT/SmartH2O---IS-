@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a69c8941-7bee-4149-9937-374d6a806c48" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ae74acee-e7b9-49ee-81eb-2652a2102ed5" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,9 +22,9 @@
     <MetadataSource Address="http://smarth20service.apphb.com/SmartH2O_Service.svc?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="SmartH2O_Service.wsdl" MetadataType="Wsdl" ID="9ebc01a7-8685-46dd-94e8-a09f621d4bc4" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?wsdl" />
-    <MetadataFile FileName="SmartH2O_Service.xsd" MetadataType="Schema" ID="11266fb0-9290-4431-aa0e-57413ff285cc" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?xsd=xsd1" />
-    <MetadataFile FileName="SmartH2O_Service1.xsd" MetadataType="Schema" ID="b3cf63b1-7be4-426e-aacf-3bbf8dc7439f" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?xsd=xsd0" />
+    <MetadataFile FileName="SmartH2O_Service.wsdl" MetadataType="Wsdl" ID="b5120f5c-d967-4338-8246-5ca6ecbad7bc" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?wsdl" />
+    <MetadataFile FileName="SmartH2O_Service.xsd" MetadataType="Schema" ID="c0119eff-9c44-439e-94db-dc88e01d59b5" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?xsd=xsd1" />
+    <MetadataFile FileName="SmartH2O_Service1.xsd" MetadataType="Schema" ID="21814f0f-3bcb-4969-99c1-d3704be434c8" SourceId="1" SourceUrl="http://smarth20service.apphb.com/SmartH2O_Service.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

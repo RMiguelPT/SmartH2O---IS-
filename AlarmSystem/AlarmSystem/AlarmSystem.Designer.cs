@@ -76,7 +76,6 @@
             this.lblValue1_CI2 = new System.Windows.Forms.Label();
             this.btnDefaultRules = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.txtBox_XmlPreviewer = new System.Windows.Forms.TextBox();
             this.grpBox_PH.SuspendLayout();
             this.grpBox_PhON_OFF.SuspendLayout();
             this.grpBox_NH3.SuspendLayout();
@@ -576,7 +575,7 @@
             // 
             // btnDefaultRules
             // 
-            this.btnDefaultRules.Location = new System.Drawing.Point(1228, 217);
+            this.btnDefaultRules.Location = new System.Drawing.Point(803, 580);
             this.btnDefaultRules.Name = "btnDefaultRules";
             this.btnDefaultRules.Size = new System.Drawing.Size(119, 23);
             this.btnDefaultRules.TabIndex = 8;
@@ -584,21 +583,11 @@
             this.btnDefaultRules.UseVisualStyleBackColor = true;
             this.btnDefaultRules.Click += new System.EventHandler(this.btnDefaultRules_Click);
             // 
-            // txtBox_XmlPreviewer
-            // 
-            this.txtBox_XmlPreviewer.Location = new System.Drawing.Point(928, 12);
-            this.txtBox_XmlPreviewer.Multiline = true;
-            this.txtBox_XmlPreviewer.Name = "txtBox_XmlPreviewer";
-            this.txtBox_XmlPreviewer.Size = new System.Drawing.Size(419, 199);
-            this.txtBox_XmlPreviewer.TabIndex = 9;
-            this.txtBox_XmlPreviewer.WordWrap = false;
-            // 
             // AlarmSystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1359, 580);
-            this.Controls.Add(this.txtBox_XmlPreviewer);
+            this.ClientSize = new System.Drawing.Size(934, 615);
             this.Controls.Add(this.btnDefaultRules);
             this.Controls.Add(this.grpBoc_CI2);
             this.Controls.Add(this.grpBox_NH3);
@@ -619,7 +608,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -663,7 +651,6 @@
         private System.Windows.Forms.Button btn_DelPhRules;
         private System.Windows.Forms.Button btn_DelNH3Rules;
         private System.Windows.Forms.Button btn_DelCI2Rules;
-        private System.Windows.Forms.TextBox txtBox_XmlPreviewer;
         private System.Windows.Forms.GroupBox grpBox_PhON_OFF;
         private System.Windows.Forms.RadioButton rdBtn_AlarmPhOFF;
         private System.Windows.Forms.RadioButton rdBtn_AlarmPhON;
