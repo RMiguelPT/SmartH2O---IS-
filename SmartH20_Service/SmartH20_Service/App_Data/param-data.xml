@@ -16,7 +16,7 @@
     <CI2>
       <SENSOR-ID>1</SENSOR-ID>
       <SENSOR-VALUE>8.0</SENSOR-VALUE>
-      <HOUR>11:00</HOUR>
+      <HOUR>10:00</HOUR>
       <DATE>11-11-2011</DATE>
     </CI2>
   </PARAM>
@@ -26,7 +26,7 @@
       <SENSOR-ID>1</SENSOR-ID>
       <SENSOR-VALUE>6.5</SENSOR-VALUE>
       <HOUR>12:00</HOUR>
-      <DATE>22-05-2020</DATE>
+      <DATE>11-11-2011</DATE>
     </CI2>
   </PARAM>
 

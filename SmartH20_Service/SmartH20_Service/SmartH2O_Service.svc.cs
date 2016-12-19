@@ -128,42 +128,56 @@ namespace SmartH20_Service
             if (doc != null)
             {
                 parameter = parameter.ToUpper();
-                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter);
+                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + date + "']");
 
 
 
                 XmlDeclaration dec = docAux.CreateXmlDeclaration("1.0", null, null);
                 docAux.AppendChild(dec);
+
                 XmlElement root = docAux.CreateElement("PARAM-DATA");
                 docAux.AppendChild(root);
 
+
+                XmlElement p = docAux.CreateElement("PARAM");
+                XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+
                 foreach (XmlNode node in nodeList)
                 {
+                    DateTime funcParamDate = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
+                    DateTime xmlNodeDate = DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT);
 
 
-                    if (DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT).Equals(DateTime.ParseExact(date, "dd-MM-yyyy", ptPT)))
-                    {
+                    //if (funcParamDate.Equals(xmlNodeDate))
+                    // {
 
-                        XmlElement p = docAux.CreateElement("PARAM");
-                        XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+                    //string paramHour = node.SelectSingleNode("HOUR").InnerText;
+
+                    string time = node.SelectSingleNode("HOUR").InnerText;
+                    string[] hour = time.Split(':');
+                    //System.Diagnostics.Debug.WriteLine(hour);
+                    XmlElement h = docAux.CreateElement(hour[0]);
+                        //h.InnerText = node.SelectSingleNode("HOUR").InnerText;
+       
                         XmlElement sid = docAux.CreateElement("SENSOR-ID");
                         sid.InnerText = node.SelectSingleNode("SENSOR-ID").InnerText;
                         XmlElement sval = docAux.CreateElement("SENSOR-VALUE");
                         sval.InnerText = node.SelectSingleNode("SENSOR-VALUE").InnerText;
-                        XmlElement h = docAux.CreateElement("HOUR");
-                        h.InnerText = node.SelectSingleNode("HOUR").InnerText;
+                        /*XmlElement h = docAux.CreateElement("HOUR");
+                        h.InnerText = node.SelectSingleNode("HOUR").InnerText;*/
 
-                        pname.AppendChild(sid);
-                        pname.AppendChild(sval);
+                        
                         pname.AppendChild(h);
+                        h.AppendChild(sid);
+                        h.AppendChild(sval);
 
                         p.AppendChild(pname);
 
                         root.AppendChild(p);
-                    }
+                  //  }
 
                 }
-                //docAux.Save(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/teste.xml");
+                docAux.Save(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/teste.xml");
                 return docAux.OuterXml;
 
             }
