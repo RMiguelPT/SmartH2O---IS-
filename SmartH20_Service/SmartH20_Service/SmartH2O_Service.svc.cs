@@ -191,40 +191,19 @@ namespace SmartH20_Service
 
             DateTime dateD = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
             
-            int hour = 00;
-
-            List<int> vals = new List<int>();
-            
                 if (doc != null)
                 {
                     parameter = parameter.ToUpper();
-                    XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE=" + sDate + "]");
+                    XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE=" + dateD + "]");
 
                     //docAux.AppendChild(root);
 
                     foreach (XmlNode node in nodeList)
                     {
-                        vals.Add(Convert.ToInt32(node.SelectSingleNode("SENSOR-VALUE").InnerText));
+                    docAux.AppendChild(node);
                     }
-
-                    XmlElement root = docAux.CreateElement("PARAM");
-                    XmlElement date = docAux.CreateElement("DATE");
-                    date.InnerText = sDate.ToString();
-                    XmlElement min = docAux.CreateElement("MIN");
-                    min.InnerText = vals.Min().ToString();
-                    XmlElement med = docAux.CreateElement("MED");
-                    med.InnerText = vals.Average().ToString();
-                    XmlElement max = docAux.CreateElement("MAX");
-                    max.InnerText = vals.Max().ToString();
-
-                    root.AppendChild(date);
-                    root.AppendChild(min);
-                    root.AppendChild(med);
-                    root.AppendChild(max);
-                    docAux.AppendChild(root);
-
-
-    
+                    
+                     
             }
             return docAux.OuterXml;
         }
