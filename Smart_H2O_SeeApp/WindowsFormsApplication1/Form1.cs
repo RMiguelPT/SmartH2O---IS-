@@ -139,29 +139,7 @@ namespace WindowsFormsApplication1
 
                                 //
                                 sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
-                                sh2OAlarm.updateAlarmPieGraphic(c.Name);
-
-
-
-/*
-                                pieChart.Series.Add(series1);
-                                series1.Points.Add(70000);
-                                series1.Points.Add(30000);
-                                var p1 = series1.Points[0];
-                                p1.AxisLabel = "70000";
-                                p1.LegendText = "Hiren Khirsaria";
-                                var p2 = series1.Points[1];
-                                p2.AxisLabel = "30000";
-                                p2.LegendText = "ABC XYZ";
-                                pieChart.Invalidate();
-                                pnlPie.Controls.Add(pieChart)
-
-
-            */
-
-
-
-
+                       
                             }
                        }
 
@@ -189,7 +167,7 @@ namespace WindowsFormsApplication1
             if (dailyParam.Checked)
             {
 
-                //sh2OGraph.changeHeaders(0);
+                sh2OGraph.changeHeaders(0);
 
 
                 if (chkCi2.Checked)
@@ -224,7 +202,7 @@ namespace WindowsFormsApplication1
 
             else if (periodParam.Checked)
             {
-                //sh2OGraph.changeHeaders(1);
+                sh2OGraph.changeHeaders(1);
 
                 if (chkCi2.Checked)
                 {
@@ -244,8 +222,17 @@ namespace WindowsFormsApplication1
                 }
                 if (chkPh.Checked)
                 {
-                    string xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
-                    //xmlPdataPh = getPeriodSummmarizedInformation("PH", paramPeriodPickInit, paramPeriodPickEnd);
+                    string xmlPdataPh = "";
+                    if (periodParam.Checked)
+                    {
+                        xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>1.0</MIN><MED>2.0</MED><MAX>3.0</MAX></PARAM></PARAM-DATA>";
+
+                        //xmlPdataPh = getPeriodSummmarizedInformation("PH", paramPeriodPickInit, paramPeriodPickEnd);
+                    }
+                    else
+                        xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>1.0</MIN><MED>2.0</MED><MAX>3.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
+
+
                     createGraphfromXml(xmlPdataPh, "PH", "periodParam");
 
                 }
@@ -255,7 +242,7 @@ namespace WindowsFormsApplication1
             {
 
 
-               // sh2OGraph.changeHeaders(2);
+               sh2OGraph.changeHeaders(2);
 
                 DateTime weeKdate = paramWeekPick.Value;
                 DayOfWeek fdow = CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek;
@@ -343,40 +330,7 @@ namespace WindowsFormsApplication1
     }
 
 
-
 /*
-    string getHourySummmarizedInformation(string param, DateTime date)
-    {
-
-        String xmlStringResult = "";
-
-        XmlDocument doc = new XmlDocument();
-        doc.Load("param-data.xml");
-
-        XmlNodeList list = doc.SelectNodes("/PARAM-DATA/PARAM/" + param);
-
-
-        foreach (XmlNode c in list)
-        {
-
-
-            listBox1.Items.Add(c.Name);
-            listSid.Items.Add(c.ChildNodes[0].InnerText);
-            listBox3.Items.Add(c.ChildNodes[1].InnerText);
-            listBox4.Items.Add(c.ChildNodes[2].InnerText);
-            listBox5.Items.Add(c.ChildNodes[3].InnerText);
-
-        }
-
-
-        return xmlStringResult;
-    }
-
-
-*/
-
-
-
 
     private void writeParam(string xmlData)
     {
@@ -460,7 +414,7 @@ namespace WindowsFormsApplication1
 
     }
 
-
+*/
 
     private void label1_Click(object sender, EventArgs e)
     {

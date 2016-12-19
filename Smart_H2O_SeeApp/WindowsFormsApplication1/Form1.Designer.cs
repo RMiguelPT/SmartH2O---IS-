@@ -57,7 +57,9 @@
             this.chkCi2 = new System.Windows.Forms.CheckBox();
             this.chkPh = new System.Windows.Forms.CheckBox();
             this.chkNh3 = new System.Windows.Forms.CheckBox();
+            this.recentAlarms = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -77,6 +79,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.recentAlarms);
             this.groupBox3.Location = new System.Drawing.Point(225, 23);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(342, 307);
@@ -356,11 +359,20 @@
             this.chkNh3.Text = "NH3";
             this.chkNh3.UseVisualStyleBackColor = true;
             // 
+            // recentAlarms
+            // 
+            this.recentAlarms.FormattingEnabled = true;
+            this.recentAlarms.ItemHeight = 16;
+            this.recentAlarms.Location = new System.Drawing.Point(7, 29);
+            this.recentAlarms.Name = "recentAlarms";
+            this.recentAlarms.Size = new System.Drawing.Size(317, 260);
+            this.recentAlarms.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 511);
+            this.ClientSize = new System.Drawing.Size(1117, 407);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -368,6 +380,7 @@
             this.Text = "Smart_H20_SeeApp";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -408,6 +421,7 @@
         private System.Windows.Forms.CheckBox chkPh;
         private System.Windows.Forms.CheckBox chkNh3;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox recentAlarms;
     }
 }
 
