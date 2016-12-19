@@ -125,61 +125,53 @@ namespace SmartH20_Service
             XmlDocument doc = readDocument(xmlDocPath);
             XmlDocument docAux = new XmlDocument();
 
+            XmlElement r = docAux.CreateElement("PARAM-DATA");
+            docAux.AppendChild(r);
+            List<double> vals = new List<double>();
+            //List<string> hours = new List<string>();
+            int hour = 0;
+
             if (doc != null)
             {
                 parameter = parameter.ToUpper();
                 XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + date + "']");
 
+                //XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+            while(hour <= 24) {
+                    foreach (XmlNode node in nodeList)
+                    {
+                        string[] words =node.SelectSingleNode("HOUR").InnerText.Split(':');
+                        if(words[0] == hour.ToString())
+                        {
+                            vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
+                            //hours.Add(node.SelectSingleNode("HOUR").InnerText);
+                        }
+                    }
+                    if (vals.Count != 0)
+                    {
+                    XmlElement root = docAux.CreateElement("PARAM");
+                    XmlElement h = docAux.CreateElement("HOUR");
+                    h.InnerText = hour.ToString();
+                    XmlElement min = docAux.CreateElement("MIN");
+                    min.InnerText = vals.Min().ToString();
+                    XmlElement med = docAux.CreateElement("MED");
+                    med.InnerText = vals.Average().ToString();
+                    XmlElement max = docAux.CreateElement("MAX");
+                    max.InnerText = vals.Max().ToString();
 
+                    root.AppendChild(h);
+                    root.AppendChild(min);
+                    root.AppendChild(med);
+                    root.AppendChild(max);
+                    r.AppendChild(root);
 
-                XmlDeclaration dec = docAux.CreateXmlDeclaration("1.0", null, null);
-                docAux.AppendChild(dec);
+                    vals = new List<double>();
+                    //hours = new List<string>();
 
-                XmlElement root = docAux.CreateElement("PARAM-DATA");
-                docAux.AppendChild(root);
-
-
-                XmlElement p = docAux.CreateElement("PARAM");
-                XmlElement pname = docAux.CreateElement(parameter.ToUpper());
-
-                foreach (XmlNode node in nodeList)
-                {
-                    DateTime funcParamDate = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
-                    DateTime xmlNodeDate = DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT);
-
-
-                    //if (funcParamDate.Equals(xmlNodeDate))
-                    // {
-
-                    //string paramHour = node.SelectSingleNode("HOUR").InnerText;
-
-                    string time = node.SelectSingleNode("HOUR").InnerText;
-                    string[] hour = time.Split(':');
-                    //System.Diagnostics.Debug.WriteLine(hour);
-                    XmlElement h = docAux.CreateElement(hour[0]);
-                    //h.InnerText = node.SelectSingleNode("HOUR").InnerText;
-
-                    XmlElement sid = docAux.CreateElement("SENSOR-ID");
-                    sid.InnerText = node.SelectSingleNode("SENSOR-ID").InnerText;
-                    XmlElement sval = docAux.CreateElement("SENSOR-VALUE");
-                    sval.InnerText = node.SelectSingleNode("SENSOR-VALUE").InnerText;
-                    /*XmlElement h = docAux.CreateElement("HOUR");
-                    h.InnerText = node.SelectSingleNode("HOUR").InnerText;*/
-
-
-                    pname.AppendChild(h);
-                    h.AppendChild(sid);
-                    h.AppendChild(sval);
-
-                    p.AppendChild(pname);
-
-                    root.AppendChild(p);
-                    //  }
-
-                }
-                //docAux.Save(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/teste.xml");
+                    }
+                    hour++;
+              }
                 return docAux.OuterXml;
-
             }
             else return null;
         }
