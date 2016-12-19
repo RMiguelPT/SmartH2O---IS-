@@ -29,7 +29,7 @@ namespace SmartH2O_DU
                 return;
             }
 
-            dll.Initialize(recebeDados, 1500);
+            dll.Initialize(recebeDados, 30000);
             
             Console.ReadKey();
             if (m_cClient.IsConnected)
@@ -49,7 +49,7 @@ namespace SmartH2O_DU
             string[] words = str.Split(';');
             string topic = words[1];
             string value = words[0]+";"+words[2];
-            Console.WriteLine(topic);
+            Console.WriteLine(topic+" "+words[2]);
             
             //string[] m_strTopicsInfo = { "news", "complaints" };
            

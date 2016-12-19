@@ -128,66 +128,195 @@ namespace SmartH20_Service
             if (doc != null)
             {
                 parameter = parameter.ToUpper();
-                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter);
+                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + date + "']");
 
 
 
                 XmlDeclaration dec = docAux.CreateXmlDeclaration("1.0", null, null);
                 docAux.AppendChild(dec);
+
                 XmlElement root = docAux.CreateElement("PARAM-DATA");
                 docAux.AppendChild(root);
 
+
+                XmlElement p = docAux.CreateElement("PARAM");
+                XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+
                 foreach (XmlNode node in nodeList)
                 {
+                    DateTime funcParamDate = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
+                    DateTime xmlNodeDate = DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT);
 
 
-                    if (DateTime.ParseExact(node.SelectSingleNode("DATE").InnerText, "dd-MM-yyyy", ptPT).Equals(DateTime.ParseExact(date, "dd-MM-yyyy", ptPT)))
-                    {
+                    //if (funcParamDate.Equals(xmlNodeDate))
+                    // {
 
-                        XmlElement p = docAux.CreateElement("PARAM");
-                        XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+                    //string paramHour = node.SelectSingleNode("HOUR").InnerText;
+
+                    string time = node.SelectSingleNode("HOUR").InnerText;
+                    string[] hour = time.Split(':');
+                    //System.Diagnostics.Debug.WriteLine(hour);
+                    XmlElement h = docAux.CreateElement(hour[0]);
+                        //h.InnerText = node.SelectSingleNode("HOUR").InnerText;
+       
                         XmlElement sid = docAux.CreateElement("SENSOR-ID");
                         sid.InnerText = node.SelectSingleNode("SENSOR-ID").InnerText;
                         XmlElement sval = docAux.CreateElement("SENSOR-VALUE");
                         sval.InnerText = node.SelectSingleNode("SENSOR-VALUE").InnerText;
-                        XmlElement h = docAux.CreateElement("HOUR");
-                        h.InnerText = node.SelectSingleNode("HOUR").InnerText;
+                        /*XmlElement h = docAux.CreateElement("HOUR");
+                        h.InnerText = node.SelectSingleNode("HOUR").InnerText;*/
 
-                        pname.AppendChild(sid);
-                        pname.AppendChild(sval);
+                        
                         pname.AppendChild(h);
+                        h.AppendChild(sid);
+                        h.AppendChild(sval);
 
                         p.AppendChild(pname);
 
                         root.AppendChild(p);
-                    }
+                  //  }
 
                 }
-                //docAux.Save(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/teste.xml");
+                docAux.Save(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/teste.xml");
                 return docAux.OuterXml;
 
             }
             else return null;
         }
 
-        public string getDailySummarizedInformation(string parameter, DateTime StartDate, DateTime EndDate)
+        public string getDailySummarizedInformation(string parameter, string date)
         {
-            return null;
+            XmlDocument doc = readDocument(xmlDocPath);
+            XmlDocument docAux = new XmlDocument();
+
+            DateTime dateD = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
+            
+                if (doc != null)
+                {
+                    parameter = parameter.ToUpper();
+                    XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE=" + dateD + "]");
+
+                    //docAux.AppendChild(root);
+
+                    foreach (XmlNode node in nodeList)
+                    {
+                    docAux.AppendChild(node);
+                    }
+                    
+                     
+            }
+            return docAux.OuterXml;
+        }
+    
+
+        
+        public string getPeriodSummarizedInformation(string parameter, string StartDate, string EndDate)
+        {
+
+            XmlDocument doc = readDocument(xmlDocPath);
+            XmlDocument docAux = new XmlDocument();
+
+            XmlElement r = docAux.CreateElement("PARAM-DATA");
+            docAux.AppendChild(r);
+
+            DateTime sDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
+            DateTime eDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
+
+            List<int> vals = new List<int>();
+
+            while (sDate<=eDate) { 
+            if (doc != null)
+            {
+                parameter = parameter.ToUpper();
+                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter+"[DATE="+sDate+"]");
+                
+                //docAux.AppendChild(root);
+
+                foreach (XmlNode node in nodeList)
+                {
+                      vals.Add(Convert.ToInt32(node.SelectSingleNode("SENSOR-VALUE").InnerText));
+                }
+
+                    XmlElement root = docAux.CreateElement("PARAM");
+                    XmlElement date = docAux.CreateElement("DATE");
+                    date.InnerText= sDate.ToString();
+                    XmlElement min = docAux.CreateElement("MIN");
+                    min.InnerText = vals.Min().ToString();
+                    XmlElement med = docAux.CreateElement("MED");
+                    med.InnerText = vals.Average().ToString();
+                    XmlElement max = docAux.CreateElement("MAX");
+                    max.InnerText = vals.Max().ToString();
+
+                    root.AppendChild(date);
+                    root.AppendChild(min);
+                    root.AppendChild(med);
+                    root.AppendChild(max);
+                    docAux.AppendChild(root);
+
+
+                }
+                sDate.AddDays(1);
+            }
+            return docAux.OuterXml;
         }
 
-        public string getWeeklySummarizedInformation(string parameter, DateTime date)
+        public string getDailyAlarmsInformation(string parameter, string date)
         {
-            return null;
+            XmlDocument doc = readDocument(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/alarm-data.xml");
+            XmlDocument docAux = new XmlDocument();
+
+            DateTime dateD = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
+
+            if (doc != null)
+            {
+                parameter = parameter.ToUpper();
+                XmlNodeList nodeList = doc.SelectNodes("/ALARM-DATA/ALARM/" + parameter + "[DATE=" + dateD + "]");
+
+                foreach (XmlNode node in nodeList)
+                {
+                    XmlElement el = docAux.CreateElement("ALARM");
+                    el.AppendChild(node);
+                    docAux.AppendChild(el);
+                }
+            }
+
+            return docAux.OuterXml;
+
         }
 
-        public string getDailyAlarmsInformation(string parameter, DateTime date)
+        public string getAlarmsInformation(string parameter, string StartDate, string EndDate)
         {
-            return null;
-        }
+            XmlDocument doc = readDocument(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/alarm-data.xml");
+            XmlDocument docAux = new XmlDocument();
 
-        public string getAlarmsInformation(string parameter, DateTime StartDate, DateTime EndDate)
-        {
-            return null;
+            DateTime sDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
+            DateTime eDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
+           // DateTime aux = sDate;
+            List<int> vals = new List<int>();
+
+            while (sDate.Date <= eDate.Date)
+            {
+                
+                if (doc != null)
+                {
+                    parameter = parameter.ToUpper();
+                    XmlNodeList nodeList = doc.SelectNodes("/ALARM-DATA/ALARM/" + parameter + "[DATE='" + sDate + "']");
+
+                    //docAux.AppendChild(root);
+
+                    foreach (XmlNode node in nodeList)
+                    {
+                        XmlElement el = docAux.CreateElement("ALARM");
+                        el.AppendChild(node);
+                        docAux.AppendChild(el);
+                    }
+
+
+                }
+                sDate = sDate.Date.AddDays(1);
+               // System.Diagnostics.Debug.WriteLine(aux);
+            }
+            return docAux.OuterXml;
         }
 
 
