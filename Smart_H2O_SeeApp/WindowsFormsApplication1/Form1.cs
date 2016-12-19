@@ -21,23 +21,10 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
 
-
         }
 
         public SmartH2O_Graph_View sh2OGraph = new SmartH2O_Graph_View();
         public SmartH2O_Alarms_View sh2OAlarm = new SmartH2O_Alarms_View();
-
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
-
-
-
 
         private void generateAlarmsView()
         {
@@ -163,17 +150,9 @@ namespace WindowsFormsApplication1
 
                             }
                         }
-
-
                     }
-
-
                 }
-
-
                 sh2OAlarm.Show();
-
-
             }
         }
 
@@ -223,7 +202,7 @@ namespace WindowsFormsApplication1
             //################## PERIOD-PARAMS ###########################
 
 
-           else if (periodParam.Checked)
+            else if (periodParam.Checked)
             {
                 sh2OGraph.changeHeaders(1);
 
@@ -294,25 +273,18 @@ namespace WindowsFormsApplication1
 
         private void createGraphfromXml(string xmlString, string param, string viewType)
         {
-
-
             XmlDocument xmlData = new XmlDocument();
 
             xmlData.LoadXml(xmlString);
 
             XmlNodeList list = xmlData.SelectNodes("/PARAM-DATA/PARAM");
 
-
-
             foreach (XmlNode c in list)
             {
 
                 if (String.ReferenceEquals(viewType, "dailyParam"))
                 {
-
                     sh2OGraph.updateHourlyGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, c.ChildNodes[0].InnerText);
-
-
                 }
                 if (String.Equals(viewType, "periodParam"))
                 {
@@ -329,135 +301,7 @@ namespace WindowsFormsApplication1
             }
 
             sh2OGraph.Show();
-
-
         }
-
-
-        /*  private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-          {
-
-          }
-
-
-
-          private void label1_Click(object sender, EventArgs e)
-          {
-
-          }
-
-
-
-          private void Form1_Load(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label3_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void textBox2_TextChanged(object sender, EventArgs e)
-          {
-
-          }
-
-
-
-          private void label4_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void textBox2_TextChanged_1(object sender, EventArgs e)
-          {
-
-          }
-
-
-
-
-
-          private void label2_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void rateTxt_TextChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void groupBox1_Enter(object sender, EventArgs e)
-          {
-
-          }
-
-          private void listBox4_SelectedIndexChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label7_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void radioButton1_CheckedChanged_1(object sender, EventArgs e)
-          {
-
-          }
-
-          private void button1_Click(object sender, EventArgs e)
-          {
-              //writeParam(paramTxt.Text);
-          }
-
-          private void button4_Click(object sender, EventArgs e)
-          {
-              // writeAlarm(alarmTxt.Text);
-          }
-
-          private void listSid_SelectedIndexChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void alarmTxt_TextChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void listBox3_SelectedIndexChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void listBox5_SelectedIndexChanged(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label9_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label8_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label6_Click(object sender, EventArgs e)
-          {
-
-          }
-
-          private void label5_Click(object sender, EventArgs e)
-          {
-
-          }*/
 
         private void viewAlarms_Click(object sender, EventArgs e)
         {
@@ -469,12 +313,5 @@ namespace WindowsFormsApplication1
         {
             generateParamsView();
         }
-
-        /* private void groupBox5_Enter(object sender, EventArgs e)
-         {
-
-         }*/
     }
-
-
 }
