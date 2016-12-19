@@ -20,13 +20,13 @@ namespace WindowsFormsApplication1
             InitializeComponent();
 
             ci2Chart.ChartAreas[0].AxisX.LabelStyle.Format = "h : tt";
-
-            // ci2Chart.Series[0].XValueType = ChartValueType.DateTime;
+            ci2Chart.Series[0].XValueType = ChartValueType.DateTime;
 
         }
 
         public void changeHeaders(int header)
         {
+                //0 - daily; 1 - period; 2 - Weekly 
 
                 ci2Chart.Titles[0].Visible = header == 0;
                 ci2Chart.Titles[1].Visible = header == 1;
@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
 
         public void updateHourlyGraphic(string param, string min, string med, string max, string hour)
         {
-
+     
 
             if (param == "CI2")
             {
@@ -73,18 +73,6 @@ namespace WindowsFormsApplication1
         public void updatePeriodGraphic(string param, string min, string med, string max, DateTime date)
         {
 
-
-            ci2Chart.Titles[0].Visible = true;
-            ci2Chart.Titles[1].Visible = false;
-            ci2Chart.Titles[2].Visible = false;
-
-            phChart.Titles[0].Visible = true;
-            phChart.Titles[1].Visible = false;
-            phChart.Titles[2].Visible = false;
-
-            nh3Chart.Titles[0].Visible = true;
-            nh3Chart.Titles[1].Visible = false;
-            nh3Chart.Titles[2].Visible = false;
 
             if (param == "CI2")
             {
@@ -119,17 +107,27 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            this.Hide();
+            clearParamsFormData();
+      
+    }
 
-            foreach (var series in ci2Chart.Series)
-            {
-                series.Points.Clear();
-            }
-            ci2Chart.Series[0].Points.Clear();
-            ci2Chart.Series[1].Points.Clear();
-            ci2Chart.Series[2].Points.Clear();
+        public void clearParamsFormData()
+        {
+            phChart.Series["MIN"].Points.Clear();
+            phChart.Series["MED"].Points.Clear();
+            phChart.Series["MAX"].Points.Clear();
 
-            this.Close();
+            ci2Chart.Series["MIN"].Points.Clear();
+            ci2Chart.Series["MED"].Points.Clear();
+            ci2Chart.Series["MAX"].Points.Clear();
+
+            nh3Chart.Series["MIN"].Points.Clear();
+            nh3Chart.Series["MED"].Points.Clear();
+            nh3Chart.Series["MAX"].Points.Clear();
+
 
         }
+
     }
 }

@@ -32,52 +32,15 @@ namespace WindowsFormsApplication1
         }
 
 
-       
-
-        private void writeAlarm(string xmlData)
-        {
 
 
-
-            XmlDocument doc = new XmlDocument();
-            XmlDocument strData = new XmlDocument();
-
-            string[] elementData = xmlData.Split(';');
-
-            doc.Load("alarm-data.xml");
-
-            XmlElement p = doc.CreateElement("ALARM");
-            XmlElement pname = doc.CreateElement(elementData[0]);
-            XmlElement sid = doc.CreateElement("ALARM-VALUE");
-            sid.InnerText = elementData[1];
-            XmlElement h = doc.CreateElement("HOUR");
-            h.InnerText = elementData[2];
-            XmlElement date = doc.CreateElement("DATE");
-            date.InnerText = elementData[3];
-
-            XmlNode pData = doc.SelectSingleNode("/ALARM-DATA");
-
-            pname.AppendChild(sid);
-            pname.AppendChild(h);
-            pname.AppendChild(date);
-
-            p.AppendChild(pname);
-
-            pData.AppendChild(p);
-
-            doc.Save("alarm-data.xml");
-
-        }
 
 
 
         private void generateAlarmsView()
         {
 
-
-
-
-            //################## ALARMS ###########################
+           //################## ALARMS ###########################
 
             XmlDocument doc = new XmlDocument();
 
@@ -89,9 +52,12 @@ namespace WindowsFormsApplication1
 
             if (dailyAlarms.Checked)
             {
-                // int day = dailyAlarmsPick.Value.Day;
-                // int month = dailyAlarmsPick.Value.Month;
-                // int year = dailyAlarmsPick.Value.Year;
+                int day = dailyAlarmsPick.Value.Day;
+                int month = dailyAlarmsPick.Value.Month;
+                int year = dailyAlarmsPick.Value.Year;
+
+                DateTime pickDate = new DateTime(year, month, day);
+
 
                 foreach (XmlNode n in list)
                 {
@@ -106,71 +72,110 @@ namespace WindowsFormsApplication1
                         DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
 
 
-                        if (nodeDate == dailyAlarmsPick.Value)
+                        if (nodeDate == pickDate)
                         {
-                            listBox1.Items.Add(c.Name);
-                            listBox3.Items.Add(c.ChildNodes[0].InnerText);
-                            listBox4.Items.Add(c.ChildNodes[1].InnerText);
-                            listBox5.Items.Add(c.ChildNodes[2].InnerText);
+
+                            sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
+                            //sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
                         }
                     }
-
-
                 }
-
+                sh2OAlarm.Show();
 
             }
 
-            else if (periodAlarms.Checked && periodAlarmsPickEnd.Value < periodAlarmsPickInit.Value)
-            {
 
-                MessageBox.Show("Data de Fim tem de ser superior a Data de inicio");
-            }
 
             //################## ALARMS-PERIOD ###########################
 
-            else {
-
-                int initDay = periodAlarmsPickInit.Value.Day;
-                int initMonth = periodAlarmsPickInit.Value.Month;
-                int initYear = periodAlarmsPickInit.Value.Year;
-
-                int endDay = periodAlarmsPickEnd.Value.Day;
-                int endMonth = periodAlarmsPickEnd.Value.Month;
-                int endYear = periodAlarmsPickEnd.Value.Year;
+            else if (periodAlarms.Checked)
+            {
 
 
 
-                foreach (XmlNode n in list)
+                if (periodAlarms.Checked && periodAlarmsPickEnd.Value < periodAlarmsPickInit.Value)
                 {
-                    foreach (XmlNode c in n.ChildNodes)
+
+                    MessageBox.Show("Data de Fim tem de ser superior a Data de inicio");
+                }
+                else {
+
+                    int initDay = periodAlarmsPickInit.Value.Day;
+                    int initMonth = periodAlarmsPickInit.Value.Month;
+                    int initYear = periodAlarmsPickInit.Value.Year;
+
+                    DateTime alarmPickInit = new DateTime(initYear, initMonth, initDay);
+
+
+                    int endDay = periodAlarmsPickEnd.Value.Day;
+                    int endMonth = periodAlarmsPickEnd.Value.Month;
+                    int endYear = periodAlarmsPickEnd.Value.Year;
+
+                    DateTime alarmPickEnd = new DateTime(endYear, endMonth, endDay);
+
+
+                    int nh3PieCont = 0;
+                    int ci2PieCont = 0;
+                    int phPieCont = 0;
+
+                    foreach (XmlNode n in list)
                     {
-
-
-                        string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
-                        int nodeDay = Int32.Parse(nodeSplitDate[0]);
-                        int nodeMonth = Int32.Parse(nodeSplitDate[1]);
-                        int nodeYear = Int32.Parse(nodeSplitDate[2]);
-
-                        DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-
-                        if (periodAlarmsPickInit.Value <= nodeDate && periodAlarmsPickEnd.Value >= nodeDate)
-
+                        foreach (XmlNode c in n.ChildNodes)
                         {
 
-                            listBox1.Items.Add(c.Name);
-                            listBox3.Items.Add(c.ChildNodes[0].InnerText);
-                            listBox4.Items.Add(c.ChildNodes[1].InnerText);
-                            listBox5.Items.Add(c.ChildNodes[2].InnerText);
-                        }
+
+                            string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                            int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                            int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                            int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                            DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+
+                            if (nodeDate >= alarmPickInit && nodeDate <= alarmPickEnd)
+
+                            {
+                                sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
+                                // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
+
+                                //
+                                sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
+                                sh2OAlarm.updateAlarmPieGraphic(c.Name);
+
+
+
+/*
+                                pieChart.Series.Add(series1);
+                                series1.Points.Add(70000);
+                                series1.Points.Add(30000);
+                                var p1 = series1.Points[0];
+                                p1.AxisLabel = "70000";
+                                p1.LegendText = "Hiren Khirsaria";
+                                var p2 = series1.Points[1];
+                                p2.AxisLabel = "30000";
+                                p2.LegendText = "ABC XYZ";
+                                pieChart.Invalidate();
+                                pnlPie.Controls.Add(pieChart)
+
+
+            */
+
+
+
+
+                            }
+                       }
+
+                        
                     }
 
 
                 }
 
 
-            }
+                sh2OAlarm.Show();
 
+
+            }
         }
 
 
@@ -330,17 +335,6 @@ namespace WindowsFormsApplication1
                 sh2OGraph.updatePeriodGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, nodeDate);
 
             }
-
-
-
-
-
-            listBox1.Items.Add(c.Name); // PARAM
-            listSid.Items.Add(c.ChildNodes[0].InnerText); //ID
-            listBox3.Items.Add(c.ChildNodes[1].InnerText); //VAL
-            listBox4.Items.Add(c.ChildNodes[2].InnerText); //HORA
-            listBox5.Items.Add(c.ChildNodes[3].InnerText); //DATA
-
         }
 
         sh2OGraph.Show();
@@ -350,7 +344,7 @@ namespace WindowsFormsApplication1
 
 
 
-
+/*
     string getHourySummmarizedInformation(string param, DateTime date)
     {
 
@@ -375,16 +369,11 @@ namespace WindowsFormsApplication1
         }
 
 
-
-
-
-
-
         return xmlStringResult;
     }
 
 
-
+*/
 
 
 
@@ -431,8 +420,42 @@ namespace WindowsFormsApplication1
     }
 
 
+        private void writeAlarm(string xmlData)
+        {
 
-    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+
+
+            XmlDocument doc = new XmlDocument();
+            XmlDocument strData = new XmlDocument();
+
+            string[] elementData = xmlData.Split(';');
+
+            doc.Load("alarm-data.xml");
+
+            XmlElement p = doc.CreateElement("ALARM");
+            XmlElement pname = doc.CreateElement(elementData[0]);
+            XmlElement sid = doc.CreateElement("ALARM-VALUE");
+            sid.InnerText = elementData[1];
+            XmlElement h = doc.CreateElement("HOUR");
+            h.InnerText = elementData[2];
+            XmlElement date = doc.CreateElement("DATE");
+            date.InnerText = elementData[3];
+
+            XmlNode pData = doc.SelectSingleNode("/ALARM-DATA");
+
+            pname.AppendChild(sid);
+            pname.AppendChild(h);
+            pname.AppendChild(date);
+
+            p.AppendChild(pname);
+
+            pData.AppendChild(p);
+
+            doc.Save("alarm-data.xml");
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
@@ -476,22 +499,7 @@ namespace WindowsFormsApplication1
 
 
 
-    private void radioButton1_CheckedChanged(object sender, EventArgs e)
-    {
-
-        labelSid.Enabled = false;
-        listSid.Enabled = false;
-        periodAlarms.Checked = true;
-    }
-
-    private void radioButton2_CheckedChanged(object sender, EventArgs e)
-    {
-
-        labelSid.Enabled = true;
-        listSid.Enabled = true;
-
-    }
-
+   
     private void label2_Click(object sender, EventArgs e)
     {
 

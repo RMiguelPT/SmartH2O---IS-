@@ -28,9 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listSid = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -42,13 +39,6 @@
             this.periodAlarmsPickInit = new System.Windows.Forms.DateTimePicker();
             this.periodAlarmsPickEnd = new System.Windows.Forms.DateTimePicker();
             this.dailyAlarms = new System.Windows.Forms.RadioButton();
-            this.listBox4 = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.labelSid = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.listBox5 = new System.Windows.Forms.ListBox();
             this.paramPeriodPickInit = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.weakParam = new System.Windows.Forms.RadioButton();
@@ -72,36 +62,6 @@
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 16;
-            this.listBox1.Location = new System.Drawing.Point(8, 417);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(109, 84);
-            this.listBox1.TabIndex = 3;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // listSid
-            // 
-            this.listSid.FormattingEnabled = true;
-            this.listSid.ItemHeight = 16;
-            this.listSid.Location = new System.Drawing.Point(139, 417);
-            this.listSid.Name = "listSid";
-            this.listSid.Size = new System.Drawing.Size(171, 84);
-            this.listSid.TabIndex = 10;
-            this.listSid.SelectedIndexChanged += new System.EventHandler(this.listSid_SelectedIndexChanged);
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 16;
-            this.listBox3.Location = new System.Drawing.Point(316, 417);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(178, 84);
-            this.listBox3.TabIndex = 11;
-            this.listBox3.SelectedIndexChanged += new System.EventHandler(this.listBox3_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -213,76 +173,6 @@
             this.dailyAlarms.Text = "Dia";
             this.dailyAlarms.UseVisualStyleBackColor = true;
             this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
-            // 
-            // listBox4
-            // 
-            this.listBox4.FormattingEnabled = true;
-            this.listBox4.ItemHeight = 16;
-            this.listBox4.Location = new System.Drawing.Point(511, 417);
-            this.listBox4.Name = "listBox4";
-            this.listBox4.Size = new System.Drawing.Size(178, 84);
-            this.listBox4.TabIndex = 25;
-            this.listBox4.SelectedIndexChanged += new System.EventHandler(this.listBox4_SelectedIndexChanged);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 395);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 17);
-            this.label5.TabIndex = 26;
-            this.label5.Text = "Parametro";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(313, 395);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(133, 17);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "Sensor/Alram Value";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
-            // 
-            // labelSid
-            // 
-            this.labelSid.AutoSize = true;
-            this.labelSid.Location = new System.Drawing.Point(136, 395);
-            this.labelSid.Name = "labelSid";
-            this.labelSid.Size = new System.Drawing.Size(70, 17);
-            this.labelSid.TabIndex = 28;
-            this.labelSid.Text = "Sensor ID";
-            this.labelSid.Click += new System.EventHandler(this.label7_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(511, 397);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 17);
-            this.label8.TabIndex = 29;
-            this.label8.Text = "Hora";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(695, 397);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 17);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Data";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
-            // 
-            // listBox5
-            // 
-            this.listBox5.FormattingEnabled = true;
-            this.listBox5.ItemHeight = 16;
-            this.listBox5.Location = new System.Drawing.Point(695, 417);
-            this.listBox5.Name = "listBox5";
-            this.listBox5.Size = new System.Drawing.Size(178, 84);
-            this.listBox5.TabIndex = 30;
-            this.listBox5.SelectedIndexChanged += new System.EventHandler(this.listBox5_SelectedIndexChanged);
             // 
             // paramPeriodPickInit
             // 
@@ -472,17 +362,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 511);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.listBox5);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.labelSid);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.listBox4);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.listBox3);
-            this.Controls.Add(this.listSid);
-            this.Controls.Add(this.listBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Smart_H20_SeeApp";
@@ -495,22 +375,11 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listSid;
-        private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox listBox4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label labelSid;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBox5;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton periodAlarms;
         private System.Windows.Forms.RadioButton dailyAlarms;
