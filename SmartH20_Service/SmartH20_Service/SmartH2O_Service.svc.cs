@@ -216,6 +216,9 @@ namespace SmartH20_Service
             XmlDocument doc = readDocument(xmlDocPath);
             XmlDocument docAux = new XmlDocument();
 
+            XmlElement r = docAux.CreateElement("PARAM-DATA");
+            docAux.AppendChild(r);
+
             DateTime sDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
             DateTime eDate = DateTime.ParseExact(StartDate, "dd-MM-yyyy", ptPT);
 
@@ -271,7 +274,9 @@ namespace SmartH20_Service
 
                 foreach (XmlNode node in nodeList)
                 {
-                    docAux.AppendChild(node);
+                    XmlElement el = docAux.CreateElement("ALARM");
+                    el.AppendChild(node);
+                    docAux.AppendChild(el);
                 }
             }
 
@@ -300,7 +305,9 @@ namespace SmartH20_Service
 
                     foreach (XmlNode node in nodeList)
                     {
-                        docAux.AppendChild(node);
+                        XmlElement el = docAux.CreateElement("ALARM");
+                        el.AppendChild(node);
+                        docAux.AppendChild(el);
                     }
 
 
