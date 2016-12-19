@@ -27,18 +27,18 @@ namespace WindowsFormsApplication1
         public void changeHeaders(int header)
         {
                 //0 - daily; 1 - period; 2 - Weekly 
+        
+                ci2Chart.Titles[0].Visible = (header == 0);
+                ci2Chart.Titles[1].Visible = (header == 1);
+                ci2Chart.Titles[2].Visible = (header == 2);
 
-                ci2Chart.Titles[0].Visible = header == 0;
-                ci2Chart.Titles[1].Visible = header == 1;
-                ci2Chart.Titles[2].Visible = header == 2;
+                phChart.Titles[0].Visible = (header == 0);
+                phChart.Titles[1].Visible = (header == 1);
+                phChart.Titles[2].Visible = (header == 2);
 
-                phChart.Titles[0].Visible = header == 0;
-                phChart.Titles[1].Visible = header == 1;
-                phChart.Titles[2].Visible = header == 2;
-
-                nh3Chart.Titles[0].Visible = header == 0;
-                nh3Chart.Titles[1].Visible = header == 1;
-                nh3Chart.Titles[2].Visible = header == 2;
+                nh3Chart.Titles[0].Visible = (header == 0);
+                nh3Chart.Titles[1].Visible = (header == 1);
+                nh3Chart.Titles[2].Visible = (header == 2);
             }
 
 

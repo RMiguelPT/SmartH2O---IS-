@@ -57,7 +57,9 @@
             this.chkCi2 = new System.Windows.Forms.CheckBox();
             this.chkPh = new System.Windows.Forms.CheckBox();
             this.chkNh3 = new System.Windows.Forms.CheckBox();
+            this.recentAlarms = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -73,10 +75,10 @@
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALARMS";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.recentAlarms);
             this.groupBox3.Location = new System.Drawing.Point(225, 23);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(342, 307);
@@ -172,7 +174,7 @@
             this.dailyAlarms.TabStop = true;
             this.dailyAlarms.Text = "Dia";
             this.dailyAlarms.UseVisualStyleBackColor = true;
-            this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
+            //this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
             // 
             // paramPeriodPickInit
             // 
@@ -314,7 +316,7 @@
             this.groupBox5.TabIndex = 46;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Ver por:";
-            this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
+           // this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // viewParam
             // 
@@ -356,18 +358,28 @@
             this.chkNh3.Text = "NH3";
             this.chkNh3.UseVisualStyleBackColor = true;
             // 
+            // recentAlarms
+            // 
+            this.recentAlarms.FormattingEnabled = true;
+            this.recentAlarms.ItemHeight = 16;
+            this.recentAlarms.Location = new System.Drawing.Point(7, 29);
+            this.recentAlarms.Name = "recentAlarms";
+            this.recentAlarms.Size = new System.Drawing.Size(317, 260);
+            this.recentAlarms.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 511);
+            this.ClientSize = new System.Drawing.Size(1117, 407);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Smart_H20_SeeApp";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            //this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -408,6 +420,7 @@
         private System.Windows.Forms.CheckBox chkPh;
         private System.Windows.Forms.CheckBox chkNh3;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ListBox recentAlarms;
     }
 }
 

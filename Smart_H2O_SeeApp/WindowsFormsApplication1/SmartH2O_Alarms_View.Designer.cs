@@ -36,15 +36,11 @@
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SmartH2O_Alarms_View));
             this.button1 = new System.Windows.Forms.Button();
             this.alarmsChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.alarmsPieChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureAlarm = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.listboxAlarmData = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -55,7 +51,7 @@
             this.listboxAlarmParam = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.alarmsChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.alarmsPieChart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureAlarm)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -111,35 +107,6 @@
             this.alarmsChart.Titles.Add(title3);
             this.alarmsChart.UseWaitCursor = true;
             // 
-            // alarmsPieChart
-            // 
-            chartArea2.Name = "ChartArea1";
-            this.alarmsPieChart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.alarmsPieChart.Legends.Add(legend2);
-            this.alarmsPieChart.Location = new System.Drawing.Point(545, 39);
-            this.alarmsPieChart.Name = "alarmsPieChart";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series4.Color = System.Drawing.Color.White;
-            series4.Legend = "Legend1";
-            series4.MarkerSize = 1;
-            series4.Name = "NH3";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series5.Legend = "Legend1";
-            series5.Name = "CI2";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series6.Legend = "Legend1";
-            series6.Name = "PH";
-            this.alarmsPieChart.Series.Add(series4);
-            this.alarmsPieChart.Series.Add(series5);
-            this.alarmsPieChart.Series.Add(series6);
-            this.alarmsPieChart.Size = new System.Drawing.Size(358, 266);
-            this.alarmsPieChart.TabIndex = 7;
-            this.alarmsPieChart.Text = "chart1";
-            // 
             // groupBox1
             // 
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -148,6 +115,18 @@
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vista de Alarms";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // pictureAlarm
+            // 
+            this.pictureAlarm.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.ErrorImage")));
+            this.pictureAlarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.Image")));
+            this.pictureAlarm.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.InitialImage")));
+            this.pictureAlarm.Location = new System.Drawing.Point(643, 57);
+            this.pictureAlarm.Name = "pictureAlarm";
+            this.pictureAlarm.Size = new System.Drawing.Size(249, 220);
+            this.pictureAlarm.TabIndex = 0;
+            this.pictureAlarm.TabStop = false;
             // 
             // label9
             // 
@@ -198,7 +177,7 @@
             // 
             this.listboxAlarmHour.FormattingEnabled = true;
             this.listboxAlarmHour.ItemHeight = 16;
-            this.listboxAlarmHour.Location = new System.Drawing.Point(414, 45);
+            this.listboxAlarmHour.Location = new System.Drawing.Point(417, 45);
             this.listboxAlarmHour.Name = "listboxAlarmHour";
             this.listboxAlarmHour.Size = new System.Drawing.Size(178, 84);
             this.listboxAlarmHour.TabIndex = 35;
@@ -245,15 +224,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(951, 531);
-            this.Controls.Add(this.alarmsPieChart);
+            this.Controls.Add(this.pictureAlarm);
             this.Controls.Add(this.alarmsChart);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox1);
             this.Name = "SmartH2O_Alarms_View";
             this.Text = "SmartH2O_Alarms_View";
+            this.Load += new System.EventHandler(this.SmartH2O_Alarms_View_Load);
             ((System.ComponentModel.ISupportInitialize)(this.alarmsChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.alarmsPieChart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureAlarm)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -263,7 +243,6 @@
         #endregion
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.DataVisualization.Charting.Chart alarmsChart;
-        private System.Windows.Forms.DataVisualization.Charting.Chart alarmsPieChart;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ListBox listboxAlarmData;
@@ -274,5 +253,6 @@
         private System.Windows.Forms.ListBox listboxAlarmValue;
         private System.Windows.Forms.ListBox listboxAlarmParam;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.PictureBox pictureAlarm;
     }
 }

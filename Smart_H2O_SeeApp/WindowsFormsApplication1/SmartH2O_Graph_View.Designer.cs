@@ -191,6 +191,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1047, 629);
+            this.ControlBox = false;
             this.Controls.Add(this.phChart);
             this.Controls.Add(this.nh3Chart);
             this.Controls.Add(this.button1);
