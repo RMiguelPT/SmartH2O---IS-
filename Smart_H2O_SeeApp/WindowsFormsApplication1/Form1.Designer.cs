@@ -30,6 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.recentAlarms = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.viewAlarms = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -57,7 +58,6 @@
             this.chkCi2 = new System.Windows.Forms.CheckBox();
             this.chkPh = new System.Windows.Forms.CheckBox();
             this.chkNh3 = new System.Windows.Forms.CheckBox();
-            this.recentAlarms = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -69,9 +69,11 @@
             // 
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(14, 13);
+            this.groupBox1.Location = new System.Drawing.Point(10, 11);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(577, 354);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(433, 288);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALARMS";
@@ -79,12 +81,23 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.recentAlarms);
-            this.groupBox3.Location = new System.Drawing.Point(225, 23);
+            this.groupBox3.Location = new System.Drawing.Point(169, 19);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(342, 307);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Size = new System.Drawing.Size(256, 249);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Alarmes Recentes";
+            // 
+            // recentAlarms
+            // 
+            this.recentAlarms.FormattingEnabled = true;
+            this.recentAlarms.Location = new System.Drawing.Point(5, 24);
+            this.recentAlarms.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.recentAlarms.Name = "recentAlarms";
+            this.recentAlarms.Size = new System.Drawing.Size(239, 212);
+            this.recentAlarms.TabIndex = 0;
             // 
             // groupBox2
             // 
@@ -97,18 +110,21 @@
             this.groupBox2.Controls.Add(this.periodAlarmsPickEnd);
             this.groupBox2.Controls.Add(this.dailyAlarms);
             this.groupBox2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox2.Location = new System.Drawing.Point(6, 23);
+            this.groupBox2.Location = new System.Drawing.Point(4, 19);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(213, 307);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(160, 249);
             this.groupBox2.TabIndex = 22;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Ver por:";
             // 
             // viewAlarms
             // 
-            this.viewAlarms.Location = new System.Drawing.Point(31, 275);
+            this.viewAlarms.Location = new System.Drawing.Point(23, 223);
+            this.viewAlarms.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.viewAlarms.Name = "viewAlarms";
-            this.viewAlarms.Size = new System.Drawing.Size(106, 26);
+            this.viewAlarms.Size = new System.Drawing.Size(80, 21);
             this.viewAlarms.TabIndex = 35;
             this.viewAlarms.Text = "Visualizar";
             this.viewAlarms.UseVisualStyleBackColor = true;
@@ -117,34 +133,38 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(28, 143);
+            this.label7.Location = new System.Drawing.Point(21, 116);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(30, 17);
+            this.label7.Size = new System.Drawing.Size(23, 13);
             this.label7.TabIndex = 42;
             this.label7.Text = "Fim";
             // 
             // dailyAlarmsPick
             // 
-            this.dailyAlarmsPick.Location = new System.Drawing.Point(29, 49);
+            this.dailyAlarmsPick.Location = new System.Drawing.Point(22, 40);
+            this.dailyAlarmsPick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dailyAlarmsPick.Name = "dailyAlarmsPick";
-            this.dailyAlarmsPick.Size = new System.Drawing.Size(171, 22);
+            this.dailyAlarmsPick.Size = new System.Drawing.Size(129, 20);
             this.dailyAlarmsPick.TabIndex = 35;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(28, 98);
+            this.label10.Location = new System.Drawing.Point(21, 80);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 17);
+            this.label10.Size = new System.Drawing.Size(32, 13);
             this.label10.TabIndex = 41;
             this.label10.Text = "Inicio";
             // 
             // periodAlarms
             // 
             this.periodAlarms.AutoSize = true;
-            this.periodAlarms.Location = new System.Drawing.Point(7, 76);
+            this.periodAlarms.Location = new System.Drawing.Point(5, 62);
+            this.periodAlarms.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.periodAlarms.Name = "periodAlarms";
-            this.periodAlarms.Size = new System.Drawing.Size(78, 21);
+            this.periodAlarms.Size = new System.Drawing.Size(61, 17);
             this.periodAlarms.TabIndex = 1;
             this.periodAlarms.TabStop = true;
             this.periodAlarms.Text = "Periodo";
@@ -152,52 +172,57 @@
             // 
             // periodAlarmsPickInit
             // 
-            this.periodAlarmsPickInit.Location = new System.Drawing.Point(31, 118);
+            this.periodAlarmsPickInit.Location = new System.Drawing.Point(23, 96);
+            this.periodAlarmsPickInit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.periodAlarmsPickInit.Name = "periodAlarmsPickInit";
-            this.periodAlarmsPickInit.Size = new System.Drawing.Size(171, 22);
+            this.periodAlarmsPickInit.Size = new System.Drawing.Size(129, 20);
             this.periodAlarmsPickInit.TabIndex = 40;
             // 
             // periodAlarmsPickEnd
             // 
-            this.periodAlarmsPickEnd.Location = new System.Drawing.Point(31, 164);
+            this.periodAlarmsPickEnd.Location = new System.Drawing.Point(23, 133);
+            this.periodAlarmsPickEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.periodAlarmsPickEnd.Name = "periodAlarmsPickEnd";
-            this.periodAlarmsPickEnd.Size = new System.Drawing.Size(171, 22);
+            this.periodAlarmsPickEnd.Size = new System.Drawing.Size(129, 20);
             this.periodAlarmsPickEnd.TabIndex = 39;
             // 
             // dailyAlarms
             // 
             this.dailyAlarms.AutoSize = true;
-            this.dailyAlarms.Location = new System.Drawing.Point(7, 22);
+            this.dailyAlarms.Location = new System.Drawing.Point(5, 18);
+            this.dailyAlarms.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dailyAlarms.Name = "dailyAlarms";
-            this.dailyAlarms.Size = new System.Drawing.Size(50, 21);
+            this.dailyAlarms.Size = new System.Drawing.Size(41, 17);
             this.dailyAlarms.TabIndex = 0;
             this.dailyAlarms.TabStop = true;
             this.dailyAlarms.Text = "Dia";
             this.dailyAlarms.UseVisualStyleBackColor = true;
-            //this.dailyAlarms.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged_1);
             // 
             // paramPeriodPickInit
             // 
-            this.paramPeriodPickInit.Location = new System.Drawing.Point(98, 110);
+            this.paramPeriodPickInit.Location = new System.Drawing.Point(74, 89);
+            this.paramPeriodPickInit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paramPeriodPickInit.Name = "paramPeriodPickInit";
-            this.paramPeriodPickInit.Size = new System.Drawing.Size(171, 22);
+            this.paramPeriodPickInit.Size = new System.Drawing.Size(129, 20);
             this.paramPeriodPickInit.TabIndex = 25;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 110);
+            this.label1.Location = new System.Drawing.Point(39, 89);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(40, 17);
+            this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 32;
             this.label1.Text = "Inicio";
             // 
             // weakParam
             // 
             this.weakParam.AutoSize = true;
-            this.weakParam.Location = new System.Drawing.Point(30, 181);
+            this.weakParam.Location = new System.Drawing.Point(22, 147);
+            this.weakParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.weakParam.Name = "weakParam";
-            this.weakParam.Size = new System.Drawing.Size(84, 21);
+            this.weakParam.Size = new System.Drawing.Size(66, 17);
             this.weakParam.TabIndex = 2;
             this.weakParam.TabStop = true;
             this.weakParam.Text = "Semanal";
@@ -206,18 +231,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 144);
+            this.label3.Location = new System.Drawing.Point(39, 117);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 17);
+            this.label3.Size = new System.Drawing.Size(23, 13);
             this.label3.TabIndex = 34;
             this.label3.Text = "Fim";
             // 
             // periodParam
             // 
             this.periodParam.AutoSize = true;
-            this.periodParam.Location = new System.Drawing.Point(30, 83);
+            this.periodParam.Location = new System.Drawing.Point(22, 67);
+            this.periodParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.periodParam.Name = "periodParam";
-            this.periodParam.Size = new System.Drawing.Size(78, 21);
+            this.periodParam.Size = new System.Drawing.Size(61, 17);
             this.periodParam.TabIndex = 1;
             this.periodParam.TabStop = true;
             this.periodParam.Text = "Periodo";
@@ -225,40 +252,45 @@
             // 
             // hourlyDatePick
             // 
-            this.hourlyDatePick.Location = new System.Drawing.Point(98, 55);
+            this.hourlyDatePick.Location = new System.Drawing.Point(74, 45);
+            this.hourlyDatePick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.hourlyDatePick.Name = "hourlyDatePick";
-            this.hourlyDatePick.Size = new System.Drawing.Size(171, 22);
+            this.hourlyDatePick.Size = new System.Drawing.Size(129, 20);
             this.hourlyDatePick.TabIndex = 23;
             // 
             // paramWeekPick
             // 
-            this.paramWeekPick.Location = new System.Drawing.Point(98, 208);
+            this.paramWeekPick.Location = new System.Drawing.Point(74, 169);
+            this.paramWeekPick.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paramWeekPick.Name = "paramWeekPick";
-            this.paramWeekPick.Size = new System.Drawing.Size(171, 22);
+            this.paramWeekPick.Size = new System.Drawing.Size(129, 20);
             this.paramWeekPick.TabIndex = 36;
             // 
             // paramPeriodPickEnd
             // 
-            this.paramPeriodPickEnd.Location = new System.Drawing.Point(98, 144);
+            this.paramPeriodPickEnd.Location = new System.Drawing.Point(74, 117);
+            this.paramPeriodPickEnd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.paramPeriodPickEnd.Name = "paramPeriodPickEnd";
-            this.paramPeriodPickEnd.Size = new System.Drawing.Size(171, 22);
+            this.paramPeriodPickEnd.Size = new System.Drawing.Size(129, 20);
             this.paramPeriodPickEnd.TabIndex = 24;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(52, 208);
+            this.label4.Location = new System.Drawing.Point(39, 169);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(40, 17);
+            this.label4.Size = new System.Drawing.Size(32, 13);
             this.label4.TabIndex = 37;
             this.label4.Text = "Inicio";
             // 
             // dailyParam
             // 
             this.dailyParam.AutoSize = true;
-            this.dailyParam.Location = new System.Drawing.Point(31, 29);
+            this.dailyParam.Location = new System.Drawing.Point(23, 24);
+            this.dailyParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dailyParam.Name = "dailyParam";
-            this.dailyParam.Size = new System.Drawing.Size(60, 21);
+            this.dailyParam.Size = new System.Drawing.Size(48, 17);
             this.dailyParam.TabIndex = 0;
             this.dailyParam.TabStop = true;
             this.dailyParam.Text = "Hora";
@@ -267,9 +299,10 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(53, 60);
+            this.label11.Location = new System.Drawing.Point(40, 49);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(29, 17);
+            this.label11.Size = new System.Drawing.Size(23, 13);
             this.label11.TabIndex = 42;
             this.label11.Text = "Dia";
             // 
@@ -280,9 +313,11 @@
             this.groupBox4.Controls.Add(this.chkCi2);
             this.groupBox4.Controls.Add(this.chkPh);
             this.groupBox4.Controls.Add(this.chkNh3);
-            this.groupBox4.Location = new System.Drawing.Point(597, 13);
+            this.groupBox4.Location = new System.Drawing.Point(448, 11);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(500, 354);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Size = new System.Drawing.Size(375, 288);
             this.groupBox4.TabIndex = 34;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "PARAMETROS";
@@ -290,9 +325,10 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(14, 52);
+            this.label12.Location = new System.Drawing.Point(10, 42);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(59, 17);
+            this.label12.Size = new System.Drawing.Size(46, 13);
             this.label12.TabIndex = 43;
             this.label12.Text = "Seleção";
             // 
@@ -310,19 +346,21 @@
             this.groupBox5.Controls.Add(this.hourlyDatePick);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.paramPeriodPickEnd);
-            this.groupBox5.Location = new System.Drawing.Point(162, 23);
+            this.groupBox5.Location = new System.Drawing.Point(122, 19);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(323, 307);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Size = new System.Drawing.Size(242, 249);
             this.groupBox5.TabIndex = 46;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Ver por:";
-           // this.groupBox5.Enter += new System.EventHandler(this.groupBox5_Enter);
             // 
             // viewParam
             // 
-            this.viewParam.Location = new System.Drawing.Point(98, 275);
+            this.viewParam.Location = new System.Drawing.Point(74, 223);
+            this.viewParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.viewParam.Name = "viewParam";
-            this.viewParam.Size = new System.Drawing.Size(106, 26);
+            this.viewParam.Size = new System.Drawing.Size(80, 21);
             this.viewParam.TabIndex = 43;
             this.viewParam.Text = "Visualizar";
             this.viewParam.UseVisualStyleBackColor = true;
@@ -331,9 +369,10 @@
             // chkCi2
             // 
             this.chkCi2.AutoSize = true;
-            this.chkCi2.Location = new System.Drawing.Point(17, 99);
+            this.chkCi2.Location = new System.Drawing.Point(13, 80);
+            this.chkCi2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkCi2.Name = "chkCi2";
-            this.chkCi2.Size = new System.Drawing.Size(50, 21);
+            this.chkCi2.Size = new System.Drawing.Size(42, 17);
             this.chkCi2.TabIndex = 45;
             this.chkCi2.Text = "CI2";
             this.chkCi2.UseVisualStyleBackColor = true;
@@ -341,9 +380,10 @@
             // chkPh
             // 
             this.chkPh.AutoSize = true;
-            this.chkPh.Location = new System.Drawing.Point(17, 126);
+            this.chkPh.Location = new System.Drawing.Point(13, 102);
+            this.chkPh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkPh.Name = "chkPh";
-            this.chkPh.Size = new System.Drawing.Size(49, 21);
+            this.chkPh.Size = new System.Drawing.Size(41, 17);
             this.chkPh.TabIndex = 44;
             this.chkPh.Text = "PH";
             this.chkPh.UseVisualStyleBackColor = true;
@@ -351,33 +391,23 @@
             // chkNh3
             // 
             this.chkNh3.AutoSize = true;
-            this.chkNh3.Location = new System.Drawing.Point(17, 72);
+            this.chkNh3.Location = new System.Drawing.Point(13, 58);
+            this.chkNh3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chkNh3.Name = "chkNh3";
-            this.chkNh3.Size = new System.Drawing.Size(58, 21);
+            this.chkNh3.Size = new System.Drawing.Size(48, 17);
             this.chkNh3.TabIndex = 43;
             this.chkNh3.Text = "NH3";
             this.chkNh3.UseVisualStyleBackColor = true;
             // 
-            // recentAlarms
-            // 
-            this.recentAlarms.FormattingEnabled = true;
-            this.recentAlarms.ItemHeight = 16;
-            this.recentAlarms.Location = new System.Drawing.Point(7, 29);
-            this.recentAlarms.Name = "recentAlarms";
-            this.recentAlarms.Size = new System.Drawing.Size(317, 260);
-            this.recentAlarms.TabIndex = 0;
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 407);
+            this.ClientSize = new System.Drawing.Size(838, 331);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Smart_H20_SeeApp";
-            //this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
