@@ -146,9 +146,14 @@ namespace SmartH20_Service
                         if(hour.ToString().Length == 1)
                         {
                             hourString = "0" + hour.ToString();
+                            if (words[0] == hourString)
+                            {
+                                vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
+                            }
+
                         }
 
-                        if (words[0] == hour.ToString())
+                        else if (words[0] == hour.ToString())
                         {
                             vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
                             //hours.Add(node.SelectSingleNode("HOUR").InnerText);

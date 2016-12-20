@@ -189,6 +189,7 @@ namespace WindowsFormsApplication1
 
                     //string xmlHdataCi2 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataCi2 = servData.getHourlySummarizedInformation("CI2", hourlyDatePick.Value.ToString("dd-MM-yyyy"));
+                    Console.WriteLine(xmlDataCi2);
                     createGraphfromXml(xmlDataCi2, "CI2", "dailyParam");
                 }
 
@@ -196,6 +197,7 @@ namespace WindowsFormsApplication1
                 {
                     // string xmlHdataNh3 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataNh3 = servData.getHourlySummarizedInformation("NH3", hourlyDatePick.Value.ToString("dd-MM-yyyy"));
+                    Console.WriteLine(xmlDataNh3);
                     createGraphfromXml(xmlDataNh3, "NH3", "dailyParam");
                 }
                 if (chkPh.Checked)
