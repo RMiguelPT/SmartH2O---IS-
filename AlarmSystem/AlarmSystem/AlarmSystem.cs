@@ -25,8 +25,8 @@ namespace AlarmSystem
         string xsdRulesPath = Application.StartupPath + @"\trigger-rules.xsd";
         static CultureInfo ptPT = CultureInfo.InvariantCulture;
 
-       // string _host = "192.168.237.219";
-        string _host = "127.0.0.1";
+        string _host = "192.168.235.163";
+        //string _host = "127.0.0.1";
         string[] _topics = { "PH", "NH3", "CI2" };
 
         bool phAlarmGenerated = false;
@@ -41,8 +41,6 @@ namespace AlarmSystem
 
         public AlarmSystem()
         {
-
-
             InitializeComponent();
 
             updateRulesList(xmlRulesPath);
@@ -62,10 +60,14 @@ namespace AlarmSystem
             timer1.Start();
 
             //Subsribe to a mosquitto channel
-           
+
             rdBtn_AlarmPhON.Select();
             rdBtn_AlarmNH3ON.Select();
             rdBtn_AlarmCI2ON.Select();
+
+            cmbBoxCondition_PH.SelectedIndex = 0;
+            cmbBoxCondition_NH3.SelectedIndex = 0;
+            cmbBoxCondition_CI2.SelectedIndex = 0;
 
             publisher = new mqttPublisher(_host);
         }
