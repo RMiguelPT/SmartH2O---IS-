@@ -69,7 +69,8 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             this.ci2Chart.Legends.Add(legend1);
-            this.ci2Chart.Location = new System.Drawing.Point(523, 34);
+            this.ci2Chart.Location = new System.Drawing.Point(392, 28);
+            this.ci2Chart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ci2Chart.Name = "ci2Chart";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -83,7 +84,7 @@
             this.ci2Chart.Series.Add(series1);
             this.ci2Chart.Series.Add(series2);
             this.ci2Chart.Series.Add(series3);
-            this.ci2Chart.Size = new System.Drawing.Size(508, 266);
+            this.ci2Chart.Size = new System.Drawing.Size(381, 216);
             this.ci2Chart.TabIndex = 0;
             this.ci2Chart.Text = "chart1";
             title1.Name = "ci2DailyView";
@@ -101,9 +102,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(482, 584);
+            this.button1.Location = new System.Drawing.Point(717, 481);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 1;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
@@ -116,7 +118,8 @@
             legend2.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend2.Name = "Legend1";
             this.nh3Chart.Legends.Add(legend2);
-            this.nh3Chart.Location = new System.Drawing.Point(275, 300);
+            this.nh3Chart.Location = new System.Drawing.Point(206, 244);
+            this.nh3Chart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nh3Chart.Name = "nh3Chart";
             series4.ChartArea = "ChartArea1";
             series4.Legend = "Legend1";
@@ -130,7 +133,7 @@
             this.nh3Chart.Series.Add(series4);
             this.nh3Chart.Series.Add(series5);
             this.nh3Chart.Series.Add(series6);
-            this.nh3Chart.Size = new System.Drawing.Size(508, 266);
+            this.nh3Chart.Size = new System.Drawing.Size(381, 216);
             this.nh3Chart.TabIndex = 2;
             this.nh3Chart.Text = "chart1";
             title4.Alignment = System.Drawing.ContentAlignment.BottomCenter;
@@ -154,7 +157,8 @@
             legend3.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend3.Name = "Legend1";
             this.phChart.Legends.Add(legend3);
-            this.phChart.Location = new System.Drawing.Point(15, 34);
+            this.phChart.Location = new System.Drawing.Point(11, 28);
+            this.phChart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.phChart.Name = "phChart";
             series7.ChartArea = "ChartArea1";
             series7.Legend = "Legend1";
@@ -168,7 +172,7 @@
             this.phChart.Series.Add(series7);
             this.phChart.Series.Add(series8);
             this.phChart.Series.Add(series9);
-            this.phChart.Size = new System.Drawing.Size(508, 266);
+            this.phChart.Size = new System.Drawing.Size(381, 216);
             this.phChart.TabIndex = 3;
             this.phChart.Text = "chart2";
             title7.Name = "phDailyView";
@@ -187,15 +191,18 @@
             // 
             // SmartH2O_Graph_View
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1047, 629);
+            this.ClientSize = new System.Drawing.Size(785, 511);
             this.ControlBox = false;
             this.Controls.Add(this.phChart);
             this.Controls.Add(this.nh3Chart);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.ci2Chart);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SmartH2O_Graph_View";
             this.Text = "SmartH2O_Graph_View";
             ((System.ComponentModel.ISupportInitialize)(this.ci2Chart)).EndInit();

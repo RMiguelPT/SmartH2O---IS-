@@ -16,57 +16,53 @@ namespace WindowsFormsApplication1
         public SmartH2O_Alarms_View()
         {
             InitializeComponent();
-            pictureAlarm.Visible = true;
             alarmsChart.Series[0].XValueType = ChartValueType.DateTime;
             alarmsChart.Series[1].XValueType = ChartValueType.DateTime;
             alarmsChart.Series[2].XValueType = ChartValueType.DateTime;
-         
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-        
+
             this.Hide();
             clearAlamsFormData();
-                          
-        }
-
-
-        public void addAlarmData(string param, string value, string hour, string data) {
-
-            listboxAlarmParam.Items.Add(param);
-            listboxAlarmValue.Items.Add(value);
-            listboxAlarmHour.Items.Add(hour);
-            listboxAlarmData.Items.Add(data);
 
         }
 
 
-   
-        public void updateAlarmGraphic(string param, string  hour, double value){
-        
-                alarmsChart.Series[param].Points.AddXY(hour, value);
+        public void addAlarmData(string param, string value, string hour, string data)
+        {
+            
+            string alarm = param + "\t\t\t\t" + value + "\t\t\t\t" + hour + "\t\t\t\t" + data;
+
+            lstBox_ALARMS.Items.Add(alarm);
+            
+
+        }
+
+
+
+        public void updateAlarmGraphic(string param, string hour, double value)
+        {
+
+            alarmsChart.Series[param].Points.AddXY(hour, value);
         }
         public void updateAlarmGraphic2(string param, DateTime date, string value)
         {
 
-           
+
             alarmsChart.Series[param].Points.AddXY(date, value);
-          
+
 
         }
 
 
 
-        public void clearAlamsFormData() {
+        public void clearAlamsFormData()
+        {
 
-            listboxAlarmParam.Items.Clear();
-            listboxAlarmData.Items.Clear();
-            listboxAlarmHour.Items.Clear();
-            listboxAlarmValue.Items.Clear();
-
-
-
+            this.lstBox_ALARMS.Items.Clear();
 
             alarmsChart.Series["NH3"].Points.Clear();
             alarmsChart.Series["CI2"].Points.Clear();
