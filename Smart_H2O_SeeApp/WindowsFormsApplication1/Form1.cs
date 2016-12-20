@@ -49,13 +49,18 @@ namespace WindowsFormsApplication1
                 DateTime pickDate = new DateTime(year, month, day);
 
                 string ph = servData.getDailyAlarmsInformation("PH", pickDate.ToString("dd-MM-yyyy"));
-
+                //XmlDocument phDoc = ne
                 string nh3 = servData.getDailyAlarmsInformation("NH3", pickDate.ToString("dd-MM-yyyy"));
 
                 string ci2 = servData.getDailyAlarmsInformation("CI2", pickDate.ToString("dd-MM-yyyy"));
 
 
                 string[] allAlarms = new String[] { ph, nh3, ci2 };
+
+                sh2OAlarm.clearAlamsFormData();
+
+                //Combine and remove duplicates
+               
 
 
 
@@ -84,8 +89,9 @@ namespace WindowsFormsApplication1
                             DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
                             //if (nodeDate == pickDate)
                             // {
-                            sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                            sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[1].InnerText);
+                            sh2OAlarm.addAlarmData(c.Name, c.SelectSingleNode("ALARM-VALUE").InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
+                            //sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate.Date.ToString("dd-MM-yyyy"), c.ChildNodes[1].InnerText);
+                            sh2OAlarm.updateAlarmGraphic(c.Name, c.SelectSingleNode("HOUR").InnerText, Convert.ToDouble(c.SelectSingleNode("ALARM-VALUE").InnerText.Replace(".",",")));
                             // }
                         }
                     }
@@ -123,19 +129,21 @@ namespace WindowsFormsApplication1
 
 
                     string ph = servData.getAlarmsInformation("ph", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                    doc.LoadXml(ph);
+                    //doc.LoadXml(ph);
                     string ci2 = servData.getAlarmsInformation("ci2", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                    doc.LoadXml(ci2);
+                   // doc.LoadXml(ci2);
                     string nh3 = servData.getAlarmsInformation("nh3", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                    doc.LoadXml(nh3);
+                    //doc.LoadXml(nh3);
 
 
                     string[] allAlarms = new String[] { ph, nh3, ci2 };
 
+                    //XmlNodeList list = doc.SelectNodes("//*");
+
                     foreach (string alarm in allAlarms)
                     {
                         doc.LoadXml(alarm);
-                        XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
+                        XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM/");
 
                         foreach (XmlNode n in list)
                         {
@@ -157,7 +165,7 @@ namespace WindowsFormsApplication1
                                     // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
 
                                     //
-                                    sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
+                                    sh2OAlarm.updateAlarmGraphic(c.Name, c.SelectSingleNode("hour").InnerText, Convert.ToDouble(c.SelectSingleNode("ALARM-VALUE").InnerText));
 
                                 }
                             }
