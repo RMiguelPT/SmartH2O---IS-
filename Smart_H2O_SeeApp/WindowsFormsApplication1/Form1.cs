@@ -34,8 +34,7 @@ namespace WindowsFormsApplication1
             ServiceData.SmartH2O_ServiceClient servData = new ServiceData.SmartH2O_ServiceClient();
             XmlDocument doc = new XmlDocument();
 
-            //doc.Load("alarm-data.xml");
-            //XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
+            
 
 
             //################## DAILY-ALARMS ###########################
@@ -49,7 +48,7 @@ namespace WindowsFormsApplication1
                 DateTime pickDate = new DateTime(year, month, day);
 
                 string ph = servData.getDailyAlarmsInformation("PH", pickDate.ToString("dd-MM-yyyy"));
-                //XmlDocument phDoc = ne
+            
                 string nh3 = servData.getDailyAlarmsInformation("NH3", pickDate.ToString("dd-MM-yyyy"));
 
                 string ci2 = servData.getDailyAlarmsInformation("CI2", pickDate.ToString("dd-MM-yyyy"));
@@ -87,16 +86,15 @@ namespace WindowsFormsApplication1
                             int nodeYear = Int32.Parse(nodeSplitDate[2]);
 
                             DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-                            //if (nodeDate == pickDate)
-                            // {
+                          
                             sh2OAlarm.addAlarmData(c.Name, c.SelectSingleNode("ALARM-VALUE").InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                            //sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate.Date.ToString("dd-MM-yyyy"), c.ChildNodes[1].InnerText);
+                           
                             sh2OAlarm.updateAlarmGraphic(c.Name, c.SelectSingleNode("HOUR").InnerText, Convert.ToDouble(c.SelectSingleNode("ALARM-VALUE").InnerText.Replace(".",",")));
 
                             sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                            sh2OAlarm.updateAlarmGraphic(c.Name, c.ChildNodes[1].InnerText, c.ChildNodes[0].InnerText);
+                            sh2OAlarm.updateAlarmGraphic(c.Name, c.ChildNodes[1].InnerText, Convert.ToDouble(c.ChildNodes[0].InnerText.Replace(".", ",")));
 
-                            // }
+                           
                         }
                     }
                 }
@@ -133,21 +131,22 @@ namespace WindowsFormsApplication1
 
 
                     string ph = servData.getAlarmsInformation("ph", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                    //doc.LoadXml(ph);
+                 
                     string ci2 = servData.getAlarmsInformation("ci2", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                   // doc.LoadXml(ci2);
+                  
                     string nh3 = servData.getAlarmsInformation("nh3", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
-                    //doc.LoadXml(nh3);
+                   
 
 
                     string[] allAlarms = new String[] { ph, nh3, ci2 };
 
-                    //XmlNodeList list = doc.SelectNodes("//*");
+                   
 
                     foreach (string alarm in allAlarms)
                     {
                         doc.LoadXml(alarm);
-                        XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM/");
+                       
+                        XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
 
                         foreach (XmlNode n in list)
                         {
@@ -161,17 +160,13 @@ namespace WindowsFormsApplication1
                                 int nodeYear = Int32.Parse(nodeSplitDate[2]);
 
                                 DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-
+                                List<DateTime> d = new List<DateTime>();
+                         
                                 if (nodeDate >= alarmPickInit && nodeDate <= alarmPickEnd)
 
                                 {
                                     sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                                    // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
-
-                                    //
-
-                                    sh2OAlarm.updateAlarmGraphic(c.Name, c.SelectSingleNode("hour").InnerText, Convert.ToDouble(c.SelectSingleNode("ALARM-VALUE").InnerText));
-
+                              
                                     sh2OAlarm.updateAlarmGraphic2(c.Name, nodeDate, c.ChildNodes[0].InnerText);
 
 
@@ -203,24 +198,21 @@ namespace WindowsFormsApplication1
                 if (chkCi2.Checked)
                 {
 
-                    //string xmlHdataCi2 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataCi2 = servData.getHourlySummarizedInformation("CI2", hourlyDatePick.Value.ToString("dd-MM-yyyy"));
-                    Console.WriteLine(xmlDataCi2);
+                    
                     createGraphfromXml(xmlDataCi2, "CI2", "dailyParam");
                 }
 
                 if (chkNh3.Checked)
                 {
-                    // string xmlHdataNh3 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataNh3 = servData.getHourlySummarizedInformation("NH3", hourlyDatePick.Value.ToString("dd-MM-yyyy"));
-                    Console.WriteLine(xmlDataNh3);
+                    
                     createGraphfromXml(xmlDataNh3, "NH3", "dailyParam");
                 }
                 if (chkPh.Checked)
                 {
-                    // string xmlHdataPh = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataPh = servData.getHourlySummarizedInformation("PH", hourlyDatePick.Value.ToString("dd-MM-yyyy"));
-                    Console.WriteLine(xmlDataPh);
+
                     createGraphfromXml(xmlDataPh, "PH", "dailyParam");
                 }
 
@@ -232,9 +224,7 @@ namespace WindowsFormsApplication1
 
                 if (chkCi2.Checked)
                 {
-                    //string xmlPdataCi2 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
 
-                    Console.WriteLine(paramPeriodPickInit.ToString());
                     string xmlPdataCi2 = servData.getPeriodSummarizedInformation("CI2", paramPeriodPickInit.Value.ToString("dd-MM-yyyy"), paramPeriodPickEnd.Value.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataCi2, "CI2", "periodParam");
 
@@ -242,7 +232,6 @@ namespace WindowsFormsApplication1
 
                 if (chkNh3.Checked)
                 {
-                    // string xmlPdataNh3 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
                     string xmlPdataNh3 = servData.getPeriodSummarizedInformation("NH3", paramPeriodPickInit.Value.ToString("dd-MM-yyyy"), paramPeriodPickEnd.Value.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataNh3, "NH3", "periodParam");
 
@@ -267,7 +256,6 @@ namespace WindowsFormsApplication1
 
                 if (chkCi2.Checked)
                 {
-                    //string xmlPdataCi2 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
                     string xmlPdataCi2 = servData.getPeriodSummarizedInformation("CI2", fisrtDayofWeek.Date.ToString("dd-MM-yyyy"), lastDayofWeek.Date.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataCi2, "CI2", "periodParam");
 
@@ -275,7 +263,6 @@ namespace WindowsFormsApplication1
 
                 if (chkNh3.Checked)
                 {
-                    //string xmlPdataNh3 = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
                     string xmlPdataNh3 = servData.getPeriodSummarizedInformation("NH3", fisrtDayofWeek.Date.ToString("dd-MM-yyyy"), lastDayofWeek.Date.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataNh3, "NH3", "periodParam");
 
@@ -283,7 +270,6 @@ namespace WindowsFormsApplication1
                 }
                 if (chkPh.Checked)
                 {
-                    // string xmlPdataPh = "<PARAM-DATA><PARAM><DATE>02-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>03-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>04-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><DATE>05-12-2016</DATE><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM></PARAM-DATA>";
                     string xmlPdataPh = servData.getPeriodSummarizedInformation("PH", fisrtDayofWeek.Date.ToString("dd-MM-yyyy"), lastDayofWeek.Date.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataPh, "PH", "periodParam");
 

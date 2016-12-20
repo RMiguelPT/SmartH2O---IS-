@@ -49,22 +49,22 @@ namespace WindowsFormsApplication1
 
             if (param == "CI2")
             {
-                ci2Chart.Series["MIN"].Points.AddXY(hour, min);
-                ci2Chart.Series["MED"].Points.AddXY(hour, med);
-                ci2Chart.Series["MAX"].Points.AddXY(hour, max);
+                ci2Chart.Series["MIN"].Points.AddXY(hour + "H", min);
+                ci2Chart.Series["MED"].Points.AddXY(hour + "H", med);
+                ci2Chart.Series["MAX"].Points.AddXY(hour + "H", max);
 
             }
             if (param == "NH3")
             {
-                nh3Chart.Series["MIN"].Points.AddXY(hour, min);
-                nh3Chart.Series["MED"].Points.AddXY(hour, med);
-                nh3Chart.Series["MAX"].Points.AddXY(hour, max);
+                nh3Chart.Series["MIN"].Points.AddXY(hour + "H", min);
+                nh3Chart.Series["MED"].Points.AddXY(hour + "H", med);
+                nh3Chart.Series["MAX"].Points.AddXY(hour + "H", max);
             }
             if (param == "PH")
             {
-                phChart.Series["MIN"].Points.AddXY(hour, min);
-                phChart.Series["MED"].Points.AddXY(hour, med);
-                phChart.Series["MAX"].Points.AddXY(hour, max);
+                phChart.Series["MIN"].Points.AddXY(hour + "H", min);
+                phChart.Series["MED"].Points.AddXY(hour + "H", med);
+                phChart.Series["MAX"].Points.AddXY(hour + "H", max);
             }
 
 

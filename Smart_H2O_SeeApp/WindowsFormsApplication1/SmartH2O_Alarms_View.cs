@@ -20,7 +20,7 @@ namespace WindowsFormsApplication1
             alarmsChart.Series[0].XValueType = ChartValueType.DateTime;
             alarmsChart.Series[1].XValueType = ChartValueType.DateTime;
             alarmsChart.Series[2].XValueType = ChartValueType.DateTime;
-           // alarmsChart.ChartAreas["ChartArea1"].AxisX.LabelStyle.Format = "yyyy-MM-dd";
+         
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -49,8 +49,10 @@ namespace WindowsFormsApplication1
         }
         public void updateAlarmGraphic2(string param, DateTime date, string value)
         {
-            Console.WriteLine(date + " " + value);
+
+           
             alarmsChart.Series[param].Points.AddXY(date, value);
+          
 
         }
 
