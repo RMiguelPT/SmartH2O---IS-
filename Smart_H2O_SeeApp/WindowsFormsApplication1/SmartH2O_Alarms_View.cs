@@ -41,9 +41,20 @@ namespace WindowsFormsApplication1
 
         }
 
+<<<<<<< HEAD
         public void updateAlarmGraphic(string param, string hour, double value){
        
                 alarmsChart.Series[param].Points.AddXY(hour, value);
+=======
+        public void updateAlarmGraphic(string param, string  hour, string value){
+        
+                alarmsChart.Series[param].Points.AddXY(hour, value);
+        }
+        public void updateAlarmGraphic2(string param, DateTime date, string value)
+        {
+            Console.WriteLine(date + " " + value);
+            alarmsChart.Series[param].Points.AddXY(date, value);
+>>>>>>> b38c0fbb1d8761ec2d41b96bdc0640bb9d38bf56
         }
 
 

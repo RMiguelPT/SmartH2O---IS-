@@ -122,7 +122,8 @@ namespace SmartH20_Service
 
         public string getHourlySummarizedInformation(string parameter, string date)
         {
-            XmlDocument doc = readDocument(xmlDocPath);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/param-data.xml");
             XmlDocument docAux = new XmlDocument();
 
             XmlElement r = docAux.CreateElement("PARAM-DATA");
@@ -135,13 +136,24 @@ namespace SmartH20_Service
             {
                 parameter = parameter.ToUpper();
                 XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + date + "']");
-
+                string hourString;
                 //XmlElement pname = docAux.CreateElement(parameter.ToUpper());
             while(hour <= 24) {
                     foreach (XmlNode node in nodeList)
                     {
                         string[] words =node.SelectSingleNode("HOUR").InnerText.Split(':');
-                        if(words[0] == hour.ToString())
+
+                        if(hour.ToString().Length == 1)
+                        {
+                            hourString = "0" + hour.ToString();
+                            if (words[0] == hourString)
+                            {
+                                vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
+                            }
+
+                        }
+
+                        else if (words[0] == hour.ToString())
                         {
                             vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
                             //hours.Add(node.SelectSingleNode("HOUR").InnerText);
