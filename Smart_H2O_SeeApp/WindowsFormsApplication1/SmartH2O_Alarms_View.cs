@@ -43,7 +43,7 @@ namespace WindowsFormsApplication1
 
 
    
-        public void updateAlarmGraphic(string param, string  hour, string value){
+        public void updateAlarmGraphic(string param, string  hour, double value){
         
                 alarmsChart.Series[param].Points.AddXY(hour, value);
         }
