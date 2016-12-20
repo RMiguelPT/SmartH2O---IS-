@@ -48,42 +48,51 @@ namespace WindowsFormsApplication1
 
                 DateTime pickDate = new DateTime(year, month, day);
 
-                string ph = servData.getDailyAlarmsInformation("ph", pickDate.ToString());
-                doc.LoadXml(ph);
-                string ci2 = servData.getDailyAlarmsInformation("ci2", pickDate.ToString());
-                doc.LoadXml(ci2);
-                string nh3 = servData.getDailyAlarmsInformation("ci2", pickDate.ToString());
-                doc.LoadXml(nh3);
+                string ph = servData.getDailyAlarmsInformation("PH", pickDate.ToString("dd-MM-yyyy"));
 
-                XmlNodeList list = doc.SelectNodes("//*");
+                string nh3 = servData.getDailyAlarmsInformation("NH3", pickDate.ToString("dd-MM-yyyy"));
 
-                foreach (XmlNode n in list)
+                string ci2 = servData.getDailyAlarmsInformation("CI2", pickDate.ToString("dd-MM-yyyy"));
+
+
+                string[] allAlarms = new String[] { ph, nh3, ci2 };
+
+
+
+                foreach (string alarm in allAlarms)
                 {
-                    foreach (XmlNode c in n.ChildNodes)
+                    Console.WriteLine(alarm);
+                }
+
+
+
+                foreach (string alarm in allAlarms)
+                {
+                    doc.LoadXml(alarm);
+                    XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
+
+                    foreach (XmlNode n in list)
                     {
-
-                        string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
-                        int nodeDay = Int32.Parse(nodeSplitDate[0]);
-                        int nodeMonth = Int32.Parse(nodeSplitDate[1]);
-                        int nodeYear = Int32.Parse(nodeSplitDate[2]);
-
-                        DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-
-
-                        if (nodeDate == pickDate)
+                        foreach (XmlNode c in n.ChildNodes)
                         {
 
+                            string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                            int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                            int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                            int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                            DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+                            //if (nodeDate == pickDate)
+                            // {
                             sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                            //sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
+                            sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[1].InnerText);
+                            // }
                         }
                     }
                 }
                 sh2OAlarm.Show();
 
             }
-
-
-
             //################## ALARMS-PERIOD ###########################
 
             else if (periodAlarms.Checked)
@@ -113,41 +122,44 @@ namespace WindowsFormsApplication1
                     DateTime alarmPickEnd = new DateTime(endYear, endMonth, endDay);
 
 
-                    int nh3PieCont = 0;
-                    int ci2PieCont = 0;
-                    int phPieCont = 0;
-
-                    string ph = servData.getAlarmsInformation("ph", alarmPickInit.ToString(), alarmPickEnd.ToString());
+                    string ph = servData.getAlarmsInformation("ph", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
                     doc.LoadXml(ph);
-                    string ci2 = servData.getAlarmsInformation("ci2", alarmPickInit.ToString(), alarmPickEnd.ToString());
+                    string ci2 = servData.getAlarmsInformation("ci2", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
                     doc.LoadXml(ci2);
-                    string nh3 = servData.getAlarmsInformation("ci2", alarmPickInit.ToString(), alarmPickEnd.ToString());
+                    string nh3 = servData.getAlarmsInformation("nh3", alarmPickInit.Date.ToString("dd-MM-yyyy"), alarmPickEnd.Date.ToString("dd-MM-yyyy"));
                     doc.LoadXml(nh3);
 
-                    XmlNodeList list = doc.SelectNodes("//*");
 
-                    foreach (XmlNode n in list)
+                    string[] allAlarms = new String[] { ph, nh3, ci2 };
+
+                    foreach (string alarm in allAlarms)
                     {
-                        foreach (XmlNode c in n.ChildNodes)
+                        doc.LoadXml(alarm);
+                        XmlNodeList list = doc.SelectNodes("/ALARM-DATA/ALARM");
+
+                        foreach (XmlNode n in list)
                         {
-
-
-                            string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
-                            int nodeDay = Int32.Parse(nodeSplitDate[0]);
-                            int nodeMonth = Int32.Parse(nodeSplitDate[1]);
-                            int nodeYear = Int32.Parse(nodeSplitDate[2]);
-
-                            DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-
-                            if (nodeDate >= alarmPickInit && nodeDate <= alarmPickEnd)
-
+                            foreach (XmlNode c in n.ChildNodes)
                             {
-                                sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                                // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
 
-                                //
-                                sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
 
+                                string[] nodeSplitDate = c.ChildNodes[2].InnerText.Split('-');
+                                int nodeDay = Int32.Parse(nodeSplitDate[0]);
+                                int nodeMonth = Int32.Parse(nodeSplitDate[1]);
+                                int nodeYear = Int32.Parse(nodeSplitDate[2]);
+
+                                DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
+
+                                if (nodeDate >= alarmPickInit && nodeDate <= alarmPickEnd)
+
+                                {
+                                    sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
+                                    // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
+
+                                    //
+                                    sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
+
+                                }
                             }
                         }
                     }
@@ -185,23 +197,16 @@ namespace WindowsFormsApplication1
                     // string xmlHdataNh3 = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataNh3 = servData.getHourlySummarizedInformation("NH3", hourlyDatePick.Value.ToString());
                     createGraphfromXml(xmlDataNh3, "NH3", "dailyParam");
-
-
                 }
                 if (chkPh.Checked)
                 {
                     // string xmlHdataPh = "<PARAM-DATA><PARAM><HOUR>02:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>03:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>04:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>05:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>06:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>07:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>8:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>09:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>10:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM><PARAM><HOUR>11:00</HOUR><MIN>5.0</MIN><MED>6.0</MED><MAX>7.0</MAX></PARAM><PARAM><HOUR>12:00</HOUR><MIN>2.0</MIN><MED>4.0</MED><MAX>5.0</MAX></PARAM></PARAM-DATA>";
                     string xmlDataPh = servData.getHourlySummarizedInformation("PH", hourlyDatePick.Value.ToString());
                     createGraphfromXml(xmlDataPh, "PH", "dailyParam");
-
                 }
 
             }
-
-
             //################## PERIOD-PARAMS ###########################
-
-
             else if (periodParam.Checked)
             {
                 sh2OGraph.changeHeaders(1);

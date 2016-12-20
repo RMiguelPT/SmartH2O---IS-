@@ -57,9 +57,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(425, 498);
+            this.button1.Location = new System.Drawing.Point(319, 405);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 5;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
@@ -72,7 +73,8 @@
             legend1.Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Bottom;
             legend1.Name = "Legend1";
             this.alarmsChart.Legends.Add(legend1);
-            this.alarmsChart.Location = new System.Drawing.Point(38, 39);
+            this.alarmsChart.Location = new System.Drawing.Point(28, 32);
+            this.alarmsChart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.alarmsChart.Name = "alarmsChart";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Point;
@@ -90,7 +92,7 @@
             this.alarmsChart.Series.Add(series1);
             this.alarmsChart.Series.Add(series2);
             this.alarmsChart.Series.Add(series3);
-            this.alarmsChart.Size = new System.Drawing.Size(508, 266);
+            this.alarmsChart.Size = new System.Drawing.Size(381, 216);
             this.alarmsChart.TabIndex = 6;
             this.alarmsChart.Text = "chart2";
             title1.Name = "phDailyView";
@@ -109,9 +111,11 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(9, 10);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(915, 318);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(686, 258);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Vista de Alarms";
@@ -122,82 +126,87 @@
             this.pictureAlarm.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.ErrorImage")));
             this.pictureAlarm.Image = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.Image")));
             this.pictureAlarm.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureAlarm.InitialImage")));
-            this.pictureAlarm.Location = new System.Drawing.Point(643, 57);
+            this.pictureAlarm.Location = new System.Drawing.Point(482, 46);
+            this.pictureAlarm.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureAlarm.Name = "pictureAlarm";
-            this.pictureAlarm.Size = new System.Drawing.Size(249, 220);
+            this.pictureAlarm.Size = new System.Drawing.Size(187, 179);
             this.pictureAlarm.TabIndex = 0;
             this.pictureAlarm.TabStop = false;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(598, 25);
+            this.label9.Location = new System.Drawing.Point(448, 20);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(38, 17);
+            this.label9.Size = new System.Drawing.Size(30, 13);
             this.label9.TabIndex = 41;
             this.label9.Text = "Data";
             // 
             // listboxAlarmData
             // 
             this.listboxAlarmData.FormattingEnabled = true;
-            this.listboxAlarmData.ItemHeight = 16;
-            this.listboxAlarmData.Location = new System.Drawing.Point(598, 45);
+            this.listboxAlarmData.Location = new System.Drawing.Point(448, 37);
+            this.listboxAlarmData.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listboxAlarmData.Name = "listboxAlarmData";
-            this.listboxAlarmData.Size = new System.Drawing.Size(178, 84);
+            this.listboxAlarmData.Size = new System.Drawing.Size(134, 69);
             this.listboxAlarmData.TabIndex = 40;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(414, 25);
+            this.label8.Location = new System.Drawing.Point(310, 20);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 17);
+            this.label8.Size = new System.Drawing.Size(30, 13);
             this.label8.TabIndex = 39;
             this.label8.Text = "Hora";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(227, 23);
+            this.label6.Location = new System.Drawing.Point(170, 19);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 17);
+            this.label6.Size = new System.Drawing.Size(31, 13);
             this.label6.TabIndex = 37;
             this.label6.Text = "Valor";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(115, 23);
+            this.label5.Location = new System.Drawing.Point(86, 19);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 17);
+            this.label5.Size = new System.Drawing.Size(55, 13);
             this.label5.TabIndex = 36;
             this.label5.Text = "Parametro";
             // 
             // listboxAlarmHour
             // 
             this.listboxAlarmHour.FormattingEnabled = true;
-            this.listboxAlarmHour.ItemHeight = 16;
-            this.listboxAlarmHour.Location = new System.Drawing.Point(417, 45);
+            this.listboxAlarmHour.Location = new System.Drawing.Point(313, 37);
+            this.listboxAlarmHour.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listboxAlarmHour.Name = "listboxAlarmHour";
-            this.listboxAlarmHour.Size = new System.Drawing.Size(178, 84);
+            this.listboxAlarmHour.Size = new System.Drawing.Size(134, 69);
             this.listboxAlarmHour.TabIndex = 35;
             // 
             // listboxAlarmValue
             // 
             this.listboxAlarmValue.FormattingEnabled = true;
-            this.listboxAlarmValue.ItemHeight = 16;
-            this.listboxAlarmValue.Location = new System.Drawing.Point(230, 45);
+            this.listboxAlarmValue.Location = new System.Drawing.Point(172, 37);
+            this.listboxAlarmValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listboxAlarmValue.Name = "listboxAlarmValue";
-            this.listboxAlarmValue.Size = new System.Drawing.Size(178, 84);
+            this.listboxAlarmValue.Size = new System.Drawing.Size(134, 69);
             this.listboxAlarmValue.TabIndex = 34;
             // 
             // listboxAlarmParam
             // 
             this.listboxAlarmParam.FormattingEnabled = true;
-            this.listboxAlarmParam.ItemHeight = 16;
-            this.listboxAlarmParam.Location = new System.Drawing.Point(115, 45);
+            this.listboxAlarmParam.Location = new System.Drawing.Point(86, 37);
+            this.listboxAlarmParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.listboxAlarmParam.Name = "listboxAlarmParam";
-            this.listboxAlarmParam.Size = new System.Drawing.Size(109, 84);
+            this.listboxAlarmParam.Size = new System.Drawing.Size(83, 69);
             this.listboxAlarmParam.TabIndex = 32;
             this.listboxAlarmParam.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -211,24 +220,28 @@
             this.groupBox2.Controls.Add(this.label8);
             this.groupBox2.Controls.Add(this.listboxAlarmHour);
             this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Location = new System.Drawing.Point(12, 345);
+            this.groupBox2.Location = new System.Drawing.Point(9, 280);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(915, 146);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(686, 119);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Detalhes de Alarmes";
             // 
             // SmartH2O_Alarms_View
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(951, 531);
+            this.ClientSize = new System.Drawing.Size(713, 431);
+            this.ControlBox = false;
             this.Controls.Add(this.pictureAlarm);
             this.Controls.Add(this.alarmsChart);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "SmartH2O_Alarms_View";
             this.Text = "SmartH2O_Alarms_View";
             this.Load += new System.EventHandler(this.SmartH2O_Alarms_View_Load);
