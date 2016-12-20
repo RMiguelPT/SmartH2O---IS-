@@ -49,9 +49,9 @@ namespace WindowsFormsApplication1
 
             if (param == "CI2")
             {
-                ci2Chart.Series["MIN"].Points.AddXY(hour + "H", min);
-                ci2Chart.Series["MED"].Points.AddXY(hour + "H", med);
-                ci2Chart.Series["MAX"].Points.AddXY(hour + "H", max);
+               ci2Chart.Series["MIN"].Points.AddXY(hour + "H", min);
+               ci2Chart.Series["MED"].Points.AddXY(hour + "H", med);
+               ci2Chart.Series["MAX"].Points.AddXY(hour + "H", max);
 
             }
             if (param == "NH3")
@@ -76,9 +76,9 @@ namespace WindowsFormsApplication1
 
             if (param == "CI2")
             {
-                ci2Chart.Series["MIN"].Points.AddXY(date.ToShortDateString(), min);
-                ci2Chart.Series["MED"].Points.AddXY(date.ToShortDateString(), med);
-                ci2Chart.Series["MAX"].Points.AddXY(date.ToShortDateString(), max);
+               ci2Chart.Series["MIN"].Points.AddXY(date.ToShortDateString(), min);
+               ci2Chart.Series["MED"].Points.AddXY(date.ToShortDateString(), med);
+               ci2Chart.Series["MAX"].Points.AddXY(date.ToShortDateString(), max);
 
             }
             if (param == "NH3")

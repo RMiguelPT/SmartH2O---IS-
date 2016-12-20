@@ -51,8 +51,8 @@ namespace SmartH2O_DLog
         {
             WriteService.SmartH2O_ServiceClient serv = new WriteService.SmartH2O_ServiceClient();
             string[] words = message.Split(';');
-            string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
-            //string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" +(new DateTime(2016, 12, 19)).ToString("dd-MM-yyyy");
+            // string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
+            string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + "2016-12-18";
             serv.writeParams(info);
             Console.WriteLine(info);
 
@@ -70,10 +70,7 @@ namespace SmartH2O_DLog
                 Console.WriteLine("Error connecting to message broker...");
                 return;
             }
-            //Specify events we are interest on
-            //New Msg Arrived
             m_cClient.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
-            //Subscribe to topics
             byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE };//QoS
             m_cClient.Subscribe(m_strTopicsInfo, qosLevels);
 
@@ -81,8 +78,8 @@ namespace SmartH2O_DLog
             if (
             m_cClient.IsConnected)
             {
-                m_cClient.Unsubscribe(m_strTopicsInfo); //Put this in a button to see notif!
-                m_cClient.Disconnect(); //Free process and process's resources
+                m_cClient.Unsubscribe(m_strTopicsInfo);
+                m_cClient.Disconnect();
             }
 
         }

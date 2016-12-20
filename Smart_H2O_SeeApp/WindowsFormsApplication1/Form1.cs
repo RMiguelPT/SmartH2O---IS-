@@ -86,10 +86,6 @@ namespace WindowsFormsApplication1
                             int nodeYear = Int32.Parse(nodeSplitDate[2]);
 
                             DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-                          
-                            sh2OAlarm.addAlarmData(c.Name, c.SelectSingleNode("ALARM-VALUE").InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                           
-                            sh2OAlarm.updateAlarmGraphic(c.Name, c.SelectSingleNode("HOUR").InnerText, Convert.ToDouble(c.SelectSingleNode("ALARM-VALUE").InnerText.Replace(".",",")));
 
                             sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
                             sh2OAlarm.updateAlarmGraphic(c.Name, c.ChildNodes[1].InnerText, Convert.ToDouble(c.ChildNodes[0].InnerText.Replace(".", ",")));
@@ -326,6 +322,11 @@ namespace WindowsFormsApplication1
         private void viewParam_Click(object sender, EventArgs e)
         {
             generateParamsView();
+        }
+
+        private void recentAlarms_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
