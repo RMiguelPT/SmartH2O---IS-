@@ -85,7 +85,7 @@ namespace WindowsFormsApplication1
                             //if (nodeDate == pickDate)
                             // {
                             sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
-                            sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[1].InnerText);
+                            sh2OAlarm.updateAlarmGraphic(c.Name, c.ChildNodes[1].InnerText, c.ChildNodes[0].InnerText);
                             // }
                         }
                     }
@@ -157,7 +157,7 @@ namespace WindowsFormsApplication1
                                     // sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, Convert.ToInt32(c.ChildNodes[1].InnerText));
 
                                     //
-                                    sh2OAlarm.updateAlarmGraphic(c.Name, nodeDate, c.ChildNodes[0].InnerText);
+                                    sh2OAlarm.updateAlarmGraphic2(c.Name, nodeDate, c.ChildNodes[0].InnerText);
 
                                 }
                             }
@@ -306,7 +306,7 @@ namespace WindowsFormsApplication1
                     int nodeYear = Int32.Parse(nodeSplitDate[2]);
 
                     
-                    DateTime nodeDate = new DateTime(nodeYear, nodeDay, nodeMonth);
+                    DateTime nodeDate = new DateTime(nodeYear,nodeMonth , nodeDay);
                     sh2OGraph.updatePeriodGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, nodeDate);
 
                 }
