@@ -122,7 +122,8 @@ namespace SmartH20_Service
 
         public string getHourlySummarizedInformation(string parameter, string date)
         {
-            XmlDocument doc = readDocument(xmlDocPath);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(AppDomain.CurrentDomain.BaseDirectory.ToString() + "App_Data/param-data.xml");
             XmlDocument docAux = new XmlDocument();
 
             XmlElement r = docAux.CreateElement("PARAM-DATA");
