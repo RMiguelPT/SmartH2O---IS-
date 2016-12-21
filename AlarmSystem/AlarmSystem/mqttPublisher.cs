@@ -39,7 +39,7 @@ namespace AlarmSystem
 
             string messageToSend = message + ";" + timestamp;
 
-            //Console.WriteLine("PUBLISH ALARM: " + topic);
+           
 
             m_cClient.Publish(topic, Encoding.UTF8.GetBytes(messageToSend));
         }

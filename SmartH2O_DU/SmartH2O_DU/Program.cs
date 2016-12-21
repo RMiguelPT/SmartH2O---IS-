@@ -34,7 +34,7 @@ namespace SmartH2O_DU
             Console.ReadKey();
             if (m_cClient.IsConnected)
             {
-                // m_cClient.Unsubscribe(m_strTopicsInfo);
+               
                 m_cClient.Disconnect();
 
 
@@ -51,10 +51,10 @@ namespace SmartH2O_DU
             string value = words[0]+";"+words[2];
             Console.WriteLine(topic+" "+words[2]);
             
-            //string[] m_strTopicsInfo = { "news", "complaints" };
+           
            
             m_cClient.Publish(topic, Encoding.UTF8.GetBytes(value));
-            //;
+          
            
 
         }

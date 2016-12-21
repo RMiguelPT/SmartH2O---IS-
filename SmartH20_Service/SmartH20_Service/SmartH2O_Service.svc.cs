@@ -129,7 +129,7 @@ namespace SmartH20_Service
             XmlElement r = docAux.CreateElement("PARAM-DATA");
             docAux.AppendChild(r);
             List<double> vals = new List<double>();
-            //List<string> hours = new List<string>();
+          
             int hour = 0;
 
             if (doc != null)
@@ -137,7 +137,7 @@ namespace SmartH20_Service
                 parameter = parameter.ToUpper();
                 XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + date + "']");
                 string hourString;
-                //XmlElement pname = docAux.CreateElement(parameter.ToUpper());
+               
             while(hour <= 24) {
                     foreach (XmlNode node in nodeList)
                     {
@@ -156,7 +156,7 @@ namespace SmartH20_Service
                         else if (words[0] == hour.ToString())
                         {
                             vals.Add(Convert.ToDouble(node.SelectSingleNode("SENSOR-VALUE").InnerText.Replace(".", ",")));
-                            //hours.Add(node.SelectSingleNode("HOUR").InnerText);
+                           
                         }
                     }
                     if (vals.Count != 0)
@@ -178,7 +178,7 @@ namespace SmartH20_Service
                     r.AppendChild(root);
 
                     vals = new List<double>();
-                    //hours = new List<string>();
+                  
 
                     }
                     hour++;
@@ -188,31 +188,7 @@ namespace SmartH20_Service
             else return null;
         }
 
-     /*   public string getDailySummarizedInformation(string parameter, string date)
-        {
-            XmlDocument doc = readDocument(xmlDocPath);
-            XmlDocument docAux = new XmlDocument();
-
-            DateTime dateD = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
-
-            if (doc != null)
-            {
-                parameter = parameter.ToUpper();
-                XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE=" + dateD + "]");
-
-                //docAux.AppendChild(root);
-
-                foreach (XmlNode node in nodeList)
-                {
-                    docAux.AppendChild(node);
-                }
-
-
-            }
-            return docAux.OuterXml;
-        }
-
-    */
+  
 
         public string getPeriodSummarizedInformation(string parameter, string StartDate, string EndDate)
         {
@@ -236,7 +212,7 @@ namespace SmartH20_Service
 
                     XmlNodeList nodeList = doc.SelectNodes("/PARAM-DATA/PARAM/" + parameter + "[DATE='" + sDate.Date.ToString("dd-MM-yyyy") + "']");
 
-                    //docAux.AppendChild(root);
+                    
                     
                     foreach (XmlNode node in nodeList)
                     {
@@ -277,15 +253,14 @@ namespace SmartH20_Service
             XmlDocument docAux = new XmlDocument();
             XmlElement r = docAux.CreateElement("ALARM-DATA");
             docAux.AppendChild(r);
-            //DateTime dateD = DateTime.ParseExact(date, "dd-MM-yyyy", ptPT);
+           
 
             if (doc != null)
             {
 
                 parameter = parameter.ToUpper();
                 XmlNodeList nodeList = doc.SelectNodes("/ALARM-DATA/ALARM/" + parameter + "[DATE = '" + date + "']");
-                //XmlNodeList nodeList = doc.SelectNodes("//*");
-                // +parameter + "[DATE='" + date + "']"
+                
                 foreach (XmlNode node in nodeList)
                 {
                     System.Diagnostics.Debug.WriteLine(node.OuterXml + "gregwrgrwgw");
