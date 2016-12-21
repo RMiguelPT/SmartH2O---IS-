@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.recentAlarms = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.viewAlarms = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -58,8 +57,8 @@
             this.chkCi2 = new System.Windows.Forms.CheckBox();
             this.chkPh = new System.Windows.Forms.CheckBox();
             this.chkNh3 = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -67,38 +66,15 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Location = new System.Drawing.Point(10, 11);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(433, 288);
+            this.groupBox1.Size = new System.Drawing.Size(176, 288);
             this.groupBox1.TabIndex = 22;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ALARMS";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.recentAlarms);
-            this.groupBox3.Location = new System.Drawing.Point(169, 19);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox3.Size = new System.Drawing.Size(256, 249);
-            this.groupBox3.TabIndex = 23;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Alarmes Recentes";
-            // 
-            // recentAlarms
-            // 
-            this.recentAlarms.FormattingEnabled = true;
-            this.recentAlarms.Location = new System.Drawing.Point(5, 24);
-            this.recentAlarms.Margin = new System.Windows.Forms.Padding(2);
-            this.recentAlarms.Name = "recentAlarms";
-            this.recentAlarms.Size = new System.Drawing.Size(239, 212);
-            this.recentAlarms.TabIndex = 0;
-            this.recentAlarms.SelectedIndexChanged += new System.EventHandler(this.recentAlarms_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -314,7 +290,7 @@
             this.groupBox4.Controls.Add(this.chkCi2);
             this.groupBox4.Controls.Add(this.chkPh);
             this.groupBox4.Controls.Add(this.chkNh3);
-            this.groupBox4.Location = new System.Drawing.Point(448, 11);
+            this.groupBox4.Location = new System.Drawing.Point(190, 11);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
@@ -347,11 +323,11 @@
             this.groupBox5.Controls.Add(this.hourlyDatePick);
             this.groupBox5.Controls.Add(this.label4);
             this.groupBox5.Controls.Add(this.paramPeriodPickEnd);
-            this.groupBox5.Location = new System.Drawing.Point(122, 19);
+            this.groupBox5.Location = new System.Drawing.Point(122, 17);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(242, 249);
+            this.groupBox5.Size = new System.Drawing.Size(242, 251);
             this.groupBox5.TabIndex = 46;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Ver por:";
@@ -404,13 +380,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(838, 331);
+            this.ClientSize = new System.Drawing.Size(578, 331);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Smart_H20_SeeApp";
             this.groupBox1.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
@@ -443,7 +418,6 @@
         private System.Windows.Forms.RadioButton dailyParam;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button viewAlarms;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button viewParam;
@@ -451,7 +425,8 @@
         private System.Windows.Forms.CheckBox chkPh;
         private System.Windows.Forms.CheckBox chkNh3;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ListBox recentAlarms;
+        private System.Windows.Forms.Timer timer1;
+         
     }
 }
 

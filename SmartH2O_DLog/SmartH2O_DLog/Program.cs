@@ -51,7 +51,7 @@ namespace SmartH2O_DLog
         {
             WriteService.SmartH2O_ServiceClient serv = new WriteService.SmartH2O_ServiceClient();
             string[] words = message.Split(';');
-            // string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
+            //string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + DateTime.Now.ToString("dd-MM-yyyy");
             string info = topic + ";" + words[0] + ";" + words[1] + ";" + DateTime.Now.ToString("HH:mm") + ";" + "2016-12-18";
             serv.writeParams(info);
             Console.WriteLine(info);

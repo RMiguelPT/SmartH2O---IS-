@@ -10,17 +10,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Schema;
+using System.Net;
 
 namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
 
-
         public Form1()
         {
             InitializeComponent();
-
         }
 
         public SmartH2O_Graph_View sh2OGraph = new SmartH2O_Graph_View();
@@ -60,16 +59,6 @@ namespace WindowsFormsApplication1
 
                 //Combine and remove duplicates
                
-
-
-
-                foreach (string alarm in allAlarms)
-                {
-                    Console.WriteLine(alarm);
-                }
-
-
-
                 foreach (string alarm in allAlarms)
                 {
                     doc.LoadXml(alarm);
@@ -86,7 +75,7 @@ namespace WindowsFormsApplication1
                             int nodeYear = Int32.Parse(nodeSplitDate[2]);
 
                             DateTime nodeDate = new DateTime(nodeYear, nodeMonth, nodeDay);
-
+                          
                             sh2OAlarm.addAlarmData(c.Name, c.ChildNodes[0].InnerText, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText);
                             sh2OAlarm.updateAlarmGraphic(c.Name, c.ChildNodes[1].InnerText, Convert.ToDouble(c.ChildNodes[0].InnerText.Replace(".", ",")));
 
@@ -223,7 +212,7 @@ namespace WindowsFormsApplication1
 
                     string xmlPdataCi2 = servData.getPeriodSummarizedInformation("CI2", paramPeriodPickInit.Value.ToString("dd-MM-yyyy"), paramPeriodPickEnd.Value.ToString("dd-MM-yyyy"));
                     createGraphfromXml(xmlPdataCi2, "CI2", "periodParam");
-
+                    Console.WriteLine(xmlPdataCi2);
                 }
 
                 if (chkNh3.Checked)
@@ -306,7 +295,7 @@ namespace WindowsFormsApplication1
                     
                     DateTime nodeDate = new DateTime(nodeYear,nodeMonth , nodeDay);
                     sh2OGraph.updatePeriodGraphic(param, c.ChildNodes[1].InnerText, c.ChildNodes[2].InnerText, c.ChildNodes[3].InnerText, nodeDate);
-
+                    Console.WriteLine(nodeDate);
                 }
             }
 
@@ -324,9 +313,6 @@ namespace WindowsFormsApplication1
             generateParamsView();
         }
 
-        private void recentAlarms_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
