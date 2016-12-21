@@ -1,0 +1,21 @@
+diff a/Smart_H2O_SeeApp/WindowsFormsApplication1/Form1.Designer.cs b/Smart_H2O_SeeApp/WindowsFormsApplication1/Form1.Designer.cs	(rejected hunks)
+@@ -347,11 +347,19 @@
+             this.groupBox5.Controls.Add(this.hourlyDatePick);
+             this.groupBox5.Controls.Add(this.label4);
+             this.groupBox5.Controls.Add(this.paramPeriodPickEnd);
++<<<<<<< HEAD
+             this.groupBox5.Location = new System.Drawing.Point(122, 19);
+             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
+             this.groupBox5.Name = "groupBox5";
+             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
+             this.groupBox5.Size = new System.Drawing.Size(242, 249);
++=======
++            this.groupBox5.Location = new System.Drawing.Point(122, 17);
++            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
++            this.groupBox5.Name = "groupBox5";
++            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
++            this.groupBox5.Size = new System.Drawing.Size(242, 251);
++>>>>>>> d5c6f1523c7366424bb6a516d1392b4cdf505aa8
+             this.groupBox5.TabIndex = 46;
+             this.groupBox5.TabStop = false;
+             this.groupBox5.Text = "Ver por:";
